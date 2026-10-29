@@ -147,3 +147,14 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+#Resource Folders
+.resources
+
+# Uploaded assets
+public/uploads/
+next-env.d.ts
+
+# Uploaded assets
+public/uploads/
+next-env.d.ts
