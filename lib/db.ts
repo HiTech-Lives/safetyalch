@@ -37,6 +37,11 @@ export async function one<T = Record<string, any>>(sql: string, params: unknown[
   return rows[0] ?? null;
 }
 
+export async function exec(sql: string, params: unknown[] = []) {
+  const [res] = await getPool().query(sql, params);
+  return res;
+}
+
 export async function audit(tenantId: string, actor: string | null, action: string, entity: string, entityId: string, detail?: unknown) {
   await q('INSERT INTO audit_log (tenant_id, actor_user_id, action, entity, entity_id, detail) VALUES (?,?,?,?,?,?)', [
     tenantId, actor, action, entity, entityId, detail ? JSON.stringify(detail) : null,

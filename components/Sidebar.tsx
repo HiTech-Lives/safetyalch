@@ -32,10 +32,19 @@ export default function Sidebar({
   const [open, setOpen] = useState(false);
   const staff = role === 'owner' || role === 'admin';
   const groups: [string, [string, string][]][] = [
-    ['Operations', [['/today', 'Today'], ['/schedule', 'Schedule'], ['/inspections', 'Inspections'], ['/recommendations', 'Recommendations']]],
-    ['People', [['/members', 'Members & sites'], ...(staff ? ([['/team', 'Team']] as [string, string][]) : [])]],
-    ['Library', [['/forms', 'Forms'], ['/regulations', 'Regulations']]],
-    ...(staff ? ([['Account', [['/brand', 'Brand & white-label'], ['/billing', 'Billing & seats']]]] as [string, [string, string][]][]) : []),
+    [
+      'Loss Control & Dispatch',
+      [
+        ['/work-queue', 'Work Queue'],
+        ['/engagements', 'Engagements & budgets'],
+        ['/assignments', 'Assignments & certs'],
+        ['/observations', 'Observations'],
+        ['/timesheets', 'Timesheets & billing'],
+      ],
+    ],
+    ['Inspections & Compliance', [['/today', 'Today'], ['/schedule', 'Schedule'], ['/inspections', 'Inspections'], ['/recommendations', 'Recommendations']]],
+    ['People & Library', [['/members', 'Members & sites'], ...(staff ? ([['/team', 'Team']] as [string, string][]) : []), ['/forms', 'Forms'], ['/regulations', 'Regulations']]],
+    ...(staff ? ([['Account', [['/brand', 'Brand & white-label'], ['/settings/ai', 'AI & model routing'], ['/billing', 'Billing & seats']]]] as [string, [string, string][]][]) : []),
     ...(isPlatformAdmin ? ([['SaaS Operator', [['/platform', 'Platform Super-Admin']]]] as [string, [string, string][]][]) : []),
   ];
 
@@ -86,8 +95,14 @@ export default function Sidebar({
         {/* Connected Platform Surfaces */}
         <div className="side-note" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           <div className="kicker" style={{ color: 'rgba(255,255,255,.45)' }}>Connected Surfaces</div>
-          <Link href="/field" style={{ color: 'var(--sand)', fontWeight: 600, fontSize: 12 }}>
-            Launch Field Inspector App →
+          <Link href="/field/route" style={{ color: 'var(--sand)', fontWeight: 600, fontSize: 12 }}>
+            Inspector Route &amp; Quick Capture →
+          </Link>
+          <Link href="/field" style={{ color: 'rgba(255,255,255,.85)', fontSize: 12 }}>
+            15-Form Field Checklists →
+          </Link>
+          <Link href="/confirm-visit/demo-confirm-s13" style={{ color: 'rgba(255,255,255,.8)', fontSize: 12 }}>
+            Site Visit Confirmation Demo ↗
           </Link>
           <Link href="/portal" style={{ color: 'rgba(255,255,255,.8)', fontSize: 12 }}>
             Member Client Portal ↗

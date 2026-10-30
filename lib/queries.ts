@@ -23,6 +23,7 @@ export type Tenant = {
   accent: string;
   logo_key: string | null;
   brand_scopes: Record<string, boolean>;
+  ai_config_json?: Record<string, any> | null;
   seats_purchased: number;
   plan?: string;
   status?: string;
@@ -31,6 +32,9 @@ export type Tenant = {
 export async function getTenant(s: Session) {
   const t = await one<any>('SELECT * FROM tenants WHERE id=?', [s.tenantId]);
   if (t && typeof t.brand_scopes === 'string') t.brand_scopes = JSON.parse(t.brand_scopes);
+  if (t && typeof t.ai_config_json === 'string') {
+    try { t.ai_config_json = JSON.parse(t.ai_config_json); } catch { t.ai_config_json = null; }
+  }
   return t as Tenant;
 }
 
@@ -168,15 +172,18 @@ export async function listVisits(s: Session, limit?: number) {
   let extra = '';
   if (crew) { extra = ' AND (v.lead_user_id IN (?) OR v.lead_user_id IS NULL)'; params.push(crew); }
   const rows = await q<any>(
-    `SELECT v.id, v.site_id, v.scheduled_for, v.origin, v.form_code, f.name AS form_name,
+    `SELECT v.id, v.site_id, v.scheduled_for, v.start_time, v.duration_minutes, v.origin, v.form_code, f.name AS form_name,
             v.lead_user_id, u.name AS lead, cb.name AS created_by_name,
-            m.id AS member_id, m.name AS member, st.name AS site, st.jurisdiction,
+            v.site_contact_name, v.site_contact_phone, v.site_contact_email,
+            v.confirm_token, v.confirm_status, v.confirmed_by_name, v.confirmed_by_phone, v.confirm_notes, v.confirmed_at,
+            v.required_certs, v.job_id,
+            m.id AS member_id, m.name AS member, st.name AS site, st.address AS site_address, st.jurisdiction,
             (SELECT COUNT(*) FROM visit_attendees va WHERE va.visit_id = v.id) AS attendees,
             (SELECT GROUP_CONCAT(va.user_id SEPARATOR ',') FROM visit_attendees va WHERE va.visit_id = v.id) AS attendee_csv
        FROM visits v JOIN forms f ON f.code = v.form_code JOIN sites st ON st.id = v.site_id JOIN members m ON m.id = st.member_id
        LEFT JOIN users u ON u.id = v.lead_user_id JOIN users cb ON cb.id = v.created_by
       WHERE v.tenant_id = ? AND v.scheduled_for >= ?${extra}
-      ORDER BY v.scheduled_for ${limit ? 'LIMIT ' + Number(limit) : ''}`,
+      ORDER BY v.scheduled_for, v.start_time ${limit ? 'LIMIT ' + Number(limit) : ''}`,
     params
   );
   return rows.map(r => ({
@@ -359,6 +366,273 @@ export async function getInspectionReportData(id: string) {
     answers,
     findings,
     maturity,
+  };
+}
+
+// ---------- Phase 5 (v0.0.2) Loss Control Operating System Queries ----------
+
+export async function listSourcesAndReferrals(s: Session) {
+  const [sources, referrals] = await Promise.all([
+    q<any>('SELECT * FROM sources WHERE tenant_id=? ORDER BY name', [s.tenantId]),
+    q<any>(
+      `SELECT r.*, src.name AS source_name, src.source_type
+         FROM referral_sources r
+         LEFT JOIN sources src ON src.id = r.source_id
+        WHERE r.tenant_id=? ORDER BY r.name`,
+      [s.tenantId]
+    ),
+  ]);
+  return { sources, referrals };
+}
+
+export async function listEngagements(s: Session) {
+  const engagements = await q<any>(
+    `SELECT e.*,
+            src.name AS source_name, src.source_type,
+            ref.name AS referral_name, ref.contact_name AS referral_contact,
+            m.name AS member_name, m.city AS member_city, m.industry AS member_industry,
+            (SELECT COUNT(*) FROM work_jobs j WHERE j.engagement_id = e.id AND j.status = 'delivered' AND j.billed = 0) AS unbilled_delivered_count,
+            (SELECT COALESCE(SUM(j.fee), 0) FROM work_jobs j WHERE j.engagement_id = e.id AND j.status = 'delivered' AND j.billed = 0) AS unbilled_delivered_amount
+       FROM engagements e
+       LEFT JOIN sources src ON src.id = e.source_id
+       LEFT JOIN referral_sources ref ON ref.id = e.referral_source_id
+       LEFT JOIN members m ON m.id = e.member_id
+      WHERE e.tenant_id=?
+      ORDER BY e.created_at DESC, e.id`,
+    [s.tenantId]
+  );
+  const serviceLines = await q<any>(
+    `SELECT esl.*
+       FROM engagement_service_lines esl
+       JOIN engagements e ON e.id = esl.engagement_id
+      WHERE e.tenant_id=?
+      ORDER BY esl.sort_order, esl.id`,
+    [s.tenantId]
+  );
+  return engagements.map(e => ({
+    ...e,
+    annual_budget: Number(e.annual_budget),
+    spent_to_date: Number(e.spent_to_date),
+    planned_amount: Number(e.planned_amount),
+    billed_amount: Number(e.billed_amount),
+    unbilled_delivered_amount: Number(e.unbilled_delivered_amount),
+    service_lines: serviceLines
+      .filter(l => l.engagement_id === e.id)
+      .map(l => ({
+        ...l,
+        planned_count: l.planned_count !== null ? Number(l.planned_count) : null,
+        done_count: l.done_count !== null ? Number(l.done_count) : null,
+        rate_each: l.rate_each !== null ? Number(l.rate_each) : null,
+        planned_total: Number(l.planned_total),
+        spent_total: Number(l.spent_total),
+      })),
+  }));
+}
+
+export async function listWorkJobs(s: Session) {
+  const crew = await crewIds(s);
+  const params: unknown[] = [s.tenantId];
+  let extra = '';
+  if (crew) {
+    extra = ' AND (j.assigned_to IN (?) OR j.assigned_to IS NULL)';
+    params.push(crew);
+  }
+  const rows = await q<any>(
+    `SELECT j.*,
+            e.title AS program_title, e.billing_model,
+            src.name AS source_name, src.source_type,
+            ref.name AS referral_name,
+            m.name AS member_name,
+            st.name AS site_name, st.jurisdiction,
+            u.name AS assigned_to_name
+       FROM work_jobs j
+       LEFT JOIN engagements e ON e.id = j.engagement_id
+       LEFT JOIN sources src ON src.id = j.source_id
+       LEFT JOIN referral_sources ref ON ref.id = j.referral_source_id
+       LEFT JOIN members m ON m.id = j.member_id
+       LEFT JOIN sites st ON st.id = j.site_id
+       LEFT JOIN users u ON u.id = j.assigned_to
+      WHERE j.tenant_id=?${extra}
+      ORDER BY FIELD(j.status,'received','scheduled','visit_done','client_submitted','in_qc','delivered'), j.due_date, j.id`,
+    params
+  );
+  return rows.map(r => ({
+    ...r,
+    fee: Number(r.fee),
+  }));
+}
+
+export async function listStaffWithCertifications(s: Session) {
+  const [staff, certs, timeAway, visits, jobs] = await Promise.all([
+    listFieldStaff(s),
+    q<any>('SELECT * FROM user_certifications WHERE tenant_id=? ORDER BY code', [s.tenantId]),
+    q<any>('SELECT * FROM user_time_away WHERE tenant_id=? ORDER BY start_date', [s.tenantId]),
+    listVisits(s),
+    listWorkJobs(s),
+  ]);
+  return {
+    staff: staff.map(u => ({
+      ...u,
+      certifications: certs.filter(c => c.user_id === u.id),
+      time_away: timeAway.filter(t => t.user_id === u.id),
+      scheduled_visits: visits.filter(v => v.lead_user_id === u.id || v.attendee_ids.includes(u.id)),
+      active_jobs: jobs.filter(j => j.assigned_to === u.id && j.status !== 'delivered'),
+    })),
+    unassignedJobs: jobs.filter(j => !j.assigned_to),
+    unassignedVisits: visits.filter(v => !v.lead_user_id),
+    allCerts: ['ALCM', 'ARM', 'CIH', 'CSP', 'CSR', 'FIRST AID/CPR/AED', 'OSHA 500', 'OSHA 510'],
+  };
+}
+
+export async function listObservations(s: Session, memberId?: string) {
+  const params: unknown[] = [s.tenantId];
+  let extra = '';
+  if (memberId) {
+    extra = ' AND o.member_id = ?';
+    params.push(memberId);
+  }
+  return q<any>(
+    `SELECT o.*,
+            m.name AS member_name,
+            st.name AS site_name, st.jurisdiction,
+            u.name AS author_name,
+            j.title AS job_title, j.carrier_ref
+       FROM observations o
+       JOIN members m ON m.id = o.member_id
+       LEFT JOIN sites st ON st.id = o.site_id
+       JOIN users u ON u.id = o.created_by
+       LEFT JOIN work_jobs j ON j.id = o.job_id
+      WHERE o.tenant_id=?${extra}
+      ORDER BY o.created_at DESC, o.id`,
+    params
+  );
+}
+
+export async function listQuickReports(s: Session) {
+  const rows = await q<any>(
+    `SELECT qr.*,
+            m.name AS member_name,
+            st.name AS site_name, st.jurisdiction,
+            u.name AS author_name,
+            j.title AS job_title, j.carrier_ref, j.fee,
+            e.title AS program_title
+       FROM quick_reports qr
+       JOIN members m ON m.id = qr.member_id
+       LEFT JOIN sites st ON st.id = qr.site_id
+       JOIN users u ON u.id = qr.author_id
+       LEFT JOIN work_jobs j ON j.id = qr.job_id
+       LEFT JOIN engagements e ON e.id = j.engagement_id
+      WHERE qr.tenant_id=?
+      ORDER BY qr.created_at DESC`,
+    [s.tenantId]
+  );
+  return rows.map(r => ({
+    ...r,
+    sections: typeof r.sections_json === 'string' ? JSON.parse(r.sections_json) : r.sections_json,
+    photos: typeof r.photos_json === 'string' ? JSON.parse(r.photos_json) : r.photos_json,
+  }));
+}
+
+export async function getQuickReportById(id: string) {
+  const r = await one<any>(
+    `SELECT qr.*,
+            m.name AS member_name, m.city AS member_city,
+            st.name AS site_name, st.address AS site_address, st.jurisdiction,
+            u.name AS author_name, u.email AS author_email,
+            j.title AS job_title, j.carrier_ref, j.requested_by, j.fee,
+            e.title AS program_title,
+            src.name AS source_name
+       FROM quick_reports qr
+       JOIN members m ON m.id = qr.member_id
+       LEFT JOIN sites st ON st.id = qr.site_id
+       JOIN users u ON u.id = qr.author_id
+       LEFT JOIN work_jobs j ON j.id = qr.job_id
+       LEFT JOIN engagements e ON e.id = j.engagement_id
+       LEFT JOIN sources src ON src.id = j.source_id
+      WHERE qr.id=?`,
+    [id]
+  );
+  if (!r) return null;
+  const tenant = await one<any>('SELECT * FROM tenants WHERE id=?', [r.tenant_id]);
+  if (tenant && typeof tenant.brand_scopes === 'string') tenant.brand_scopes = JSON.parse(tenant.brand_scopes);
+  return {
+    ...r,
+    tenant,
+    sections: typeof r.sections_json === 'string' ? JSON.parse(r.sections_json) : r.sections_json,
+    photos: typeof r.photos_json === 'string' ? JSON.parse(r.photos_json) : r.photos_json,
+  };
+}
+
+export async function listTimesheetsAndExpenses(s: Session) {
+  const crew = await crewIds(s);
+  const params: unknown[] = [s.tenantId];
+  let userFilter = '';
+  if (crew) {
+    userFilter = ' AND t.user_id IN (?)';
+    params.push(crew);
+  }
+  const timesheets = await q<any>(
+    `SELECT t.*, u.name AS user_name, u.email AS user_email, u.role AS user_role
+       FROM timesheets t
+       JOIN users u ON u.id = t.user_id
+      WHERE t.tenant_id=?${userFilter}
+      ORDER BY t.week_start DESC, u.name`,
+    params
+  );
+  const entries = await q<any>(
+    `SELECT te.*,
+            m.name AS member_name,
+            st.name AS site_name,
+            j.title AS job_title, j.carrier_ref
+       FROM timesheet_entries te
+       JOIN timesheets t ON t.id = te.timesheet_id
+       JOIN members m ON m.id = te.member_id
+       LEFT JOIN sites st ON st.id = te.site_id
+       LEFT JOIN work_jobs j ON j.id = te.job_id
+      WHERE t.tenant_id=?
+      ORDER BY te.id`,
+    [s.tenantId]
+  );
+  const expenses = await q<any>(
+    `SELECT ex.*,
+            u.name AS user_name,
+            m.name AS member_name,
+            j.title AS job_title, j.carrier_ref,
+            e.title AS program_title
+       FROM expenses ex
+       JOIN users u ON u.id = ex.user_id
+       LEFT JOIN members m ON m.id = ex.member_id
+       LEFT JOIN work_jobs j ON j.id = ex.job_id
+       LEFT JOIN engagements e ON e.id = ex.engagement_id
+      WHERE ex.tenant_id=?${crew ? ' AND ex.user_id IN (?)' : ''}
+      ORDER BY ex.expense_date DESC, ex.id`,
+    crew ? [s.tenantId, crew] : [s.tenantId]
+  );
+
+  return {
+    timesheets: timesheets.map(ts => ({
+      ...ts,
+      total_hours: Number(ts.total_hours),
+      overtime_hours: Number(ts.overtime_hours),
+      entries: entries
+        .filter(e => e.timesheet_id === ts.id)
+        .map(e => ({
+          ...e,
+          mon_hrs: Number(e.mon_hrs),
+          tue_hrs: Number(e.tue_hrs),
+          wed_hrs: Number(e.wed_hrs),
+          thu_hrs: Number(e.thu_hrs),
+          fri_hrs: Number(e.fri_hrs),
+          sat_hrs: Number(e.sat_hrs),
+          sun_hrs: Number(e.sun_hrs),
+          client_sheet_hours: e.client_sheet_hours !== null ? Number(e.client_sheet_hours) : null,
+        })),
+    })),
+    expenses: expenses.map(ex => ({
+      ...ex,
+      amount: Number(ex.amount),
+      miles: ex.miles !== null ? Number(ex.miles) : null,
+    })),
   };
 }
 

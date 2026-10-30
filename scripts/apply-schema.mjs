@@ -4,6 +4,8 @@ import fs from 'node:fs';
 import mysql from 'mysql2/promise';
 
 const TABLES = [
+  'timesheet_entries','timesheets','expenses','quick_reports','observations','user_time_away','user_certifications',
+  'work_jobs','engagement_service_lines','engagements','referral_sources','sources',
   'audit_log','magic_links','photos','rec_events','recommendations','answers','inspections',
   'visit_attendees','visits','question_regulations','questions','form_sections','forms','regulations',
   'sites','member_assignments','member_contacts','members','seat_requests','users','tenants'

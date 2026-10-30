@@ -354,6 +354,100 @@ export default function PublicLandingPage() {
           </div>
         </section>
 
+        {/* Loss Control Operating System Section */}
+        <section id="loss-control-os" style={{ padding: '52px 24px', background: '#fff', borderBottom: '1px solid var(--div)' }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 22 }}>
+            <div>
+              <div className="kicker">Every Assignment from the Day It Comes In to the Day It Is Billed</div>
+              <h2 style={{ margin: '4px 0 0', font: '700 30px/1.1 var(--fh)', textTransform: 'uppercase', letterSpacing: '.02em' }}>
+                Complete Loss Control &amp; EHS Consulting Operating System
+              </h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 16 }}>
+              <Frame style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div className="kicker" style={{ color: 'var(--acc)' }}>1 · Work Queue &amp; AI Email Intake</div>
+                <div style={{ fontWeight: 700, fontSize: 16 }}>Paste a Carrier Email → Click &ldquo;Read it&rdquo; → Dispatched</div>
+                <p style={{ margin: 0, fontSize: 13, color: 'var(--n6)', lineHeight: 1.55 }}>
+                  Extracts Carrier Reference, Service Type, Insured, Broker/Program Manager, Site Contact, Approved Fee, and Due Date while keeping the original email side-by-side. Tracks jobs from <code>Received → Scheduled → Visit Done → In QC → Delivered → Billed</code>.
+                </p>
+                <Link href="/work-queue" className="mono" style={{ fontSize: 12, fontWeight: 600, color: 'var(--acc)', marginTop: 4 }}>
+                  Open Work Queue &amp; AI Intake →
+                </Link>
+              </Frame>
+
+              <Frame style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div className="kicker" style={{ color: 'var(--acc)' }}>2 · 3-Tier Captives, Brokers &amp; Draw-Down Budgets</div>
+                <div style={{ fontWeight: 700, fontSize: 16 }}>Carrier/Captive → Referral Broker → Policyholder</div>
+                <p style={{ margin: 0, fontSize: 13, color: 'var(--n6)', lineHeight: 1.55 }}>
+                  Manage annual draw-down retainers, fixed-deliverable contracts, and T&amp;M engagements. Track <strong>In Force $</strong>, <strong>Spent to Date</strong>, <strong>Planned</strong>, and line-item Service Plans in real time.
+                </p>
+                <Link href="/engagements" className="mono" style={{ fontSize: 12, fontWeight: 600, color: 'var(--acc)', marginTop: 4 }}>
+                  Explore Engagements &amp; Program Budgets →
+                </Link>
+              </Frame>
+
+              <Frame style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div className="kicker" style={{ color: 'var(--acc)' }}>3 · Qualification-Aware Staffing</div>
+                <div style={{ fontWeight: 700, fontSize: 16 }}>Who Is Qualified, Free &amp; Certified for the Whole Job</div>
+                <p style={{ margin: 0, fontSize: 13, color: 'var(--n6)', lineHeight: 1.55 }}>
+                  Filter field staff by required credentials (<code>CSP</code>, <code>CIH</code>, <code>ALCM</code>, <code>ARM</code>, <code>CSR</code>, <code>OSHA 500/510</code>, <code>First Aid/CPR</code>) and verify certification expiration dates cover the entire assignment window.
+                </p>
+                <Link href="/assignments" className="mono" style={{ fontSize: 12, fontWeight: 600, color: 'var(--acc)', marginTop: 4 }}>
+                  Open Qualification Staffing →
+                </Link>
+              </Frame>
+
+              <Frame style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div className="kicker" style={{ color: 'var(--acc)' }}>4 · Mobile Route &amp; Passwordless Visit Confirmation</div>
+                <div style={{ fontWeight: 700, fontSize: 16 }}>Multi-Stop Navigation &amp; 1-Tap Site Contact Confirm</div>
+                <p style={{ margin: 0, fontSize: 13, color: 'var(--n6)', lineHeight: 1.55 }}>
+                  Site contacts confirm visits from their email with zero login (<em>&ldquo;Someone will be there&rdquo;</em>, <em>&ldquo;Tell us who to meet&rdquo;</em>, or <em>&ldquo;Time does not work&rdquo;</em>), updating the inspector&rsquo;s mobile route card live.
+                </p>
+                <div style={{ display: 'flex', gap: 12, marginTop: 4 }}>
+                  <Link href="/field/route" className="mono" style={{ fontSize: 12, fontWeight: 600, color: 'var(--acc)' }}>
+                    Inspector Route →
+                  </Link>
+                  <Link href="/confirm-visit/demo-confirm-s13" className="mono" style={{ fontSize: 12, fontWeight: 600 }}>
+                    No-Login Confirm Demo ↗
+                  </Link>
+                </div>
+              </Frame>
+
+              <Frame style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div className="kicker" style={{ color: 'var(--acc)' }}>5 · AI Quick Capture &amp; &ldquo;In the Truck&rdquo; Quick Reports</div>
+                <div style={{ fontWeight: 700, fontSize: 16 }}>Numbered Photos + Voice Dictation → Narrative Report</div>
+                <p style={{ margin: 0, fontSize: 13, color: 'var(--n6)', lineHeight: 1.55 }}>
+                  Capture photos and voice memos once on the site walk; AI pairs Federal <code>29 CFR</code> + State (<code>Cal/OSHA Title 8</code> / <code>WA DOSH</code>) citations and drafts complete Post-Incident Reviews ready for consultant verification.
+                </p>
+                <div style={{ display: 'flex', gap: 12, marginTop: 4 }}>
+                  <Link href="/field/capture" className="mono" style={{ fontSize: 12, fontWeight: 600, color: 'var(--acc)' }}>
+                    AI Quick Capture →
+                  </Link>
+                  <Link href="/field/quick-report" className="mono" style={{ fontSize: 12, fontWeight: 600 }}>
+                    AI Quick Report →
+                  </Link>
+                </div>
+              </Frame>
+
+              <Frame style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div className="kicker" style={{ color: 'var(--acc)' }}>6 · Receipt OCR, Timesheets &amp; Multi-Cloud AI</div>
+                <div style={{ fontWeight: 700, fontSize: 16 }}>AWS Bedrock (Qwen / Nova), Azure AI &amp; 1-Click Billing CSV</div>
+                <p style={{ margin: 0, fontSize: 13, color: 'var(--n6)', lineHeight: 1.55 }}>
+                  Snap hotel/meal receipts with AI OCR, collect policyholder &amp; employee signatures on weekly timesheets, export 1-row-per-site Billing CSVs, and route AI tasks to cost-efficient AWS Bedrock Qwen or Azure AI models.
+                </p>
+                <div style={{ display: 'flex', gap: 12, marginTop: 4 }}>
+                  <Link href="/timesheets" className="mono" style={{ fontSize: 12, fontWeight: 600, color: 'var(--acc)' }}>
+                    Timesheets &amp; Billing CSV →
+                  </Link>
+                  <Link href="/settings/ai" className="mono" style={{ fontSize: 12, fontWeight: 600 }}>
+                    AWS / Azure Model Router →
+                  </Link>
+                </div>
+              </Frame>
+            </div>
+          </div>
+        </section>
+
         {/* Architectural Advantage & Comparison */}
         <section id="architecture" style={{ padding: '52px 24px', borderBottom: '1px solid var(--div)' }}>
           <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 22 }}>
