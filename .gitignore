@@ -153,8 +153,5 @@ vite.config.ts.timestamp-*
 
 # Uploaded assets
 public/uploads/
-next-env.d.ts
-
-# Uploaded assets
-public/uploads/
+.storage/
 next-env.d.ts

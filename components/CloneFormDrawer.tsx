@@ -2,9 +2,20 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function CloneFormDrawer({ forms }: { forms: any[] }) {
+export default function CloneFormDrawer({
+  forms,
+  canMaster = false,
+  canTenant = false,
+  hasTeamWorkspace = false,
+}: {
+  forms: any[];
+  canMaster?: boolean;
+  canTenant?: boolean;
+  hasTeamWorkspace?: boolean;
+}) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [scope, setScope] = useState<'tenant' | 'platform'>(hasTeamWorkspace && canTenant ? 'tenant' : 'platform');
   const [sourceCode, setSourceCode] = useState(forms[0]?.code ?? 'WHS');
   const [newCode, setNewCode] = useState('');
   const [newName, setNewName] = useState('');
@@ -17,7 +28,7 @@ export default function CloneFormDrawer({ forms }: { forms: any[] }) {
     const res = await fetch('/api/platform', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ action: 'clone_form', sourceCode, newCode, newName }),
+      body: JSON.stringify({ action: 'clone_form', scope, sourceCode, newCode, newName }),
     });
     const body = await res.json();
     setBusy(false);
@@ -34,40 +45,55 @@ export default function CloneFormDrawer({ forms }: { forms: any[] }) {
 
   return (
     <>
-      <button className="btn btn-sm" onClick={() => setOpen(true)}>+ Clone &amp; Customize Form</button>
+      <button className="btn btn-sm" onClick={() => setOpen(true)}>+ Clone Existing Form / Policy</button>
       {open && (
         <>
           <div className="drawer-bg" onClick={() => setOpen(false)} />
-          <aside className="drawer" role="dialog" aria-label="Clone Master Form">
+          <aside className="drawer" role="dialog" aria-label="Clone Form or Policy">
             <div className="drawer-head">
               <div style={{ flex: 1 }}>
-                <div className="kicker">Tenant-Scoped Form Customization</div>
-                <h2>Clone Master Form Into Tenant</h2>
+                <div className="kicker">{scope === 'platform' ? 'Master Library Template Duplication' : 'Workspace Form Customization'}</div>
+                <h2>Clone Form or Written Policy</h2>
               </div>
               <button className="btn" style={{ width: 36, height: 36, padding: 0 }} onClick={() => setOpen(false)} aria-label="Close">×</button>
             </div>
             <form onSubmit={submit} className="drawer-body">
               <div style={{ fontSize: 12.5, color: 'var(--n6)', lineHeight: 1.5 }}>
-                Cloning creates a tenant-owned copy of any master form so your consultancy can add, detach, or customize questions without modifying the global master template.
+                {scope === 'platform'
+                  ? 'Duplicates all sections and items of an existing template into a new Global Master Form or Written Policy.'
+                  : 'Creates a workspace-owned copy of any master form or policy so your consultancy can add, detach, or customize items without altering the global master library.'}
               </div>
+
+              {canMaster && hasTeamWorkspace && canTenant && (
+                <label className="field">
+                  <span>Destination Library Plane</span>
+                  <select className="select" value={scope} onChange={e => setScope(e.target.value as 'tenant' | 'platform')}>
+                    <option value="tenant">Workspace Custom Copy (This Tenant Only)</option>
+                    <option value="platform">Platform Master Template (Global Library)</option>
+                  </select>
+                </label>
+              )}
+
               <label className="field">
-                <span>Source Master Template</span>
+                <span>Source Form / Written Policy</span>
                 <select className="select" value={sourceCode} onChange={e => setSourceCode(e.target.value)}>
-                  {forms.filter(f => !f.tenant_id).map(f => (
-                    <option key={f.code} value={f.code}>{f.code} · {f.name} ({f.n} items)</option>
+                  {forms.map(f => (
+                    <option key={f.code} value={f.code}>
+                      {f.code} · {f.name} ({f.n} items · {f.tenant_id ? 'Workspace' : 'Master'})
+                    </option>
                   ))}
                 </select>
               </label>
               <label className="field">
-                <span>New Form Code (up to 16 chars, e.g. WHS-CUSTOM)</span>
-                <input className="input" value={newCode} onChange={e => setNewCode(e.target.value.toUpperCase())} required placeholder="WHS-CUSTOM" />
+                <span>New Template Code (up to 16 chars, e.g. GAP-WVPP or WHS-COLD)</span>
+                <input className="input mono" value={newCode} onChange={e => setNewCode(e.target.value.toUpperCase())} required placeholder="GAP-WVPP" />
               </label>
               <label className="field">
-                <span>Custom Form Title</span>
-                <input className="input" value={newName} onChange={e => setNewName(e.target.value)} required placeholder="Cold Storage & Ammonia Warehouse Audit" />
+                <span>New Form / Policy Title</span>
+                <input className="input" value={newName} onChange={e => setNewName(e.target.value)} required placeholder="Workplace Violence Prevention Written Policy Audit" />
               </label>
               <div className="drawer-foot" style={{ padding: '12px 0 0', borderTop: 'none' }}>
-                <button type="submit" className="btn btn-primary" disabled={busy}>Clone Form</button>
+                <button type="submit" className="btn btn-primary" disabled={busy}>Clone &amp; Open Builder →</button>
                 <button type="button" className="btn" onClick={() => setOpen(false)}>Cancel</button>
               </div>
             </form>
@@ -78,4 +104,3 @@ export default function CloneFormDrawer({ forms }: { forms: any[] }) {
     </>
   );
 }
-

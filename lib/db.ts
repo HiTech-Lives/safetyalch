@@ -42,8 +42,50 @@ export async function exec(sql: string, params: unknown[] = []) {
   return res;
 }
 
-export async function audit(tenantId: string, actor: string | null, action: string, entity: string, entityId: string, detail?: unknown) {
-  await q('INSERT INTO audit_log (tenant_id, actor_user_id, action, entity, entity_id, detail) VALUES (?,?,?,?,?,?)', [
-    tenantId, actor, action, entity, entityId, detail ? JSON.stringify(detail) : null,
-  ]);
+export function nowSql(offsetMs = 0): string {
+  return new Date(Date.now() + offsetMs).toISOString().slice(0, 19).replace('T', ' ');
+}
+
+export async function audit(
+  tenantId: string,
+  actor: string | null,
+  action: string,
+  entity: string,
+  entityId: string,
+  detail?: unknown,
+  impersonatedByPlatformUserId?: string | null
+) {
+  await q(
+    'INSERT INTO audit_log (tenant_id, actor_user_id, impersonated_by_platform_user_id, action, entity, entity_id, detail) VALUES (?,?,?,?,?,?,?)',
+    [
+      tenantId,
+      actor,
+      impersonatedByPlatformUserId ?? null,
+      action,
+      entity,
+      entityId,
+      detail ? JSON.stringify(detail) : null,
+    ]
+  );
+}
+
+export async function platformAudit(
+  actorPlatformUserId: string | null,
+  action: string,
+  targetTenantId: string | null,
+  entity: string,
+  entityId: string,
+  detail?: unknown
+) {
+  await q(
+    'INSERT INTO platform_audit_log (actor_platform_user_id, action, target_tenant_id, entity, entity_id, detail) VALUES (?,?,?,?,?,?)',
+    [
+      actorPlatformUserId,
+      action,
+      targetTenantId,
+      entity,
+      entityId,
+      detail ? JSON.stringify(detail) : null,
+    ]
+  );
 }

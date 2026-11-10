@@ -1,0 +1,249 @@
+{
+  "industryLines": [
+    {
+      "id": "ind-agrishield",
+      "code": "AGRI",
+      "name": "Agriculture & Food Production",
+      "shield_brand": "AgriShield",
+      "is_core_shield": 1,
+      "federal_baseline": "29 CFR Part 1928 & Select Part 1910",
+      "state_overlay_notes": "CA (8 CCR 3395 Outdoor Heat @ 80F shade / 95F high-heat + 10-min rest every 2 hrs, Ag Ergonomics, Tractor ROPS, 8 CCR 3203 IIPP); WA (WISHA WAC 296-307) & OR (OAR Div 437-004) outdoor heat, wildfire smoke, worker housing & field sanitation.",
+      "special_rule_alert": "Federal Budget Rider Alert: Annual federal appropriations riders exempt agricultural operations with 10 or fewer non-family employees from routine Fed OSHA enforcement UNLESS a temporary labor camp is maintained.",
+      "default_topics": ["heat_illness", "ag_field_sanitation", "ag_housing", "machine_guarding", "hazcom", "iipp", "wildfire_smoke"],
+      "legacy_aliases": ["Agriculture", "Dairy", "AG", "Packing House"],
+      "sort_order": 10,
+      "subsectors": [
+        { "code": "AGRI-CULTIVATOR", "name": "Cultivator (Row, Field & Orchard Crops)", "description": "Field harvesting, tractor/PTO operations, irrigation, pesticide/WPS & field sanitation." },
+        { "code": "AGRI-STOCKMAN", "name": "Stockman (Dairy, Cattle & Livestock)", "description": "Milking parlors, animal handling, manure lagoons/confined spaces, feed mills & skid steers." },
+        { "code": "AGRI-WORKFORCE", "name": "Workforce (FLC, H-2A Housing & Crew Transport)", "description": "Farm labor contractors, H-2A temporary worker housing camps, Cal/OSHA van/bus transport & multi-language training." },
+        { "code": "AGRI-CANNABIS", "name": "Cannabis (Indoor/Greenhouse/Outdoor Cultivation)", "description": "CO2 enrichment monitors, extraction/solvents, UV/lighting electrical, pesticide & odor controls." },
+        { "code": "AGRI-PROCESSOR", "name": "Processor (Packing House, Cold Storage & Processing)", "description": "Conveyors, palletizers, ammonia refrigeration PSM, forklifts, wet-floor slips & repetitive ergonomics." }
+      ]
+    },
+    {
+      "id": "ind-constructshield",
+      "code": "CONST",
+      "name": "Construction & Specialty Trades",
+      "shield_brand": "ConstructShield",
+      "is_core_shield": 1,
+      "federal_baseline": "29 CFR Part 1926 (6 ft general fall protection; 10–30 ft scaffold/steel exceptions)",
+      "state_overlay_notes": "CA (8 CCR CSO: 15 ft general fall trigger, 6 ft residential framing/roofing, 7.5 ft floor/wall openings; mandatory Cal/OSHA excavation/trenching & >36 ft framing permits; IIPP); MI (MIOSHA) & WA (WISHA WAC 296-155 / 296-880) stricter fall restraint, equipment inspection & trench sloping.",
+      "special_rule_alert": "Cal/OSHA Permit Check: Verify active Division permits prior to trenches >=5 ft entered by workers, structure demolition/erection >36 ft, or diesel underground work.",
+      "default_topics": ["fall", "ladders", "scaffolding", "trenching", "silica", "crane_hoist", "scaffold_erection", "steel_erection", "electrical", "heat_illness"],
+      "legacy_aliases": ["Construction", "CONST", "Roofing", "Framing", "Paving"],
+      "sort_order": 20,
+      "subsectors": [
+        { "code": "CONST-HEAVY", "name": "Heavy (Civil, Highway, Bridge & Paving)", "description": "Work-zone traffic control, asphalt/silica, heavy earthmoving, cranes & rigging." },
+        { "code": "CONST-SYSTEMS", "name": "Systems (Electrical, MEP, HVAC & Solar)", "description": "NFPA 70E arc-flash/energized work, LOTO, rooftop/ladder access & confined spaces." },
+        { "code": "CONST-TRADESMAN", "name": "Tradesman (Framing, Roofing, Drywall & Finish)", "description": "6-ft residential roof/framing fall protection, pneumatic nailers, scaffolds & portable ladders." },
+        { "code": "CONST-GROUNDWORKS", "name": "Groundworks (Excavation, Trenching, Utility & Concrete)", "description": "Competent person soil classification, shoring/trench boxes, underground utility locates & silica." },
+        { "code": "CONST-EXECUTIVE", "name": "Executive (General Contractors & Construction Management)", "description": "Multi-employer worksite coordination, subcontractor COI/prequalification, site orientations & daily huddles." }
+      ]
+    },
+    {
+      "id": "ind-culinaryshield",
+      "code": "CULINARY",
+      "name": "Hospitality, Dining & Food Service",
+      "shield_brand": "CulinaryShield",
+      "is_core_shield": 1,
+      "federal_baseline": "29 CFR Part 1910 (Walking-Working Surfaces, Machine Guarding, HazCom, Exit Routes)",
+      "state_overlay_notes": "CA (8 CCR GISO: SB 553 Workplace Violence Prevention Plan 8 CCR 3342, Repetitive Motion Ergonomics 8 CCR 5110, Indoor Heat Illness 8 CCR 3396 for commercial kitchens).",
+      "special_rule_alert": null,
+      "default_topics": ["walking_surfaces", "machine_guarding", "hazcom", "fire", "egress", "ergonomics", "workplace_violence", "heat_illness"],
+      "legacy_aliases": ["Hospitality", "Restaurant", "REST", "Golf Course"],
+      "sort_order": 30,
+      "subsectors": [
+        { "code": "CULINARY-QSR", "name": "Quick-Service (QSR, Fast Casual & Cafes)", "description": "Hot oil/fryer burn prevention, grease slip controls, drive-thru/late-night workplace violence & young worker rules." },
+        { "code": "CULINARY-FULL", "name": "Full-Service (Restaurants, Banquets & Catering)", "description": "Slicers/mixers guarding, knife safety, CO2 beverage cylinders, indoor kitchen heat & Dish/Chem HazCom." },
+        { "code": "CULINARY-RESORT", "name": "Clubs & Resorts (Hotels, Country Clubs & Golf Operations)", "description": "Housekeeping ergonomics, pool chemicals, turf/grounds maintenance equipment & guest-facing security." }
+      ]
+    },
+    {
+      "id": "ind-serviceshield",
+      "code": "SERVICE",
+      "name": "Retail & Consumer Operations",
+      "shield_brand": "ServiceShield",
+      "is_core_shield": 1,
+      "federal_baseline": "29 CFR Part 1910 & OSH Act Section 5(a)(1) General Duty Clause",
+      "state_overlay_notes": "CA & WA: Late-night retail & cash-handling Workplace Violence rules (CA WVPP 8 CCR 3342; NY Retail Worker Safety Act); Cannabis Overlay (CA DCC): odor/chemical filtration, armored/cash-transit security, certified dispensary training hours.",
+      "special_rule_alert": null,
+      "default_topics": ["egress", "fire", "electrical", "material_handling", "hazcom", "workplace_violence", "walking_surfaces"],
+      "legacy_aliases": ["Retail", "RETAIL", "General", "GEN"],
+      "sort_order": 40,
+      "subsectors": [
+        { "code": "SERVICE-RETAIL", "name": "General Retail (Storefronts, Grocers & Big-Box)", "description": "Backroom racking/balers, exit route clearance, ladder/step-stool use, cash-handling WPV & customer slip prevention." },
+        { "code": "SERVICE-CANNABIS", "name": "Cannabis Retail (Licensed Dispensaries & Delivery)", "description": "Controlled access/vault security, cash-transit protocols, DCC/state compliance training & WVPP." }
+      ]
+    },
+    {
+      "id": "ind-factoryshield",
+      "code": "FACTORY",
+      "name": "Manufacturing & Industrial Processing",
+      "shield_brand": "FactoryShield",
+      "is_core_shield": 1,
+      "federal_baseline": "29 CFR Part 1910 (1910.147 LOTO, 1910.212 Machine Guarding, 1910.134 Respiratory, Subpart Z PELs)",
+      "state_overlay_notes": "CA (8 CCR: significantly stricter Cal/OSHA PELs across hundreds of airborne contaminants, formal Ergonomics 8 CCR 5110, Indoor Heat 8 CCR 3396); MI (MIOSHA: detailed automated production, industrial machinery & power-driven hoist standards).",
+      "special_rule_alert": null,
+      "default_topics": ["loto", "machine_guarding", "respiratory", "hearing", "forklift", "hazcom", "electrical", "crane_hoist", "confined_space", "ergonomics"],
+      "legacy_aliases": ["Manufacturing", "Foundry", "FOUNDRY"],
+      "sort_order": 50,
+      "subsectors": [
+        { "code": "FACTORY-CORE", "name": "Core Manufacturing, Fabrication & Foundry", "description": "Point-of-operation guarding, hazardous energy LOTO, overhead cranes, welding/hex-chrome/silica, hearing conservation & PITs." }
+      ]
+    },
+    {
+      "id": "ind-logistics",
+      "code": "LOGISTICS",
+      "name": "Logistics, Trucking & Warehousing",
+      "shield_brand": "FleetShield",
+      "is_core_shield": 0,
+      "federal_baseline": "29 CFR Part 1910 (1910.178 PITs) & 49 CFR FMCSA Parts 390–397",
+      "state_overlay_notes": "CA Indoor Heat (8 CCR 3396) for non-air-conditioned warehouses/containers; WA Warehouse Quota & Ergonomics rules; DOT Driver Qualification, HOS, Drug/Alcohol Clearinghouse & PM schedules.",
+      "special_rule_alert": null,
+      "default_topics": ["forklift", "fleet_dot", "material_handling", "ergonomics", "egress", "fire", "heat_illness"],
+      "legacy_aliases": ["Warehouse", "Distribution", "Trucking"],
+      "sort_order": 60,
+      "subsectors": [
+        { "code": "LOG-TRUCKING", "name": "Heavy Auto, Regional & Long-Haul Trucking", "description": "DOT Driver Qualification files, MVRs/CAB scores, telematics/dash-cams, load securement & tractor/trailer PM." },
+        { "code": "LOG-WAREHOUSE", "name": "3PL Warehousing, Distribution & Cold Storage", "description": "Dock locks/wheel chocks, pallet rack integrity, forklift pedestrian separation & battery charging." },
+        { "code": "LOG-LASTMILE", "name": "Last-Mile Delivery & Commercial Fleets", "description": "Non-CDL fleet telematics, backing prevention, dog/slip hazards & liftgate ergonomics." }
+      ]
+    },
+    {
+      "id": "ind-healthcare",
+      "code": "HEALTHCARE",
+      "name": "Healthcare, Senior Living & Social Services",
+      "shield_brand": "CareShield",
+      "is_core_shield": 0,
+      "federal_baseline": "29 CFR 1910.1030 (Bloodborne Pathogens), 1910.134 (Respiratory) & General Duty Clause",
+      "state_overlay_notes": "CA Healthcare Workplace Violence (8 CCR 3342), Aerosol Transmissible Diseases (8 CCR 5199), Safe Patient Handling (8 CCR 5120); WA Safe Patient Handling & Healthcare WPV.",
+      "special_rule_alert": null,
+      "default_topics": ["bloodborne", "respiratory", "ergonomics", "workplace_violence", "hazcom", "egress"],
+      "legacy_aliases": ["Healthcare", "Medical", "Senior Living"],
+      "sort_order": 70,
+      "subsectors": [
+        { "code": "HC-CLINICAL", "name": "Hospitals, Urgent Care & Outpatient Clinics", "description": "Sharps/BBP exposure control, ATD/isolation, hazardous drugs & workplace violence." },
+        { "code": "HC-SENIOR", "name": "Skilled Nursing, Assisted Living & Memory Care", "description": "Resident lift/transfer ergonomics, elopement/wander security, kitchen/laundry safety & slip prevention." },
+        { "code": "HC-SOCIAL", "name": "Home Health, Behavioral Health & Non-Profits", "description": "Lone-worker field safety, client transport fleets & de-escalation protocols." }
+      ]
+    },
+    {
+      "id": "ind-maritime",
+      "code": "MARITIME",
+      "name": "Maritime, Shipyards & Marine Terminals",
+      "shield_brand": "MaritimeShield",
+      "is_core_shield": 0,
+      "federal_baseline": "29 CFR Part 1915 (Shipyards), Part 1917 (Marine Terminals) & Part 1918 (Longshoring)",
+      "state_overlay_notes": "Federal OSHA retains exclusive jurisdiction over navigable waters and most USL&H maritime operations even inside State Plan states (check shore-side boundaries in CA SSO / WA DOSH).",
+      "special_rule_alert": "Jurisdiction Carve-Out: Verify USL&H navigable-water vs. shore-side State Plan boundary before citing state vs. 29 CFR 1915/1917/1918.",
+      "default_topics": ["confined_space", "fall", "crane_hoist", "respiratory", "fire", "loto", "electrical"],
+      "legacy_aliases": ["Maritime", "Shipyard"],
+      "sort_order": 80,
+      "subsectors": [
+        { "code": "MAR-SHIPYARD", "name": "Shipyard Repair, Boatbuilding & Drydocks", "description": " Shipyard competent person confined space testing, hot work, scaffolding & coatings." },
+        { "code": "MAR-TERMINAL", "name": "Marine Terminals, Ports & Stevedoring", "description": "Intermodal container handling, gantry cranes, man-overboard/PFDs & heavy mobile equipment." }
+      ]
+    },
+    {
+      "id": "ind-public",
+      "code": "PUBLIC_EDU",
+      "name": "Public Entities, Education & Municipalities",
+      "shield_brand": "CivicShield",
+      "is_core_shield": 0,
+      "federal_baseline": "State Plan Public-Sector Standards (incl. 7 Bifurcated States: CT, IL, ME, MA, NJ, NY, VI)",
+      "state_overlay_notes": "Covered by all 22 Complete State Plans AND all 7 Public-Sector-Only State Plans (CONN-OSHA, IL OSHA, Maine BLS, Mass DLS, NJ PEOSH, NY PESH, VIDOSH).",
+      "special_rule_alert": null,
+      "default_topics": ["iipp", "confined_space", "trenching", "fleet_dot", "hazcom", "workplace_violence", "ergonomics"],
+      "legacy_aliases": ["Municipality", "Education", "Public Entity"],
+      "sort_order": 90,
+      "subsectors": [
+        { "code": "PUB-MUNICIPAL", "name": "Cities, Counties, Public Works & Water Districts", "description": "Permit-required sewer/vault confined spaces, trenching, fleet/DPW shops & parks maintenance." },
+        { "code": "PUB-EDU", "name": "K–12 School Districts, Charter Schools & Higher Ed", "description": "Custodial/maintenance shops, science lab chemical hygiene, bus fleets & campus emergency plans." }
+      ]
+    },
+    {
+      "id": "ind-energy",
+      "code": "ENERGY",
+      "name": "Energy, Utilities, Oil & Gas & Mining",
+      "shield_brand": "EnergyShield",
+      "is_core_shield": 0,
+      "federal_baseline": "29 CFR 1910.269 (Electric Power), 1910.119 (PSM) & 30 CFR MSHA",
+      "state_overlay_notes": "CA Petroleum Safety Orders & PSM; WY/NM/UT/AK oil & gas servicing provisions; MSHA Part 46/48 surface & underground mining.",
+      "special_rule_alert": null,
+      "default_topics": ["electrical", "loto", "confined_space", "fall", "heat_illness", "flammables", "fleet_dot"],
+      "legacy_aliases": ["Utilities", "Oil & Gas", "Mining"],
+      "sort_order": 100,
+      "subsectors": [
+        { "code": "ENG-UTILITY", "name": "Electric, Gas, Telecom & Utility Contractors", "description": "Minimum approach distances, bucket trucks, arc-flash, pole/tower climbing & traffic work zones." },
+        { "code": "ENG-RENEW", "name": "Utility-Scale Solar, Wind & Battery Storage", "description": "DC electrical LOTO, torque/material handling, remote site heat/EMS & crane picks." }
+      ]
+    },
+    {
+      "id": "ind-autosvc",
+      "code": "AUTO_SVC",
+      "name": "Automotive Dealerships, Collision & Fleet Repair",
+      "shield_brand": "AutoShield",
+      "is_core_shield": 0,
+      "federal_baseline": "29 CFR Part 1910 (1910.107 Spray Finishing, 1910.134 Respiratory, 1910.215 Grinders)",
+      "state_overlay_notes": "CA Automotive Lift / ALI inspection standards, isocyanate respiratory programs, EV high-voltage bay isolation & hazardous waste.",
+      "special_rule_alert": null,
+      "default_topics": ["machine_guarding", "respiratory", "flammables", "hazcom", "electrical", "ppe", "fire"],
+      "legacy_aliases": ["Automotive", "AUTO"],
+      "sort_order": 110,
+      "subsectors": [
+        { "code": "AUTO-DEALER", "name": "Dealership Service Bays, Tire & Heavy Equipment Shops", "description": "Annual ALI lift inspections, jack stands, tire cages, oil pits, grinders & eye protection." },
+        { "code": "AUTO-BODY", "name": "Collision Repair & Spray Booth Operations", "description": "Spray booth ventilation/suppression, supplied-air respirators, flammable cabinets & sanding dust." }
+      ]
+    },
+    {
+      "id": "ind-property",
+      "code": "PROPERTY",
+      "name": "Property Management, Janitorial & Landscaping",
+      "shield_brand": "PropertyShield",
+      "is_core_shield": 0,
+      "federal_baseline": "29 CFR Part 1910 & Tree Care / Outdoor Operations",
+      "state_overlay_notes": "CA Tree Work Safety Orders (8 CCR 3420–3428), Outdoor Heat (8 CCR 3395), MD/VA/OR tree care standards, janitorial ergonomics & chemical dilution.",
+      "special_rule_alert": null,
+      "default_topics": ["ladders", "heat_illness", "hazcom", "ppe", "fleet_dot", "ergonomics", "electrical"],
+      "legacy_aliases": ["Property Management", "Landscaping", "Janitorial"],
+      "sort_order": 120,
+      "subsectors": [
+        { "code": "PROP-MGMT", "name": "Commercial Real Estate, Multifamily/HOA & Facilities", "description": "Roof access/ladders, maintenance engineers, pool/boiler rooms & contractor oversight." },
+        { "code": "PROP-LANDSCAPE", "name": "Commercial Landscaping, Tree Care & Pest Control", "description": "Chipper/chainsaw PPE, drop zones, trailer/fleet towing, pesticides & outdoor heat." }
+      ]
+    }
+  ],
+  "groupPresets": {
+    "breckpoint_sig_rsa": {
+      "label": "Gems",
+      "groups": [
+        { "code": "CAN", "name": "California Agriculture Network (CAN)", "group_type": "sig_captive", "accent_color": "#2d6a4f", "billing_mode": "included_captive", "sort_order": 10 },
+        { "code": "CAP", "name": "Contractors Alliance Program (CAP)", "group_type": "sig_captive", "accent_color": "#b5651d", "billing_mode": "included_captive", "sort_order": 20 },
+        { "code": "CCN", "name": "Culinary & Hospitality Network (CCN)", "group_type": "sig_captive", "accent_color": "#7b2cbf", "billing_mode": "included_captive", "sort_order": 30 },
+        { "code": "CFM", "name": "Core Factory & Manufacturing (CFM)", "group_type": "sig_captive", "accent_color": "#1d3557", "billing_mode": "included_captive", "sort_order": 40 },
+        { "code": "CLP", "name": "Commercial Logistics & Processing (CLP)", "group_type": "sig_captive", "accent_color": "#006d77", "billing_mode": "included_captive", "sort_order": 50 },
+        { "code": "CRMBC", "name": "California Retail & Multi-Brand Captive (CRMBC)", "group_type": "sig_captive", "accent_color": "#9b2226", "billing_mode": "included_captive", "sort_order": 60 },
+        { "code": "RSA", "name": "Retail Sales Accounts (Fee-for-Service)", "group_type": "retail_rsa", "accent_color": "#5f584f", "billing_mode": "scoro_invoiced", "sort_order": 70 }
+      ],
+      "relationshipTypes": [
+        { "code": "PARENT_CHILD", "label": "Parent → Subsidiary", "rolls_up_analytics": 1 },
+        { "code": "SIBLING", "label": "Sibling / Common Ownership", "rolls_up_analytics": 1 },
+        { "code": "GC_SUB", "label": "General Contractor → Subcontractor", "rolls_up_analytics": 0 }
+      ]
+    },
+    "standard_consultancy": {
+      "label": "Client Portfolios",
+      "groups": [
+        { "code": "CAPTIVE", "name": "Captive & Group Programs", "group_type": "sig_captive", "accent_color": "#1f4f6e", "billing_mode": "included_captive", "sort_order": 10 },
+        { "code": "CARRIER", "name": "Carrier Loss Control Dispatch", "group_type": "carrier_program", "accent_color": "#3d5a80", "billing_mode": "fee_for_service", "sort_order": 20 },
+        { "code": "DIRECT", "name": "Direct Commercial Retainers", "group_type": "retail_rsa", "accent_color": "#4b2454", "billing_mode": "hourly", "sort_order": 30 }
+      ],
+      "relationshipTypes": [
+        { "code": "PARENT_CHILD", "label": "Parent → Subsidiary", "rolls_up_analytics": 1 },
+        { "code": "FRANCHISE", "label": "Franchisor → Franchisee", "rolls_up_analytics": 1 },
+        { "code": "PEO_CLIENT", "label": "PEO → Client Company", "rolls_up_analytics": 0 }
+      ]
+    }
+  }
+}
+

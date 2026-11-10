@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Frame, Pill } from './ui';
@@ -24,16 +24,27 @@ export default function PortalClientView({
 }) {
   const router = useRouter();
   const [activeRec, setActiveRec] = useState<any | null>(null);
-  const [mode, setMode] = useState<'fix' | 'assume'>('fix');
+  const [mode, setMode] = useState<'fix' | 'board_response' | 'assume'>('fix');
+  const [memberResponse, setMemberResponse] = useState<'agree' | 'disagree'>('agree');
   const [note, setNote] = useState('');
   const [signer, setSigner] = useState(contact.name);
   const [photoDataUrl, setPhotoDataUrl] = useState<string>('');
   const [busy, setBusy] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
+  // Exchange magic link into HTTP-only sa_portal_session cookie on mount so printable report tabs pass the S4 auth gate seamlessly
+  useEffect(() => {
+    if (!token || token === 'session') return;
+    fetch(`/api/portal/${encodeURIComponent(token)}`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ action: 'exchange_session' }),
+    }).catch(() => {});
+  }, [token]);
+
   function notify(msg: string) {
     setToast(msg);
-    setTimeout(() => setToast(null), 3000);
+    setTimeout(() => setToast(null), 3200);
   }
 
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
@@ -51,9 +62,11 @@ export default function PortalClientView({
     const payload =
       mode === 'fix'
         ? { action: 'submit_fix', recId: activeRec.id, note, photoDataUrl }
-        : { action: 'assume_risk', recId: activeRec.id, reason: note, signer };
+        : mode === 'board_response'
+          ? { action: 'respond_rec', recId: activeRec.id, memberResponse, note }
+          : { action: 'assume_risk', recId: activeRec.id, reason: note, signer };
 
-    const res = await fetch(`/api/portal/${token}`, {
+    const res = await fetch(`/api/portal/${encodeURIComponent(token)}`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(payload),
@@ -102,8 +115,8 @@ export default function PortalClientView({
       {/* Actionable Open Findings */}
       <Frame className="strong">
         <div className="panel-head">
-          <h2>Open Recommendations Requiring Action ({openList.length})</h2>
-          <span className="kicker">Upload correction proof or sign a Risk Assumed statement</span>
+          <h2>Open Recommendations Requiring 30-Day Response ({openList.length})</h2>
+          <span className="kicker">Submit correction proof, record 30-Day Board Response, or sign Risk Assumed</span>
         </div>
         {openList.length === 0 && (
           <div style={{ padding: 20, fontSize: 13.5, color: 'var(--ok)', fontWeight: 500 }}>
@@ -113,15 +126,26 @@ export default function PortalClientView({
         {openList.map(r => (
           <div key={r.id} style={{ padding: '16px 18px', borderTop: '1px solid var(--div2)', display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
-              <span className="code">{r.id}</span>
+              <span className="code">{r.rec_number || r.id}</span>
               <Pill kind={r.state}>{STATE_LABEL[r.state as keyof typeof STATE_LABEL]}</Pill>
               <Pill kind="ink">{r.priority} · {PRIORITY_DAYS[r.priority as keyof typeof PRIORITY_DAYS]}d · due {fmtShort(r.due_on)}</Pill>
+              {r.member_response && (
+                <Pill kind={r.member_response === 'agree' ? 'verified' : 'overdue'}>
+                  30d Response: {String(r.member_response).toUpperCase()}
+                </Pill>
+              )}
               <span className="kicker">{r.site_name} ({r.jurisdiction}) · Inspection {r.inspection_id}</span>
             </div>
-            <div style={{ fontSize: 14.5, lineHeight: 1.5, fontWeight: 500 }}>{r.text}</div>
-            {r.reg_code && (
+            {r.title && <div style={{ fontWeight: 700, fontSize: 15 }}>{r.title}</div>}
+            <div style={{ fontSize: 14, lineHeight: 1.5 }}>{r.text}</div>
+            {(r.reg_code || r.reg_source_url) && (
               <div style={{ fontSize: 12, color: 'var(--n7)' }}>
-                <strong>Citation:</strong> {r.reg_code} — {r.reg_title}
+                <strong>Resource Standard:</strong> {r.reg_code ? `${r.reg_code} — ${r.reg_title || ''}` : 'Official Standard'}{' '}
+                {r.reg_source_url && (
+                  <a href={r.reg_source_url} target="_blank" rel="noreferrer" style={{ color: 'var(--acc)', textDecoration: 'underline' }}>
+                    Live Source ↗
+                  </a>
+                )}
               </div>
             )}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 4 }}>
@@ -130,6 +154,17 @@ export default function PortalClientView({
                 onClick={() => { setActiveRec(r); setMode('fix'); setNote(''); setPhotoDataUrl(''); }}
               >
                 Submit Correction + Photo
+              </button>
+              <button
+                className="btn btn-sm"
+                onClick={() => {
+                  setActiveRec(r);
+                  setMode('board_response');
+                  setMemberResponse(r.member_response === 'disagree' ? 'disagree' : 'agree');
+                  setNote(r.member_response_note || '');
+                }}
+              >
+                30-Day Board Response (Agree / Disagree)
               </button>
               <button
                 className="btn btn-sm"
@@ -152,9 +187,10 @@ export default function PortalClientView({
             <div key={r.id} style={{ padding: '13px 18px', borderTop: '1px solid var(--div2)', display: 'flex', justifyContent: 'space-between', gap: 14, alignItems: 'center' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                  <span className="code">{r.id}</span>
+                  <span className="code">{r.rec_number || r.id}</span>
                   <span className="kicker">{r.site_name} · due {fmtShort(r.due_on)}</span>
                 </div>
+                {r.title && <div style={{ fontWeight: 600, fontSize: 13.5 }}>{r.title}</div>}
                 <div style={{ fontSize: 13.5 }}>{r.text}</div>
               </div>
               <Pill kind={r.state}>{STATE_LABEL[r.state as keyof typeof STATE_LABEL]}</Pill>
@@ -166,7 +202,7 @@ export default function PortalClientView({
       {/* Inspection Reports Archive */}
       <Frame>
         <div className="panel-head">
-          <h2>Inspection Reports &amp; Printable PDFs ({inspections.length})</h2>
+          <h2>Inspection Packet Archive &amp; Printable PDFs ({inspections.length})</h2>
           <span className="kicker">7-Year Immutable Compliance Archive</span>
         </div>
         {inspections.map(i => (
@@ -177,16 +213,15 @@ export default function PortalClientView({
               </div>
               <div className="sub">Conducted {fmtDate(i.started_at)} by {i.consultant}</div>
             </div>
-            <div style={{ display: 'flex', gap: 8 }}>
-              <Link href={`/inspections/${i.id}/report?type=full`} target="_blank" className="btn btn-sm">
-                Full Report PDF ↗
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <Link href={`/inspections/${i.id}/report?mode=full`} target="_blank" className="btn btn-sm">
+                Full Report / Scorecard ↗
               </Link>
-              <Link
-                href={`/inspections/${i.id}/report?type=${i.scale === 'maturity' ? 'development' : 'recommendations'}`}
-                target="_blank"
-                className="btn btn-primary btn-sm"
-              >
-                {i.scale === 'maturity' ? 'Development Plan PDF ↗' : 'Recommendation Report PDF ↗'}
+              <Link href={`/inspections/${i.id}/report?mode=letter`} target="_blank" className="btn btn-sm">
+                ARU Cover Letter ↗
+              </Link>
+              <Link href={`/inspections/${i.id}/report?mode=response`} target="_blank" className="btn btn-primary btn-sm">
+                {i.scale === 'maturity' ? 'Development Roadmap ↗' : '30-Day Response Form ↗'}
               </Link>
             </div>
           </div>
@@ -199,17 +234,24 @@ export default function PortalClientView({
           <aside className="drawer" role="dialog" aria-label="Respond to recommendation">
             <div className="drawer-head">
               <div style={{ flex: 1 }}>
-                <div className="kicker">{activeRec.id} · {activeRec.site_name}</div>
-                <h2>{mode === 'fix' ? 'Submit Hazard Correction' : 'Assume Risk in Writing'}</h2>
+                <div className="kicker">{activeRec.rec_number || activeRec.id} · {activeRec.site_name}</div>
+                <h2>
+                  {mode === 'fix'
+                    ? 'Submit Hazard Correction'
+                    : mode === 'board_response'
+                      ? '30-Day Captive Board Response'
+                      : 'Assume Risk in Writing'}
+                </h2>
               </div>
               <button className="btn" style={{ width: 36, height: 36, padding: 0 }} onClick={() => setActiveRec(null)} aria-label="Close">×</button>
             </div>
             <form onSubmit={submitAction} className="drawer-body">
               <div style={{ fontSize: 13.5, lineHeight: 1.5, padding: 12, background: '#fff', border: '1px solid var(--div)' }}>
+                {activeRec.title && <div style={{ fontWeight: 700, marginBottom: 4 }}>{activeRec.title}</div>}
                 {activeRec.text}
               </div>
 
-              {mode === 'fix' ? (
+              {mode === 'fix' && (
                 <>
                   <label className="field">
                     <span>Corrective Action Taken (Required)</span>
@@ -224,8 +266,14 @@ export default function PortalClientView({
                     />
                   </label>
                   <label className="field">
-                    <span>Upload Proof Photo (Optional)</span>
-                    <input type="file" accept="image/*" onChange={handleFile} className="input" style={{ paddingTop: 6 }} />
+                    <span>Upload Proof Photo (PNG, JPEG, WebP — SVG Blocked)</span>
+                    <input
+                      type="file"
+                      accept="image/png,image/jpeg,image/webp"
+                      onChange={handleFile}
+                      className="input"
+                      style={{ paddingTop: 6 }}
+                    />
                   </label>
                   {photoDataUrl && (
                     <div className="frame" style={{ padding: 8 }}>
@@ -233,7 +281,44 @@ export default function PortalClientView({
                     </div>
                   )}
                 </>
-              ) : (
+              )}
+
+              {mode === 'board_response' && (
+                <>
+                  <div className="note">
+                    Record your official 30-Day Captive Board response while corrective work is being scheduled. If you disagree with the recommendation, an explanation is required.
+                  </div>
+                  <label className="field">
+                    <span>30-Day Board Determination</span>
+                    <select
+                      className="select"
+                      value={memberResponse}
+                      onChange={e => setMemberResponse(e.target.value as 'agree' | 'disagree')}
+                    >
+                      <option value="agree">Agree — Corrective Action Planned / In Progress</option>
+                      <option value="disagree">Disagree — Request Captive / Underwriting Review</option>
+                    </select>
+                  </label>
+                  <label className="field">
+                    <span>{memberResponse === 'disagree' ? 'Explanation for Disagreement (Required)' : 'Planned Completion Date & Action Plan'}</span>
+                    <textarea
+                      className="input"
+                      rows={4}
+                      value={note}
+                      onChange={e => setNote(e.target.value)}
+                      required={memberResponse === 'disagree'}
+                      placeholder={
+                        memberResponse === 'disagree'
+                          ? 'Explain operational or regulatory basis for disagreeing…'
+                          : 'Target completion date, responsible supervisor, or vendor PO…'
+                      }
+                      style={{ width: '100%' }}
+                    />
+                  </label>
+                </>
+              )}
+
+              {mode === 'assume' && (
                 <>
                   <div className="banner warn">
                     Assuming risk closes this recommendation without physical abatement. Your written statement and signature print permanently under the finding on the report and are shown on the next inspection visit.
@@ -259,7 +344,11 @@ export default function PortalClientView({
 
               <div className="drawer-foot" style={{ padding: '12px 0 0', borderTop: 'none' }}>
                 <button type="submit" className="btn btn-primary" disabled={busy}>
-                  {mode === 'fix' ? 'Submit for Consultant Verification' : 'Sign & Record Risk Assumption'}
+                  {mode === 'fix'
+                    ? 'Submit for Consultant Verification'
+                    : mode === 'board_response'
+                      ? 'Save 30-Day Board Response'
+                      : 'Sign & Record Risk Assumption'}
                 </button>
                 <button type="button" className="btn" onClick={() => setActiveRec(null)}>Cancel</button>
               </div>

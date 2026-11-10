@@ -1,4 +1,4 @@
-// Applies db/schema.sql. `--drop` drops every table first (destroys data — dev only).
+// Applies db/schema.sql. `--drop` drops every table first (destroys data — local dev only).
 import 'dotenv/config';
 import fs from 'node:fs';
 import mysql from 'mysql2/promise';
@@ -6,9 +6,12 @@ import mysql from 'mysql2/promise';
 const TABLES = [
   'timesheet_entries','timesheets','expenses','quick_reports','observations','user_time_away','user_certifications',
   'work_jobs','engagement_service_lines','engagements','referral_sources','sources',
-  'audit_log','magic_links','photos','rec_events','recommendations','answers','inspections',
-  'visit_attendees','visits','question_regulations','questions','form_sections','forms','regulations',
-  'sites','member_assignments','member_contacts','members','seat_requests','users','tenants'
+  'audit_log','magic_links','report_share_links','stored_files','photos','rec_events','recommendations','answers','inspections',
+  'visit_attendees','visits','question_regulations','book_recommendations','questions','form_sections','forms','regulations',
+  'jurisdiction_portals','sites','member_assignments','portal_sessions','member_contacts','company_relationships','members',
+  'seat_requests','tenant_relationship_types','user_group_scopes','tenant_member_groups','tenant_disabled_industries',
+  'industry_subsectors','industry_lines','user_permission_overrides','tenant_role_permissions',
+  'platform_impersonation_sessions','user_sessions','users','platform_audit_log','platform_sessions','platform_user_acl','platform_users','tenants'
 ];
 
 function parseDbConfig(rawUrl) {
@@ -20,7 +23,7 @@ function parseDbConfig(rawUrl) {
     user: decodeURIComponent(u.username),
     password: decodeURIComponent(u.password),
     database: u.pathname.replace(/^\//, ''),
-    connectTimeout: 5000,
+    connectTimeout: 8000,
     dateStrings: true,
   };
 }

@@ -514,4 +514,6 @@ await ins('timesheet_entries', {
 });
 
 console.log('Demo tenants seeded. Recommendations: ' + (recNo - 101) + ' · Loss Control Jobs: ' + WORK_JOBS.length);
+const { runMigrateV003 } = await import('./migrate-v003.mjs');
+await runMigrateV003(conn);
 await conn.end();

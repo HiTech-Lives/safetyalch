@@ -17,10 +17,16 @@ export default async function InspectionDetail({ params }: { params: Promise<{ i
   const total = Number(insp.question_count);
 
   const cells = locked
-    ? [['Questions', total], ['Status', 'In progress']]
+    ? [['Items', total], ['Status', 'In progress']]
     : baseline
       ? [['Items', total], ['Sections', maturity.length], ['N/A', tallies.na ?? 0], ['Due dates', 'None']]
-      : [['Questions', total, 'var(--ink)'], ['Safe', tallies.safe ?? 0, 'var(--ok)'], ['Unsafe', tallies.unsafe ?? 0, 'var(--bad)'], ['N/A', tallies.na ?? 0, 'var(--n7)']];
+      : insp.scale === 'policy_gap'
+        ? [['Elements', total, 'var(--ink)'], ['Addressed', tallies.addressed ?? 0, 'var(--ok)'], ['Partial', tallies.partial ?? 0, 'var(--warn)'], ['Missing', tallies.missing ?? 0, 'var(--bad)']]
+        : insp.scale === 'rca_percent'
+          ? [['Items', total, 'var(--ink)'], ['Acceptable', tallies.acceptable ?? 0, 'var(--ok)'], ['Needs Imp.', tallies.needs_improvement ?? 0, 'var(--bad)'], ['N/A', tallies.na ?? 0, 'var(--n7)']]
+          : insp.scale === 'lce_100' || insp.scale === 'auto_sup_1_5'
+            ? [['Items', total, 'var(--ink)'], ['Rated', (tallies.points ?? 0) + (tallies.score_1 ?? 0) + (tallies.score_2 ?? 0) + (tallies.score_3 ?? 0) + (tallies.score_4 ?? 0) + (tallies.score_5 ?? 0), 'var(--acc)'], ['Findings', findings.length, findings.length ? 'var(--bad)' : 'var(--ok)'], ['N/A', tallies.na ?? 0, 'var(--n7)']]
+            : [['Questions', total, 'var(--ink)'], ['Safe', tallies.safe ?? 0, 'var(--ok)'], ['Unsafe', tallies.unsafe ?? 0, 'var(--bad)'], ['N/A', tallies.na ?? 0, 'var(--n7)']];
 
   return (
     <>

@@ -1,4 +1,4 @@
--- The Safety Alchemist · MySQL 8 schema
+-- The Safety Alchemist · MySQL 8 schema (v0.0.3)
 -- Statements are separated by "-- @@" lines so scripts/apply-schema.mjs can run triggers without DELIMITER.
 
 CREATE TABLE tenants (
@@ -6,10 +6,14 @@ CREATE TABLE tenants (
   name VARCHAR(160) NOT NULL,
   custom_domain VARCHAR(190) NULL UNIQUE,
   email_sender VARCHAR(190) NULL,
+  email_sender_verified TINYINT(1) NOT NULL DEFAULT 0,
   accent CHAR(7) NOT NULL DEFAULT '#4b2454',
   logo_key VARCHAR(255) NULL,
   brand_scopes JSON NOT NULL,
   ai_config_json JSON NULL,
+  ai_credentials_enc TEXT NULL,
+  sso_config_json JSON NULL,
+  group_label VARCHAR(60) NOT NULL DEFAULT 'Portfolio Groups',
   seats_purchased INT NOT NULL DEFAULT 1,
   plan VARCHAR(40) NOT NULL DEFAULT 'professional',
   status ENUM('active','trial','suspended') NOT NULL DEFAULT 'active',
@@ -17,16 +21,67 @@ CREATE TABLE tenants (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- @@
+CREATE TABLE platform_users (
+  id VARCHAR(36) PRIMARY KEY,
+  name VARCHAR(160) NOT NULL,
+  email VARCHAR(190) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role ENUM('platform_super_admin','platform_ops_admin','platform_compliance_editor','platform_support_viewer') NOT NULL,
+  status ENUM('active','invited','suspended') NOT NULL DEFAULT 'active',
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE platform_user_acl (
+  platform_user_id VARCHAR(36) NOT NULL,
+  permission_key VARCHAR(80) NOT NULL,
+  effect ENUM('allow','deny') NOT NULL,
+  updated_by VARCHAR(36) NULL,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (platform_user_id, permission_key),
+  FOREIGN KEY (platform_user_id) REFERENCES platform_users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE platform_sessions (
+  id VARCHAR(36) PRIMARY KEY,
+  platform_user_id VARCHAR(36) NOT NULL,
+  token_hash CHAR(64) NOT NULL UNIQUE,
+  ip_address VARCHAR(64) NULL,
+  user_agent VARCHAR(255) NULL,
+  expires_at DATETIME NOT NULL,
+  revoked_at DATETIME NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (platform_user_id) REFERENCES platform_users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE platform_audit_log (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  actor_platform_user_id VARCHAR(36) NULL,
+  action VARCHAR(80) NOT NULL,
+  target_tenant_id VARCHAR(36) NULL,
+  entity VARCHAR(40) NOT NULL,
+  entity_id VARCHAR(60) NOT NULL,
+  detail JSON NULL,
+  KEY idx_plat_audit (at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TRIGGER platform_audit_append_only_u BEFORE UPDATE ON platform_audit_log FOR EACH ROW
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Platform audit log is append-only.';
+-- @@
+CREATE TRIGGER platform_audit_append_only_d BEFORE DELETE ON platform_audit_log FOR EACH ROW
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Platform audit log is append-only.';
+-- @@
 CREATE TABLE users (
   id VARCHAR(36) PRIMARY KEY,
   tenant_id VARCHAR(36) NOT NULL,
   name VARCHAR(160) NOT NULL,
   email VARCHAR(190) NOT NULL,
   password_hash VARCHAR(255) NULL,
-  role ENUM('owner','admin','supervisor','consultant') NOT NULL,
+  role ENUM('owner','admin','supervisor','consultant','underwriting','viewer') NOT NULL,
   status ENUM('active','invited','suspended') NOT NULL DEFAULT 'invited',
   supervisor_id VARCHAR(36) NULL,
   is_platform_admin TINYINT(1) NOT NULL DEFAULT 0,
+  is_complimentary_seat TINYINT(1) NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE KEY uq_user_email (tenant_id, email),
   FOREIGN KEY (tenant_id) REFERENCES tenants(id),
@@ -48,12 +103,133 @@ BEGIN
   END IF;
 END
 -- @@
+CREATE TABLE user_sessions (
+  id VARCHAR(36) PRIMARY KEY,
+  tenant_id VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  token_hash CHAR(64) NOT NULL UNIQUE,
+  ip_address VARCHAR(64) NULL,
+  user_agent VARCHAR(255) NULL,
+  expires_at DATETIME NOT NULL,
+  revoked_at DATETIME NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE platform_impersonation_sessions (
+  id VARCHAR(36) PRIMARY KEY,
+  platform_user_id VARCHAR(36) NOT NULL,
+  target_tenant_id VARCHAR(36) NOT NULL,
+  target_user_id VARCHAR(36) NOT NULL,
+  token_hash CHAR(64) NOT NULL UNIQUE,
+  reason VARCHAR(500) NOT NULL,
+  expires_at DATETIME NOT NULL,
+  ended_at DATETIME NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (platform_user_id) REFERENCES platform_users(id),
+  FOREIGN KEY (target_tenant_id) REFERENCES tenants(id),
+  FOREIGN KEY (target_user_id) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE tenant_role_permissions (
+  tenant_id VARCHAR(36) NOT NULL,
+  role VARCHAR(32) NOT NULL,
+  permission_key VARCHAR(80) NOT NULL,
+  effect ENUM('allow','deny') NOT NULL,
+  PRIMARY KEY (tenant_id, role, permission_key),
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE user_permission_overrides (
+  tenant_id VARCHAR(36) NOT NULL,
+  user_id VARCHAR(36) NOT NULL,
+  permission_key VARCHAR(80) NOT NULL,
+  effect ENUM('allow','deny') NOT NULL,
+  updated_by VARCHAR(36) NULL,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (user_id, permission_key),
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE industry_lines (
+  id VARCHAR(36) PRIMARY KEY,
+  tenant_id VARCHAR(36) NULL,
+  code VARCHAR(32) NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  shield_brand VARCHAR(80) NULL,
+  is_core_shield TINYINT(1) NOT NULL DEFAULT 0,
+  federal_baseline VARCHAR(255) NULL,
+  state_overlay_notes TEXT NULL,
+  special_rule_alert TEXT NULL,
+  default_topics_json JSON NULL,
+  legacy_aliases_json JSON NULL,
+  sort_order INT NOT NULL DEFAULT 100,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE industry_subsectors (
+  id VARCHAR(36) PRIMARY KEY,
+  industry_line_id VARCHAR(36) NOT NULL,
+  tenant_id VARCHAR(36) NULL,
+  code VARCHAR(40) NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  description TEXT NULL,
+  sort_order INT NOT NULL DEFAULT 10,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  FOREIGN KEY (industry_line_id) REFERENCES industry_lines(id),
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE tenant_disabled_industries (
+  tenant_id VARCHAR(36) NOT NULL,
+  industry_line_id VARCHAR(36) NOT NULL,
+  PRIMARY KEY (tenant_id, industry_line_id),
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id),
+  FOREIGN KEY (industry_line_id) REFERENCES industry_lines(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE tenant_member_groups (
+  id VARCHAR(36) PRIMARY KEY,
+  tenant_id VARCHAR(36) NOT NULL,
+  code VARCHAR(32) NOT NULL,
+  name VARCHAR(160) NOT NULL,
+  group_type ENUM('sig_captive','retail_rsa','carrier_program','association','internal_division','custom') NOT NULL DEFAULT 'custom',
+  accent_color CHAR(7) NOT NULL DEFAULT '#4b2454',
+  billing_mode ENUM('included_captive','fee_for_service','scoro_invoiced','hourly','none') NOT NULL DEFAULT 'included_captive',
+  sort_order INT NOT NULL DEFAULT 10,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  UNIQUE KEY uq_tmg_code (tenant_id, code),
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE user_group_scopes (
+  user_id VARCHAR(36) NOT NULL,
+  group_id VARCHAR(36) NOT NULL,
+  PRIMARY KEY (user_id, group_id),
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (group_id) REFERENCES tenant_member_groups(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE tenant_relationship_types (
+  id VARCHAR(36) PRIMARY KEY,
+  tenant_id VARCHAR(36) NOT NULL,
+  code VARCHAR(32) NOT NULL,
+  label VARCHAR(120) NOT NULL,
+  rolls_up_analytics TINYINT(1) NOT NULL DEFAULT 1,
+  UNIQUE KEY uq_trt_code (tenant_id, code),
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
 CREATE TABLE seat_requests (
   id VARCHAR(36) PRIMARY KEY,
   tenant_id VARCHAR(36) NOT NULL,
   requested_by VARCHAR(36) NOT NULL,
   invite_email VARCHAR(190) NOT NULL,
-  invite_role ENUM('supervisor','consultant') NOT NULL,
+  invite_role ENUM('admin','supervisor','consultant','underwriting','viewer') NOT NULL,
   reason VARCHAR(500) NULL,
   status ENUM('pending','approved','declined') NOT NULL DEFAULT 'pending',
   decided_by VARCHAR(36) NULL,
@@ -69,9 +245,34 @@ CREATE TABLE members (
   tenant_id VARCHAR(36) NOT NULL,
   name VARCHAR(190) NOT NULL,
   industry VARCHAR(80) NOT NULL,
+  industry_line_id VARCHAR(36) NULL,
+  subsector_code VARCHAR(40) NULL,
+  group_id VARCHAR(36) NULL,
+  watch_tier ENUM('none','green','yellow','orange','red') NOT NULL DEFAULT 'none',
+  flags_json JSON NULL,
+  broker_name VARCHAR(160) NULL,
+  broker_email VARCHAR(190) NULL,
+  broker_firm VARCHAR(190) NULL,
+  employee_count INT NULL,
+  description_of_operations TEXT NULL,
   city VARCHAR(120) NULL,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (tenant_id) REFERENCES tenants(id)
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id),
+  FOREIGN KEY (industry_line_id) REFERENCES industry_lines(id),
+  FOREIGN KEY (group_id) REFERENCES tenant_member_groups(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE company_relationships (
+  id VARCHAR(36) PRIMARY KEY,
+  tenant_id VARCHAR(36) NOT NULL,
+  from_member_id VARCHAR(36) NOT NULL,
+  to_member_id VARCHAR(36) NOT NULL,
+  relationship_code VARCHAR(32) NOT NULL DEFAULT 'PARENT_CHILD',
+  notes VARCHAR(255) NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id),
+  FOREIGN KEY (from_member_id) REFERENCES members(id),
+  FOREIGN KEY (to_member_id) REFERENCES members(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- @@
 CREATE TABLE member_contacts (
@@ -81,6 +282,20 @@ CREATE TABLE member_contacts (
   email VARCHAR(190) NOT NULL,
   is_primary TINYINT(1) NOT NULL DEFAULT 0,
   FOREIGN KEY (member_id) REFERENCES members(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE portal_sessions (
+  id VARCHAR(36) PRIMARY KEY,
+  contact_id VARCHAR(36) NOT NULL,
+  member_id VARCHAR(36) NOT NULL,
+  tenant_id VARCHAR(36) NOT NULL,
+  token_hash CHAR(64) NOT NULL UNIQUE,
+  expires_at DATETIME NOT NULL,
+  revoked_at DATETIME NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (contact_id) REFERENCES member_contacts(id),
+  FOREIGN KEY (member_id) REFERENCES members(id),
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- @@
 CREATE TABLE member_assignments (
@@ -97,7 +312,24 @@ CREATE TABLE sites (
   name VARCHAR(190) NOT NULL,
   address VARCHAR(255) NULL,
   jurisdiction VARCHAR(8) NOT NULL,
+  employee_count INT NULL,
+  description_of_operations TEXT NULL,
   FOREIGN KEY (member_id) REFERENCES members(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE jurisdiction_portals (
+  code VARCHAR(24) PRIMARY KEY,
+  name VARCHAR(160) NOT NULL,
+  plan_type ENUM('master_repo','federal_master','complete_state_plan','public_sector_state_plan','federal_osha') NOT NULL,
+  agency_name VARCHAR(190) NOT NULL,
+  admin_code_citation VARCHAR(255) NULL,
+  portal_url VARCHAR(500) NOT NULL,
+  standards_url VARCHAR(500) NULL,
+  fed_region VARCHAR(40) NULL,
+  big_four_divergence TINYINT(1) NOT NULL DEFAULT 0,
+  key_divergences TEXT NULL,
+  last_verified_at DATETIME NULL,
+  last_http_status INT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- @@
 CREATE TABLE forms (
@@ -105,8 +337,13 @@ CREATE TABLE forms (
   tenant_id VARCHAR(36) NULL,
   name VARCHAR(190) NOT NULL,
   industry VARCHAR(80) NOT NULL,
-  scale ENUM('safe_unsafe_na','maturity') NOT NULL DEFAULT 'safe_unsafe_na',
+  shield_code VARCHAR(32) NULL,
+  subsector_code VARCHAR(40) NULL,
+  category ENUM('field_inspection','maturity','policy_gap','lce_100','auto_sup_1_5','rca_percent') NOT NULL DEFAULT 'field_inspection',
+  scale ENUM('safe_unsafe_na','maturity','policy_gap','lce_100','auto_sup_1_5','rca_percent') NOT NULL DEFAULT 'safe_unsafe_na',
+  description TEXT NULL,
   allow_additional_findings TINYINT(1) NOT NULL DEFAULT 0,
+  is_archived TINYINT(1) NOT NULL DEFAULT 0,
   version INT NOT NULL DEFAULT 1,
   published_at DATETIME NULL,
   FOREIGN KEY (tenant_id) REFERENCES tenants(id)
@@ -116,6 +353,7 @@ CREATE TABLE form_sections (
   form_code VARCHAR(16) NOT NULL,
   section_no INT NOT NULL,
   name VARCHAR(190) NOT NULL,
+  max_points DECIMAL(8,2) NULL,
   PRIMARY KEY (form_code, section_no),
   FOREIGN KEY (form_code) REFERENCES forms(code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -147,6 +385,7 @@ CREATE TABLE questions (
 -- @@
 CREATE TABLE regulations (
   reg_id VARCHAR(40) PRIMARY KEY,
+  tenant_id VARCHAR(36) NULL,
   jurisdiction VARCHAR(8) NOT NULL,
   agency VARCHAR(60) NOT NULL,
   code VARCHAR(60) NOT NULL,
@@ -160,8 +399,11 @@ CREATE TABLE regulations (
   status VARCHAR(60) NOT NULL,
   superseded_by VARCHAR(40) NULL,
   notes TEXT NULL,
+  last_live_checked_at DATETIME NULL,
+  live_http_status INT NULL,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  KEY idx_reg_lookup (jurisdiction, topic)
+  KEY idx_reg_lookup (jurisdiction, topic),
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- @@
 CREATE TRIGGER regulations_never_edit BEFORE UPDATE ON regulations FOR EACH ROW
@@ -176,6 +418,23 @@ END
 -- @@
 CREATE TRIGGER regulations_never_delete BEFORE DELETE ON regulations FOR EACH ROW
   SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Regulation entries are never deleted. Mark them superseded.';
+-- @@
+CREATE TABLE book_recommendations (
+  id VARCHAR(36) PRIMARY KEY,
+  tenant_id VARCHAR(36) NULL,
+  title VARCHAR(220) NOT NULL,
+  body TEXT NOT NULL,
+  trigger_type ENUM('Regulatory','Best Practice','Program','Training','Maintenance','Record Keeping') NOT NULL DEFAULT 'Regulatory',
+  priority ENUM('High','Med','Low') NOT NULL DEFAULT 'Med',
+  scope ENUM('site_specific','corporate') NOT NULL DEFAULT 'site_specific',
+  topic VARCHAR(40) NOT NULL DEFAULT 'general',
+  reg_id VARCHAR(40) NULL,
+  status ENUM('active','archived') NOT NULL DEFAULT 'active',
+  created_by VARCHAR(36) NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id),
+  FOREIGN KEY (reg_id) REFERENCES regulations(reg_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- @@
 CREATE TABLE question_regulations (
   question_key VARCHAR(32) NOT NULL,
@@ -238,6 +497,7 @@ CREATE TABLE inspections (
   form_version INT NOT NULL DEFAULT 1,
   consultant_id VARCHAR(36) NOT NULL,
   device_id VARCHAR(80) NULL,
+  meta_json JSON NULL,
   started_at DATETIME NOT NULL,
   submitted_at DATETIME NULL,
   FOREIGN KEY (tenant_id) REFERENCES tenants(id),
@@ -264,10 +524,12 @@ CREATE TABLE answers (
   inspection_id VARCHAR(20) NOT NULL,
   question_id VARCHAR(10) NOT NULL,
   question_key VARCHAR(32) NOT NULL,
-  value ENUM('safe','unsafe','na','absent','written','practiced','owned') NOT NULL,
+  value ENUM('safe','unsafe','na','absent','written','practiced','owned','addressed','partial','not_addressed','acceptable','needs_improvement','score_1','score_2','score_3','score_4','score_5','points') NOT NULL,
   measured_value DECIMAL(10,2) NULL,
   na_reason VARCHAR(255) NULL,
   note TEXT NULL,
+  action_owner VARCHAR(160) NULL,
+  target_date DATE NULL,
   answered_at DATETIME NOT NULL,
   PRIMARY KEY (inspection_id, question_id),
   KEY idx_ans_qkey (question_key),
@@ -295,10 +557,18 @@ CREATE TABLE recommendations (
   question_id VARCHAR(10) NULL,
   question_key VARCHAR(32) NULL,
   section_no INT NULL,
+  rec_number VARCHAR(24) NULL,
+  title VARCHAR(220) NULL,
   text TEXT NOT NULL,
   original_text TEXT NULL,
   revised_by VARCHAR(36) NULL,
   revised_at DATETIME NULL,
+  trigger_type ENUM('Regulatory','Best Practice','Program','Training','Maintenance','Record Keeping') NOT NULL DEFAULT 'Regulatory',
+  scope ENUM('site_specific','corporate') NOT NULL DEFAULT 'site_specific',
+  is_loss_trend TINYINT(1) NOT NULL DEFAULT 0,
+  cost_band ENUM('L','M','H') NULL,
+  member_response ENUM('unanswered','agree','disagree') NOT NULL DEFAULT 'unanswered',
+  member_response_note TEXT NULL,
   priority ENUM('High','Med','Low') NOT NULL,
   due_on DATE NOT NULL,
   status ENUM('open','pending','corrected','assumed') NOT NULL DEFAULT 'open',
@@ -347,6 +617,40 @@ CREATE TABLE photos (
   FOREIGN KEY (rec_id) REFERENCES recommendations(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- @@
+CREATE TABLE stored_files (
+  id VARCHAR(36) PRIMARY KEY,
+  tenant_id VARCHAR(36) NOT NULL,
+  member_id VARCHAR(36) NULL,
+  inspection_id VARCHAR(20) NULL,
+  quick_report_id VARCHAR(36) NULL,
+  mime_type VARCHAR(80) NOT NULL,
+  byte_size INT NOT NULL,
+  disk_path VARCHAR(255) NOT NULL,
+  original_name VARCHAR(255) NULL,
+  uploaded_by_user VARCHAR(36) NULL,
+  uploaded_by_contact VARCHAR(36) NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TABLE report_share_links (
+  id VARCHAR(36) PRIMARY KEY,
+  tenant_id VARCHAR(36) NOT NULL,
+  entity_type ENUM('inspection','quick_report') NOT NULL,
+  entity_id VARCHAR(36) NOT NULL,
+  token_hash CHAR(64) NOT NULL UNIQUE,
+  recipient_label VARCHAR(190) NULL,
+  report_mode VARCHAR(40) NOT NULL DEFAULT 'full',
+  expires_at DATETIME NOT NULL,
+  revoked_at DATETIME NULL,
+  access_count INT NOT NULL DEFAULT 0,
+  last_accessed_at DATETIME NULL,
+  created_by VARCHAR(36) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (tenant_id) REFERENCES tenants(id),
+  FOREIGN KEY (created_by) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
 CREATE TABLE magic_links (
   id VARCHAR(36) PRIMARY KEY,
   contact_id VARCHAR(36) NOT NULL,
@@ -364,12 +668,19 @@ CREATE TABLE audit_log (
   tenant_id VARCHAR(36) NOT NULL,
   at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   actor_user_id VARCHAR(36) NULL,
+  impersonated_by_platform_user_id VARCHAR(36) NULL,
   action VARCHAR(60) NOT NULL,
   entity VARCHAR(40) NOT NULL,
   entity_id VARCHAR(40) NOT NULL,
   detail JSON NULL,
   KEY idx_audit (tenant_id, at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- @@
+CREATE TRIGGER audit_log_append_only_u BEFORE UPDATE ON audit_log FOR EACH ROW
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Audit log is append-only.';
+-- @@
+CREATE TRIGGER audit_log_append_only_d BEFORE DELETE ON audit_log FOR EACH ROW
+  SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Audit log is append-only.';
 -- @@
 CREATE TABLE sources (
   id VARCHAR(36) PRIMARY KEY,

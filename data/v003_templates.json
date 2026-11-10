@@ -1,0 +1,993 @@
+{
+  "regulations": [
+    {
+      "reg_id": "CA-3203",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 3203",
+      "title": "Injury and Illness Prevention Program (IIPP) & SB 513 Training Records",
+      "topic": "iipp",
+      "summary": "Every California employer must establish, implement, and maintain an effective written Injury and Illness Prevention Program (IIPP) containing 8 mandatory elements: (1) person(s) with authority/responsibility, (2) compliance system, (3) two-way hazard communication, (4) hazard assessment/scheduled inspections, (5) accident/exposure investigation, (6) timely hazard correction, (7) training and instruction, and (8) recordkeeping (including Jan 1, 2026 CA SB 513 training record elements: employee name, training date, duration, provider, core competencies, and resulting qualification/certification) plus employee access within 5 business days.",
+      "verbatim_text": "(a) Effective July 1, 1991, every employer shall establish, implement and maintain an effective Injury and Illness Prevention Program (Program). The Program shall be in writing and, shall, at a minimum: (1) Identify the person or persons with authority and responsibility for implementing the Program. (2) Include a system for ensuring that employees comply with safe and healthy work practices. (3) Include a system for communicating with employees in a form readily understandable by all affected employees on matters relating to occupational safety and health, including provisions designed to encourage employees to inform the employer of hazards at the worksite without fear of reprisal. (4) Include procedures for identifying and evaluating work place hazards including scheduled periodic inspections. (5) Include a procedure to investigate occupational injury or occupational illness. (6) Include methods and/or procedures for correcting unsafe or unhealthy conditions, work practices and work procedures in a timely manner based on the severity of the hazard. (7) Provide training and instruction. (8) Allow employee access to the Program within five (5) business days of request.",
+      "source_url": "https://www.dir.ca.gov/title8/3203.html",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Title 8 Source",
+      "superseded_by": null,
+      "notes": "Includes CA SB 513 (effective Jan 1, 2026) Labor Code §1198.5 education/training record retention requirements."
+    },
+    {
+      "reg_id": "CA-3395",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 3395",
+      "title": "Heat Illness Prevention in Outdoor Places of Employment",
+      "topic": "heat_illness",
+      "summary": "Applies to all outdoor places of employment in California. Requires fresh, pure, suitably cool potable water (>=1 quart/worker/hour), shade erected when temperatures exceed 80°F (and upon request below 80°F), high-heat procedures at >=95°F (including mandatory 10-minute cool-down rest every 2 hours for agriculture), 14-day supervisor/buddy acclimatization observation, emergency response procedures, training, and an English/translated written HIPP on site.",
+      "verbatim_text": "(c) Provision of water. Employees shall have access to potable drinking water, including but not limited to the requirements that it be fresh, pure, suitably cool, and provided to employees free of charge... Where drinking water is not plumbed or otherwise continuously supplied, it shall be provided in sufficient quantity at the beginning of the work shift to provide one quart per employee per hour for drinking for the entire shift. (d) Access to shade. (1) Shade shall be present when the temperature exceeds 80 degrees Fahrenheit. When the outdoor temperature in the work area exceeds 80 degrees Fahrenheit, the employer shall have and maintain one or more areas with shade at all times while employees are present that are either open to the air or provided with ventilation or cooling. (e) High-heat procedures. The employer shall implement high-heat procedures when the temperature equals or exceeds 95 degrees Fahrenheit.",
+      "source_url": "https://www.dir.ca.gov/title8/3395.html",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Title 8 Source",
+      "superseded_by": null,
+      "notes": "Thresholds: Shade trigger >80°F; High-heat procedures >=95°F; Ag mandatory 10-min preventative cool-down rest every 2 hours at >=95°F; Acclimatization observation 14 days."
+    },
+    {
+      "reg_id": "CA-3396",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 3396",
+      "title": "Heat Illness Prevention in Indoor Places of Employment",
+      "topic": "heat_illness",
+      "summary": "Applies to indoor work areas in California when indoor temperatures equal or exceed 82°F while employees are present. Mandates cool-down areas (<82°F), potable water, temperature/heat-index assessment and engineering/administrative controls when indoor temperature or heat index reaches 87°F (or 82°F with radiant heat or restrictive clothing), acclimatization observation, and a written Indoor or Combined Indoor/Outdoor Heat Illness Prevention Plan.",
+      "verbatim_text": "Applies to all indoor work areas where the temperature equals or exceeds 82 degrees Fahrenheit when employees are present. Requires access to cool-down areas maintained below 82 degrees Fahrenheit, assessment and control measures at 87 degrees Fahrenheit (or 82 degrees Fahrenheit where employees wear clothing that restricts heat removal or work in high radiant heat areas), emergency response, acclimatization, training, and a written Indoor Heat Illness Prevention Plan.",
+      "source_url": "https://www.dir.ca.gov/title8/3396.html",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Title 8 Source",
+      "superseded_by": null,
+      "notes": "Can be integrated with 8 CCR 3395 via Cal/OSHA Model Combined Indoor/Outdoor Plan."
+    },
+    {
+      "reg_id": "CA-3321",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 3321",
+      "title": "Identification of Piping Systems",
+      "topic": "hazcom",
+      "summary": "Hazardous substances, steam, air, or chemical lines transported in above-ground non-potable piping systems must be labeled, color-coded, or tagged at valves, flanges, wall penetrations, and points of use so employees recognize pipe contents and hazards.",
+      "verbatim_text": "All above-ground piping systems used to transport hazardous substances, dangerous materials, or high-pressure steam/gases shall be identified by distinctive labels, tags, or color coding indicating the content and hazard at valves, junctions, and intervals where employees may be exposed.",
+      "source_url": "https://www.dir.ca.gov/title8/3321.html",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Title 8 Source",
+      "superseded_by": null,
+      "notes": "California HazCom supplement — critical for processing plants, dairies, ammonia lines, and manufacturing."
+    },
+    {
+      "reg_id": "CA-3204",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 3204",
+      "title": "Access to Employee Exposure and Medical Records (SDS 30-Year Archive)",
+      "topic": "hazcom",
+      "summary": "Requires employers to preserve and provide employees and designated representatives access to employee exposure records (including Safety Data Sheets or chemical identity/where-used/when-used lists) and medical records for at least 30 years.",
+      "verbatim_text": "Each employer shall assure the preservation and retention of employee exposure records, including Safety Data Sheets (or chemical identity, where used, and when used records), for at least thirty (30) years, and provide access within fifteen (15) working days of an employee request.",
+      "source_url": "https://www.dir.ca.gov/title8/3204.html",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Title 8 Source",
+      "superseded_by": null,
+      "notes": "Cross-referenced in CA HazCom Gap Analysis for discontinued/archived SDS retention."
+    },
+    {
+      "reg_id": "CA-3342",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 3342 / Labor Code 6401.9",
+      "title": "Workplace Violence Prevention Plan (WVPP / SB 553)",
+      "topic": "workplace_violence",
+      "summary": "Requires California employers to establish, implement, and maintain an effective written Workplace Violence Prevention Plan (WVPP), maintain a violent incident log, conduct periodic workplace violence hazard inspections, and provide annual interactive employee training.",
+      "verbatim_text": "Every covered employer shall establish, implement, and maintain an effective workplace violence prevention plan in writing, available and easily accessible to employees at all times, including procedures to accept and respond to reports of workplace violence, violent incident logs, and annual training.",
+      "source_url": "https://www.dir.ca.gov/dosh/Workplace-Violence/",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Cal/OSHA Source",
+      "superseded_by": null,
+      "notes": "High enforcement focus for CulinaryShield, ServiceShield, and CareShield."
+    },
+    {
+      "reg_id": "CA-5110",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 5110",
+      "title": "Repetitive Motion Injuries (Ergonomics)",
+      "topic": "ergonomics",
+      "summary": "Applies to jobs, processes, or operations where a repetitive motion injury (RMI) has occurred to more than one employee within 12 months. Requires worksite evaluation, timely exposure control, and employee training.",
+      "verbatim_text": "Every employer subject to this section shall establish and implement a program designed to minimize RMIs. The program shall include a worksite evaluation, control of exposures that have caused RMIs, and training of employees.",
+      "source_url": "https://www.dir.ca.gov/title8/5110.html",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Title 8 Source",
+      "superseded_by": null,
+      "notes": "Unique standalone California ergonomics standard."
+    },
+    {
+      "reg_id": "CA-1670",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 1670 & 1716.2",
+      "title": "Construction Personal Fall Arrest, Fall Restraint & Framing/Roofing Triggers",
+      "topic": "fall",
+      "summary": "Cal/OSHA Construction Safety Orders specify multi-tiered fall protection thresholds: 6 ft for residential framing/roofing under §1716.2/§1731, 7.5 ft around unprotected floor/wall/roof openings and perimeters where workers are exposed, and 15 ft general CSO trigger under §1670.",
+      "verbatim_text": "Approved personal fall arrest, personal fall restraint or positioning systems shall be worn by those employees whose work exposes them to falling in excess of 7 1/2 feet from the perimeter of a structure, unprotected sides and edges, leading edges, sloped roofs, or residential framing/roofing at 6 feet where applicable under 8 CCR 1716.2 and 1731.",
+      "source_url": "https://www.dir.ca.gov/title8/1670.html",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Title 8 Source",
+      "superseded_by": null,
+      "notes": "Contrast with uniform 6-ft Federal OSHA 29 CFR 1926.501 construction rule."
+    },
+    {
+      "reg_id": "CA-1675",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 1675 & 3276",
+      "title": "Portable Ladders — Inspection, 36-Inch Extension & Securing",
+      "topic": "ladders",
+      "summary": "Portable ladders must be inspected regularly, removed and tagged out if defective, placed on a substantial footing at 4:1 pitch, tied/blocked against displacement, and side rails must extend at least 36 inches (3 ft) above upper landing surfaces.",
+      "verbatim_text": "Side rails of portable ladders used for access to an upper landing surface shall extend not less than 36 inches above the landing, and ladders shall be tied, blocked, or otherwise secured to prevent displacement.",
+      "source_url": "https://www.dir.ca.gov/title8/1675.html",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Title 8 Source",
+      "superseded_by": null,
+      "notes": "Matches ARU Construction Service Letter 36-inch extension & defective ladder tagout rules."
+    },
+    {
+      "reg_id": "CA-1541",
+      "jurisdiction": "CA",
+      "agency": "Cal/OSHA",
+      "code": "8 CCR 1541 & 1541.1 / 341",
+      "title": "Excavations, Trenching Protective Systems & Cal/OSHA Trench Permits",
+      "topic": "trenching",
+      "summary": "Requires daily Competent Person inspection, utility locates, safe egress within 25 ft lateral travel at >=4 ft depth, shoring/sloping/shielding at >=5 ft depth (or shallower if cave-in potential exists), AND a mandatory Cal/OSHA Division Permit under 8 CCR §341 prior to worker entry into trenches >=5 ft.",
+      "verbatim_text": "Each employee in an excavation shall be protected from cave-ins by an adequate protective system except when excavations are made entirely in stable rock or are less than 5 feet in depth and examination of the ground by a competent person provides no indication of a potential cave-in. Permits under 8 CCR 341 are required prior to construction of trenches or excavations 5 feet or deeper into which a person is required to descend.",
+      "source_url": "https://www.dir.ca.gov/title8/1541_1.html",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Title 8 Source",
+      "superseded_by": null,
+      "notes": "Cal/OSHA §341 permit is a critical divergence from Federal 29 CFR 1926.652."
+    },
+    {
+      "reg_id": "FED-1926-501",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1926.501",
+      "title": "Duty to Have Fall Protection (Construction — 6-Foot Trigger)",
+      "topic": "fall",
+      "summary": "Each employee on a walking/working surface (horizontal and vertical surface) with an unprotected side or edge which is 6 feet (1.8 m) or more above a lower level shall be protected from falling by the use of guardrail systems, safety net systems, or personal fall arrest systems.",
+      "verbatim_text": "(b)(1) Unprotected sides and edges. Each employee on a walking/working surface (horizontal and vertical surface) with an unprotected side or edge which is 6 feet (1.8 m) or more above a lower level shall be protected from falling by the use of guardrail systems, safety net systems, or personal fall arrest systems.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1926/subpart-M/section-1926.501",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": "6-ft general construction fall threshold (10 ft scaffolds Subpart L, 15/30 ft steel erection Subpart R)."
+    },
+    {
+      "reg_id": "FED-1926-1053",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1926.1053",
+      "title": "Construction Ladders — 3-Foot Extension & Inspection",
+      "topic": "ladders",
+      "summary": "When portable ladders are used for access to an upper landing surface, the ladder side rails shall extend at least 3 feet (0.9 m) above the upper landing surface, be maintained free of structural defects, and be inspected periodically by a competent person.",
+      "verbatim_text": "(b)(1) When portable ladders are used for access to an upper landing surface, the ladder side rails shall extend at least 3 feet (.9 m) above the upper landing surface to which the ladder is used to gain access.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1926/subpart-X/section-1926.1053",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": null
+    },
+    {
+      "reg_id": "FED-1926-652",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1926.651 & 1926.652",
+      "title": "Excavations — Competent Person, Egress & Protective Systems",
+      "topic": "trenching",
+      "summary": "Requires daily inspection by a competent person, safe egress within 25 ft at >=4 ft depth, spoil piles set back >=2 ft from edge, and sloping, benching, shoring, or trench shields at >=5 ft depth.",
+      "verbatim_text": "Each employee in an excavation shall be protected from cave-ins by an adequate protective system designed in accordance with paragraph (b) or (c) of this section except when excavations are made entirely in stable rock or are less than 5 feet (1.52m) in depth and examination of the ground by a competent person provides no indication of a potential cave-in.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1926/subpart-P/section-1926.652",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": null
+    },
+    {
+      "reg_id": "FED-1926-1153",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1926.1153",
+      "title": "Respirable Crystalline Silica in Construction (Table 1 & Written ECP)",
+      "topic": "silica",
+      "summary": "Requires Table 1 wet-cutting / dust-shroud engineering controls or PEL air monitoring (50 µg/m³ TWA, 25 µg/m³ Action Level), a Written Exposure Control Plan (ECP), designated Competent Person, and medical surveillance.",
+      "verbatim_text": "For each employee engaged in a task identified on Table 1, the employer shall fully and properly implement the engineering controls, work practices, and respiratory protection specified for the task on Table 1, and establish and implement a written exposure control plan.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1926/subpart-Z/section-1926.1153",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": null
+    },
+    {
+      "reg_id": "FED-1910-147",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1910.147",
+      "title": "The Control of Hazardous Energy (Lockout/Tagout)",
+      "topic": "loto",
+      "summary": "Mandates machine-specific energy control procedures, authorized/affected employee training, standardized LOTO hardware, and documented annual periodic inspections of each energy control procedure.",
+      "verbatim_text": "The employer shall establish a program consisting of energy control procedures, employee training and periodic inspections to ensure that before any employee performs any servicing or maintenance on a machine or equipment where the unexpected energizing, startup or release of stored energy could occur and cause injury, the machine or equipment shall be isolated from the energy source and rendered inoperative.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-J/section-1910.147",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": null
+    },
+    {
+      "reg_id": "FED-1910-134",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1910.134",
+      "title": "Respiratory Protection — Medical Evaluation, Fit Testing & Written Program",
+      "topic": "respiratory",
+      "summary": "Requires a written respiratory protection program with worksite-specific procedures, PLHCP medical evaluation prior to fit testing/use, annual qualitative or quantitative fit testing for tight-fitting respirators, and Appendix D advisory for voluntary filtering facepieces.",
+      "verbatim_text": "In any workplace where respirators are necessary to protect the health of the employee or whenever respirators are required by the employer, the employer shall establish and implement a written respiratory protection program with worksite-specific procedures.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-I/section-1910.134",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": null
+    },
+    {
+      "reg_id": "FED-1910-95",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1910.95",
+      "title": "Occupational Noise Exposure & Hearing Conservation (85 dBA Action Level)",
+      "topic": "hearing",
+      "summary": "Requires a continuing, effective Hearing Conservation Program whenever employee noise exposures equal or exceed an 8-hour TWA of 85 dBA, including noise monitoring, baseline/annual audiograms, hearing protectors, and annual training.",
+      "verbatim_text": "The employer shall administer a continuing, effective hearing conservation program whenever employee noise exposures equal or exceed an 8-hour time-weighted average sound level (TWA) of 85 decibels measured on the A scale.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-G/section-1910.95",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": null
+    },
+    {
+      "reg_id": "FED-1910-1030",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1910.1030",
+      "title": "Bloodborne Pathogens — Exposure Control Plan & Hepatitis B Vaccination",
+      "topic": "bloodborne",
+      "summary": "Applies to occupational exposure to blood or OPIM. Requires an annually reviewed written Exposure Control Plan, engineering controls/sharps disposal, PPE, Hepatitis B vaccination offer, post-exposure evaluation, and annual training.",
+      "verbatim_text": "Each employer having an employee(s) with occupational exposure as defined by paragraph (b) of this section shall establish a written Exposure Control Plan designed to eliminate or minimize employee exposure, reviewed and updated at least annually.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-Z/section-1910.1030",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": null
+    },
+    {
+      "reg_id": "FED-1910-146",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1910.146",
+      "title": "Permit-Required Confined Spaces",
+      "topic": "confined_space",
+      "summary": "Requires workplace evaluation/inventory of permit-required confined spaces, danger signage, written PRCS entry program, pre-entry atmospheric testing (O2, LEL, toxic gases), attendant/entrant/supervisor roles, and non-entry/rescue provisions.",
+      "verbatim_text": "The employer shall evaluate the workplace to determine if any spaces are permit-required confined spaces, inform exposed employees by posting danger signs, and implement a written permit space program before employees enter permit spaces.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-J/section-1910.146",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": null
+    },
+    {
+      "reg_id": "FED-1928-51",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1928.51 & 1928.57",
+      "title": "Agricultural Tractors (ROPS / Seatbelts) & Guarding of Farm Field Equipment (PTOs)",
+      "topic": "machine_guarding",
+      "summary": "Requires Roll-Over Protective Structures (ROPS) and seatbelts on agricultural tractors >20 HP and complete master-shield / driveline guarding on Power Take-Off (PTO) shafts and nip points on farm field and farmstead equipment.",
+      "verbatim_text": "Roll-over protective structures (ROPS) and seatbelts shall be provided on agricultural tractors operated by employees, and all power take-off (PTO) shafts, including rear, mid- or side-mounted shafts, shall be guarded either by a master shield or by other protective guarding.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1928/subpart-C/section-1928.51",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": "Subject to <=10 non-family employee federal appropriations rider unless a temporary labor camp is active."
+    },
+    {
+      "reg_id": "FED-1928-110",
+      "jurisdiction": "FED",
+      "agency": "Fed OSHA",
+      "code": "29 CFR 1928.110 & 1910.142",
+      "title": "Agricultural Field Sanitation & Temporary Labor Camps",
+      "topic": "ag_field_sanitation",
+      "summary": "Requires potable drinking water, 1 toilet and 1 handwashing facility per 20 hand-labor employees located within a 1/4-mile walk, and sanitary temporary labor housing compliance under 29 CFR 1910.142.",
+      "verbatim_text": "Potable drinking water shall be provided and placed in locations readily accessible to all employees. One toilet facility and one handwashing facility shall be provided for each twenty (20) employees or fraction thereof, located within a one-quarter-mile walk of each hand laborer's place of work.",
+      "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1928/subpart-I/section-1928.110",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": null
+    },
+    {
+      "reg_id": "FED-FMCSA-391",
+      "jurisdiction": "FED",
+      "agency": "DOT / FMCSA",
+      "code": "49 CFR Parts 391, 382 & 396",
+      "title": "Commercial Motor Vehicle Driver Qualification, Drug/Alcohol Clearinghouse & PM",
+      "topic": "fleet_dot",
+      "summary": "Establishes Driver Qualification File (DQF) standards, annual MVR reviews, DOT medical certificates, Part 382 Drug & Alcohol Clearinghouse pre-employment/annual queries and random testing, and Part 396 systematic vehicle inspection, repair, and maintenance.",
+      "verbatim_text": "Every motor carrier shall maintain a driver qualification file for each driver it employs, conduct annual motor vehicle record inquiries, comply with controlled substances and alcohol testing under Part 382, and systematically inspect, repair, and maintain all motor vehicles subject to its control under Part 396.",
+      "source_url": "https://www.ecfr.gov/current/title-49/subtitle-B/chapter-III/subchapter-B/part-391",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official eCFR Source",
+      "superseded_by": null,
+      "notes": "Primary reference for Heavy Auto / Trucking Supplemental Survey (AUTO-SUP)."
+    },
+    {
+      "reg_id": "WA-296-62-095",
+      "jurisdiction": "WA",
+      "agency": "WA L&I / DOSH",
+      "code": "WAC 296-62-095 & 296-307-097",
+      "title": "Washington Outdoor Heat Exposure & Wildfire Smoke Protection",
+      "topic": "heat_illness",
+      "summary": "Year-round Washington DOSH outdoor heat rule triggering shade, cool drinking water, and acclimatization at 80°F (52°F for non-breathable/vapor-barrier clothing) plus mandatory paid cool-down rest periods at >=90°F and >=100°F.",
+      "verbatim_text": "Applies to outdoor work environments at or above 80 degrees Fahrenheit (52 degrees Fahrenheit for nonbreathable clothing), requiring shade, cool potable water, close observation during 14-day acclimatization, and mandatory 10-minute cool-down rest every 2 hours at 90°F and 15 minutes every hour at 100°F.",
+      "source_url": "https://lni.wa.gov/safety-health/safety-topics/topics/outdoor-heat-exposure",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official WA DOSH Source",
+      "superseded_by": null,
+      "notes": "BIG 4 DIVERGENCE — Washington State Plan."
+    },
+    {
+      "reg_id": "OR-437-002-0156",
+      "jurisdiction": "OR",
+      "agency": "Oregon OSHA",
+      "code": "OAR 437-002-0156 & Div. 4",
+      "title": "Oregon Heat Illness Prevention (Indoor & Outdoor >=80°F / >=90°F)",
+      "topic": "heat_illness",
+      "summary": "Applies to both indoor and outdoor workplaces in Oregon whenever heat index equals or exceeds 80°F, requiring shade, cool water, acclimatization plan, and mandatory high-heat rest break schedules when heat index reaches >=90°F.",
+      "verbatim_text": "Applies whenever an employee performs work activities, whether in indoor or outdoor environments, where the heat index equals or exceeds 80 degrees Fahrenheit, with additional high-heat practices and preventative rest break schedules required at 90 degrees Fahrenheit.",
+      "source_url": "https://osha.oregon.gov/OSHARules/div2/div2J.pdf",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official Oregon OSHA Source",
+      "superseded_by": null,
+      "notes": "BIG 4 DIVERGENCE — Oregon State Plan."
+    },
+    {
+      "reg_id": "MI-PART-1-14",
+      "jurisdiction": "MI",
+      "agency": "MIOSHA",
+      "code": "MIOSHA Gen. Ind. Part 1, Part 14 & Part 85",
+      "title": "MIOSHA General Provisions, Conveyors, Automated Machinery & Lockout",
+      "topic": "machine_guarding",
+      "summary": "Michigan-specific General Industry safety standards governing automated production machinery, conveyor emergency stops/guarding, power-driven hoists, and hazardous energy lockout.",
+      "verbatim_text": "Employers in Michigan shall guard points of operation, nip points, conveyors, and automated industrial machinery in accordance with standalone MIOSHA General Industry Safety Standards Parts 1, 7, 14, and 85.",
+      "source_url": "https://www.michigan.gov/leo/bureaus-agencies/miosha/standards",
+      "verified_on": "2026-11-04",
+      "verified_by": "Safety Alchemist Compliance Engine",
+      "status": "Verified — Official MIOSHA Source",
+      "superseded_by": null,
+      "notes": "BIG 4 DIVERGENCE — Michigan State Plan."
+    }
+  ],
+  "bookRecommendations": [
+    {
+      "id": "br-reg-01",
+      "title": "Update Written IIPP & SB 513 Training Record Retention",
+      "trigger_type": "Regulatory",
+      "priority": "High",
+      "scope": "corporate",
+      "topic": "iipp",
+      "reg_id": "CA-3203",
+      "body": "Update the written Injury and Illness Prevention Program (IIPP) to identify the designated program administrator by name/title, establish a 5-business-day employee access procedure, and ensure all safety training logs capture employee name, date, duration, training provider, core competencies, and resulting certifications per California SB 513 (effective January 1, 2026)."
+    },
+    {
+      "id": "br-reg-02",
+      "title": "Outdoor Heat Illness Shade (>80°F) & High-Heat Rest Procedures (>=95°F)",
+      "trigger_type": "Regulatory",
+      "priority": "High",
+      "scope": "site_specific",
+      "topic": "heat_illness",
+      "reg_id": "CA-3395",
+      "body": "Stage fresh, suitably cool potable drinking water (>=1 quart per employee per hour) within close proximity to crews, erect ventilated shade structures before ambient temperatures exceed 80°F, and enforce documented high-heat procedures at >=95°F (including mandatory 10-minute cool-down rest breaks every 2 hours for agricultural operations and 14-day acclimatization observation)."
+    },
+    {
+      "id": "br-reg-03",
+      "title": "GHS Rev 7 Chemical Secondary Labeling, SDS Access & §3321 Piping Identification",
+      "trigger_type": "Regulatory",
+      "priority": "Med",
+      "scope": "site_specific",
+      "topic": "hazcom",
+      "reg_id": "CA-5194",
+      "body": "Maintain a complete chemical inventory cross-referenced to current GHS Rev 7 Safety Data Sheets accessible to all shifts without login barriers, ensure all secondary spray bottles/transfer containers bear product identifier and hazard warnings, and label all above-ground chemical/compressed-air piping per 8 CCR §3321."
+    },
+    {
+      "id": "br-reg-04",
+      "title": "Clear 36-Inch Working Space at Electrical Panels",
+      "trigger_type": "Regulatory",
+      "priority": "High",
+      "scope": "site_specific",
+      "topic": "electrical",
+      "reg_id": "FED-1910-303",
+      "body": "Remove all materials placed in front of electrical panels immediately. Establish and maintain a clear working zone of at least 36 inches (3 feet) in front of all electrical panels, disconnects, and transformers, and stripe the floor 'Keep Clear — No Storage'."
+    },
+    {
+      "id": "br-bp-01",
+      "title": "Enhance Defensive & Distracted Driving Telematics Controls",
+      "trigger_type": "Best Practice",
+      "priority": "High",
+      "scope": "corporate",
+      "topic": "fleet_dot",
+      "reg_id": "FED-FMCSA-391",
+      "body": "Place focused emphasis on defensive driving, safety buffer zones, and distracted driving prevention by reviewing dash-camera/telematics events weekly, conducting annual MVR reviews for all company and non-owned auto drivers, and reinforcing safe following distances during monthly tailgate meetings."
+    },
+    {
+      "id": "br-mnt-01",
+      "title": "Portable Ladder Inspection, Tag-Out & 36-Inch Landing Extension",
+      "trigger_type": "Maintenance",
+      "priority": "High",
+      "scope": "site_specific",
+      "topic": "ladders",
+      "reg_id": "CA-1675",
+      "body": "Withdraw any portable ladder with damaged rungs, split rails, or missing manufacturer capacity labels immediately and tag 'Damaged — Do Not Use'. Require portable extension ladders to be tied/secured against displacement with side rails extending at least 36 inches above the upper landing."
+    },
+    {
+      "id": "br-prg-01",
+      "title": "Subcontractor Certificate of Insurance (COI) & Additional Insured Controls",
+      "trigger_type": "Program",
+      "priority": "Med",
+      "scope": "corporate",
+      "topic": "general",
+      "reg_id": null,
+      "body": "Implement a formal subcontractor prequalification and COI tracking procedure requiring executed written subcontracts with favorable Hold Harmless/Indemnification clauses, Additional Insured endorsements, Waiver of Subrogation, and policy limits meeting or exceeding captive requirements prior to site mobilization."
+    },
+    {
+      "id": "br-trn-01",
+      "title": "Bilingual Tailgate & Task-Specific Safety Orientation",
+      "trigger_type": "Training",
+      "priority": "Med",
+      "scope": "corporate",
+      "topic": "iipp",
+      "reg_id": "CA-3203",
+      "body": "Deliver new-hire safety orientations and weekly 10-minute toolbox talks in English, Spanish, and any other primary workforce languages, and retain signed attendance rosters documenting topic competencies and trainer credentials."
+    },
+    {
+      "id": "br-rec-01",
+      "title": "30-Year Chemical Exposure & Archived SDS Retention Protocol",
+      "trigger_type": "Record Keeping",
+      "priority": "Low",
+      "scope": "corporate",
+      "topic": "hazcom",
+      "reg_id": "CA-3204",
+      "body": "Establish a formal archival procedure ensuring discontinued Safety Data Sheets (or chemical identity, department used, and dates of use records) are preserved for at least 30 years and retrievable within 15 working days per 8 CCR §3204."
+    }
+  ],
+  "templates": [
+    {
+      "code": "GAP-IIPP",
+      "name": "CA Written IIPP Gap Analysis (8 CCR §3203 + SB 513)",
+      "industry": "General",
+      "shield_code": "SERVICE",
+      "category": "policy_gap",
+      "scale": "policy_gap",
+      "description": "Comprehensive written program gap analysis auditing California Title 8 §3203 Injury & Illness Prevention Program elements, 5-day employee document access, and Jan 1, 2026 SB 513 training record mandates.",
+      "sections": [
+        {
+          "section_no": 1,
+          "name": "1. Responsibility & Program Authority (§3203(a)(1))",
+          "max_points": null,
+          "questions": [
+            { "id": "IP-01", "key": "GAP-IIPP-01", "text": "Written IIPP is established, maintained as a current standalone or integrated document, and reflects current company operations and locations.", "topic": "iipp", "priority": "High", "rec": "Establish and maintain an up-to-date written Injury and Illness Prevention Program tailored to current facilities and operations per 8 CCR §3203(a)." },
+            { "id": "IP-02", "key": "GAP-IIPP-02", "text": "Identifies by name and/or specific job title the person(s) with authority and operational responsibility for implementing the IIPP across all shifts/sites.", "topic": "iipp", "priority": "High", "rec": "Update the written IIPP to explicitly name the designated IIPP Administrator(s) and alternate site leads with authority to enforce program requirements per 8 CCR §3203(a)(1)." },
+            { "id": "IP-03", "key": "GAP-IIPP-03", "text": "Defines clear safety responsibilities for executives, managers, supervisors, and front-line employees.", "topic": "iipp", "priority": "Med", "rec": "Add role-specific safety accountability descriptions for management, field supervisors, and employees within the written IIPP." }
+          ]
+        },
+        {
+          "section_no": 2,
+          "name": "2. System for Ensuring Employee Compliance (§3203(a)(2))",
+          "max_points": null,
+          "questions": [
+            { "id": "IP-04", "key": "GAP-IIPP-04", "text": "Includes positive recognition/reinforcement provisions for employees who follow safe and healthful work practices.", "topic": "iipp", "priority": "Low", "rec": "Document methods for recognizing employees who demonstrate safe work practices per 8 CCR §3203(a)(2)." },
+            { "id": "IP-05", "key": "GAP-IIPP-05", "text": "Includes fair, progressive disciplinary procedures and retraining triggers for employees or supervisors who fail to follow safety rules.", "topic": "iipp", "priority": "Med", "rec": "Include clear progressive disciplinary and corrective retraining procedures in the Compliance section of the IIPP per 8 CCR §3203(a)(2)." }
+          ]
+        },
+        {
+          "section_no": 3,
+          "name": "3. Two-Way Employee Hazard Communication (§3203(a)(3))",
+          "max_points": null,
+          "questions": [
+            { "id": "IP-06", "key": "GAP-IIPP-06", "text": "Provides communication in a form and language readily understandable by all affected employees (e.g., English/Spanish meetings, postings, written notices).", "topic": "iipp", "priority": "High", "rec": "Translate written IIPP materials, postings, and safety meetings into all primary workforce languages per 8 CCR §3203(a)(3)." },
+            { "id": "IP-07", "key": "GAP-IIPP-07", "text": "Includes an anonymous hazard reporting mechanism and explicit anti-retaliation assurance encouraging employees to report hazards without fear of reprisal.", "topic": "iipp", "priority": "High", "rec": "Establish an anonymous hazard report form/box or digital channel and include explicit non-reprisal language in the IIPP per 8 CCR §3203(a)(3)." },
+            { "id": "IP-08", "key": "GAP-IIPP-08", "text": "If using a labor/management safety committee to satisfy communication rules, committee meets at least quarterly, keeps written minutes, and reviews inspection/incident records.", "topic": "iipp", "priority": "Med", "rec": "Ensure the Safety Committee charters quarterly meetings, maintains written minutes for at least 1 year, and reviews periodic inspections and incident investigations per 8 CCR §3203(c)." }
+          ]
+        },
+        {
+          "section_no": 4,
+          "name": "4. Hazard Assessment & Scheduled Periodic Inspections (§3203(a)(4))",
+          "max_points": null,
+          "questions": [
+            { "id": "IP-09", "key": "GAP-IIPP-09", "text": "Defines scheduled periodic inspection frequencies, checklists, and responsible inspectors for all facilities, yards, fleets, and field crews.", "topic": "iipp", "priority": "High", "rec": "Define periodic self-inspection schedules, assign responsible personnel, and attach site-specific inspection checklists in the IIPP per 8 CCR §3203(a)(4)." },
+            { "id": "IP-10", "key": "GAP-IIPP-10", "text": "Requires hazard re-evaluation whenever new substances, processes, procedures, or equipment are introduced or new hazards are recognized.", "topic": "iipp", "priority": "Med", "rec": "Add a Management-of-Change / new-equipment hazard evaluation trigger to the IIPP per 8 CCR §3203(a)(4)(B)-(C)." }
+          ]
+        },
+        {
+          "section_no": 5,
+          "name": "5. Accident & Exposure Investigation (§3203(a)(5))",
+          "max_points": null,
+          "questions": [
+            { "id": "IP-11", "key": "GAP-IIPP-11", "text": "Establishes step-by-step procedures to investigate occupational injuries, illnesses, and near-miss exposures to identify root/contributing causes rather than fault.", "topic": "iipp", "priority": "High", "rec": "Incorporate a standardized root-cause Accident & Near-Miss Investigation procedure and form into the IIPP per 8 CCR §3203(a)(5)." },
+            { "id": "IP-12", "key": "GAP-IIPP-12", "text": "Includes Cal/OSHA 8-hour serious injury/illness/hospitalization/amputation/loss-of-eye/fatality reporting protocol (8 CCR §342).", "topic": "recordkeeping", "priority": "High", "rec": "Add explicit 8-hour Cal/OSHA serious injury/illness telephone reporting instructions (8 CCR §342) with nearest District Office contact numbers." }
+          ]
+        },
+        {
+          "section_no": 6,
+          "name": "6. Timely Hazard Correction & Imminent Hazard Protocol (§3203(a)(6))",
+          "max_points": null,
+          "questions": [
+            { "id": "IP-13", "key": "GAP-IIPP-13", "text": "Specifies procedures for correcting unsafe/unhealthful conditions and work practices in a timely manner prioritized by hazard severity.", "topic": "iipp", "priority": "High", "rec": "Document severity-based corrective action target timelines and verification sign-off tracking in the IIPP per 8 CCR §3203(a)(6)(A)." },
+            { "id": "IP-14", "key": "GAP-IIPP-14", "text": "Mandates immediate removal of exposed employees (except properly protected abatement personnel) when an imminent hazard cannot be immediately abated.", "topic": "iipp", "priority": "High", "rec": "Add mandatory stop-work / evacuation and PPE protection rules for imminent hazards that cannot be immediately corrected per 8 CCR §3203(a)(6)(B)." }
+          ]
+        },
+        {
+          "section_no": 7,
+          "name": "7. Training & Instruction (§3203(a)(7))",
+          "max_points": null,
+          "questions": [
+            { "id": "IP-15", "key": "GAP-IIPP-15", "text": "Requires training upon initial hire, upon new job assignment, when new substances/processes/equipment are introduced, and whenever a new hazard is recognized.", "topic": "iipp", "priority": "High", "rec": "Ensure the IIPP mandates safety training at all six statutory triggers in 8 CCR §3203(a)(7)(A)-(F)." },
+            { "id": "IP-16", "key": "GAP-IIPP-16", "text": "Requires supervisors to receive specific training to familiarize them with the safety and health hazards to which employees under their immediate direction may be exposed.", "topic": "iipp", "priority": "Med", "rec": "Include dedicated supervisor hazard-awareness training requirements in the IIPP per 8 CCR §3203(a)(7)(F)." }
+          ]
+        },
+        {
+          "section_no": 8,
+          "name": "8. Recordkeeping & 2026 CA SB 513 Training Records (§3203(b))",
+          "max_points": null,
+          "questions": [
+            { "id": "IP-17", "key": "GAP-IIPP-17", "text": "Retains scheduled inspection records (inspector name, unsafe conditions identified, and corrective actions taken) for at least 1 year.", "topic": "recordkeeping", "priority": "Med", "rec": "Retain written periodic inspection records showing person(s) conducting inspection, unsafe conditions, and action taken for >=1 year per 8 CCR §3203(b)(1)." },
+            { "id": "IP-18", "key": "GAP-IIPP-18", "text": "Training records comply with both 8 CCR §3203(b)(2) AND Jan 1, 2026 CA SB 513 (employee name, training date, duration, provider, core competencies covered, and resulting certification/qualification).", "topic": "recordkeeping", "priority": "High", "rec": "Upgrade all safety training log templates to capture SB 513 mandatory fields: employee name, date, duration of training, training provider, core competencies (including equipment/skills), and resulting certification or qualification." }
+          ]
+        },
+        {
+          "section_no": 9,
+          "name": "9. Employee Right of Access to Written IIPP (§3203(a)(8))",
+          "max_points": null,
+          "questions": [
+            { "id": "IP-19", "key": "GAP-IIPP-19", "text": "Provides employees or designated representatives unobstructed website/intranet access OR delivers a printed/electronic copy of the IIPP within 5 business days of request at no cost.", "topic": "iipp", "priority": "High", "rec": "Document the 5-business-day employee IIPP access procedure (or unobstructed digital portal access) and designated request contact per 8 CCR §3203(a)(8)." },
+            { "id": "IP-20", "key": "GAP-IIPP-20", "text": "Cross-references companion California required written plans (Outdoor/Indoor Heat §3395/§3396, HazCom §5194, Workplace Violence §3342, Emergency Action Plan §3220).", "topic": "iipp", "priority": "Med", "rec": "Add a cross-reference index in the IIPP linking companion Title 8 written plans (HIPP, WVPP, HazCom, EAP) and verify annual program review sign-off." }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "GAP-HEAT",
+      "name": "CA Heat Illness Prevention Gap Analysis (8 CCR §3395 & §3396)",
+      "industry": "Agriculture",
+      "shield_code": "AGRI",
+      "category": "policy_gap",
+      "scale": "policy_gap",
+      "description": "Audits Written Heat Illness Prevention Plans against Cal/OSHA 8 CCR §3395 Outdoor Heat (>80°F shade, >=95°F high-heat, Ag 2-hr rest breaks, 14-day acclimatization) and 8 CCR §3396 Indoor Heat integration.",
+      "sections": [
+        {
+          "section_no": 1,
+          "name": "1. Written Plan Availability & Bilingual Access (§3395(i))",
+          "max_points": null,
+          "questions": [
+            { "id": "HT-01", "key": "GAP-HEAT-01", "text": "Written Heat Illness Prevention Plan (HIPP) is customized to site operations (not blank boilerplate) and physically or digitally accessible at every worksite.", "topic": "heat_illness", "priority": "High", "rec": "Customize all site-specific fields in the written HIPP and ensure field supervisors carry or have immediate electronic access to the plan at every outdoor/indoor worksite per 8 CCR §3395(i)." },
+            { "id": "HT-02", "key": "GAP-HEAT-02", "text": "Written HIPP is maintained in English and the language understood by the majority of employees (e.g., Spanish).", "topic": "heat_illness", "priority": "High", "rec": "Provide the written HIPP in both English and Spanish (or applicable majority workforce language) at each worksite per 8 CCR §3395(i)." }
+          ]
+        },
+        {
+          "section_no": 2,
+          "name": "2. Potable Drinking Water Procedures (§3395(c))",
+          "max_points": null,
+          "questions": [
+            { "id": "HT-03", "key": "GAP-HEAT-03", "text": "Specifies provision of fresh, pure, suitably cool potable water free of charge at >=1 quart per employee per hour for the entire shift (or documented replenishment).", "topic": "heat_illness", "priority": "High", "rec": "Specify exact water staging quantities (>=1 quart/worker/hour), ice/cooler sanitation procedures, and designated water replenishment responsibility in the written HIPP per 8 CCR §3395(c)." },
+            { "id": "HT-04", "key": "GAP-HEAT-04", "text": "Requires water containers to be positioned as close as practicable to working crews (moving with field/jobsite crews) with single-use cups.", "topic": "heat_illness", "priority": "Med", "rec": "Document procedures for relocating water coolers alongside moving crews so drinking water remains within immediate walking distance." }
+          ]
+        },
+        {
+          "section_no": 3,
+          "name": "3. Shade Triggers, Capacity & Cool-Down Rest (§3395(d))",
+          "max_points": null,
+          "questions": [
+            { "id": "HT-05", "key": "GAP-HEAT-05", "text": "Mandates erecting ventilated/open-air shade structures before outdoor temperatures exceed 80°F (and providing timely shade upon employee request below 80°F).", "topic": "heat_illness", "priority": "High", "rec": "Specify in the HIPP that shade structures must be erected at <=80°F (forecast or measured) and provided promptly upon employee request at any temperature per 8 CCR §3395(d)." },
+            { "id": "HT-06", "key": "GAP-HEAT-06", "text": "Shade capacity accommodates all employees on recovery, rest, or onsite meal periods simultaneously without physical contact, with seating off the ground.", "topic": "heat_illness", "priority": "High", "rec": "Ensure shade canopies, chairs/benches, and trailers are sized for 100% of resting/meal-period crew members to sit comfortably without touching per 8 CCR §3395(d)(1)." },
+            { "id": "HT-07", "key": "GAP-HEAT-07", "text": "Prevents employees taking a preventative cool-down rest (>=5 minutes) from being ordered back to work until signs/symptoms subside, with active symptom monitoring.", "topic": "heat_illness", "priority": "High", "rec": "Include explicit preventative cool-down rest monitoring rules (>=5 minutes minimum, never left unattended if symptomatic, EMS activation if symptoms worsen) per 8 CCR §3395(d)(3)." }
+          ]
+        },
+        {
+          "section_no": 4,
+          "name": "4. High-Heat Procedures >=95°F & Agricultural Rest Mandate (§3395(e))",
+          "max_points": null,
+          "questions": [
+            { "id": "HT-08", "key": "GAP-HEAT-08", "text": "Defines high-heat procedures triggered at >=95°F: effective voice/electronic communication, buddy system / supervisor observation (<=20 employees per observer), and pre-shift high-heat reminders.", "topic": "heat_illness", "priority": "High", "rec": "Detail high-heat (>=95°F) observation methods (buddy system, supervisor ratio <=20 workers, lone-worker check-ins) and pre-shift hydration reminders per 8 CCR §3395(e)." },
+            { "id": "HT-09", "key": "GAP-HEAT-09", "text": "For Agricultural operations, mandates a minimum 10-minute net preventative cool-down rest period every 2 hours when temperatures equal or exceed 95°F.", "topic": "heat_illness", "priority": "High", "rec": "Include the mandatory Agricultural >=95°F rest schedule (minimum 10-minute net cool-down rest every 2 hours during 8/10/12-hour shifts) per 8 CCR §3395(e)(6)." }
+          ]
+        },
+        {
+          "section_no": 5,
+          "name": "5. Emergency Medical Response & Precise Directions (§3395(f))",
+          "max_points": null,
+          "questions": [
+            { "id": "HT-10", "key": "GAP-HEAT-10", "text": "Designates trained first-aid/CPR personnel, immediate cooling methods (ice packs, wet towels, misting, shaded air-conditioning), and rule never to send a symptomatic worker home unattended.", "topic": "heat_illness", "priority": "High", "rec": "Document on-site rapid cooling steps, prohibit sending symptomatic workers home alone, and require immediate EMS transport for confusion, staggering, vomiting, or altered consciousness per 8 CCR §3395(f)." },
+            { "id": "HT-11", "key": "GAP-HEAT-11", "text": "Includes a procedure to capture and post clear, precise GPS/cross-street/gate-code directions to guide EMS to remote ranches, orchards, or construction sites.", "topic": "heat_illness", "priority": "High", "rec": "Attach a daily site-address / GPS / nearest cross-road emergency dispatch card to the HIPP for every field crew per 8 CCR §3395(f)(3)." }
+          ]
+        },
+        {
+          "section_no": 6,
+          "name": "6. Acclimatization & Heat Wave Monitoring (§3395(g))",
+          "max_points": null,
+          "questions": [
+            { "id": "HT-12", "key": "GAP-HEAT-12", "text": "Mandates close observation by a supervisor or designee during a heat wave (>=80°F and >=10°F above prior 5-day average) AND for the first 14 days of any new/returning employee's assignment to high-heat areas.", "topic": "heat_illness", "priority": "High", "rec": "Add explicit 14-day new/returning employee acclimatization tracking and heat-wave (>=10°F spike above 5-day average at >=80°F) supervisor observation protocols per 8 CCR §3395(g)." }
+          ]
+        },
+        {
+          "section_no": 7,
+          "name": "7. Employee & Supervisor Training (§3395(h))",
+          "max_points": null,
+          "questions": [
+            { "id": "HT-13", "key": "GAP-HEAT-13", "text": "Covers all employee training topics prior to outdoor heat exposure (environmental/personal risk factors, acclimatization, 4 cups/hr hydration, early symptom reporting, first aid) with SB 513 compliant logs.", "topic": "heat_illness", "priority": "High", "rec": "Verify pre-season/pre-assignment heat illness training covers all 8 CCR §3395(h)(1) topics and retain SB 513 compliant training logs." },
+            { "id": "HT-14", "key": "GAP-HEAT-14", "text": "Includes dedicated Supervisor training prior to supervising outdoor workers (weather forecast monitoring, hot-weather advisories, emergency response execution).", "topic": "heat_illness", "priority": "High", "rec": "Provide and document separate Supervisor Heat Illness training covering NWS weather monitoring and emergency response before supervisors lead crews in hot weather per 8 CCR §3395(h)(2)." }
+          ]
+        },
+        {
+          "section_no": 8,
+          "name": "8. Indoor Heat Illness Integration (8 CCR §3396)",
+          "max_points": null,
+          "questions": [
+            { "id": "HT-15", "key": "GAP-HEAT-15", "text": "Addresses indoor work areas (warehouses, kitchens, packing houses, shops, vehicle cabs without AC) reaching >=82°F with cool-down areas (<82°F) and >=87°F temperature/heat-index engineering controls.", "topic": "heat_illness", "priority": "Med", "rec": "Expand the HIPP into a Combined Indoor & Outdoor Heat Illness Prevention Plan addressing 8 CCR §3396 triggers (82°F cool-down area access; 87°F / 82°F radiant-heat assessment & engineering controls)." }
+          ]
+        },
+        {
+          "section_no": 9,
+          "name": "9. Weather Tracking & Field Verification Checklists",
+          "max_points": null,
+          "questions": [
+            { "id": "HT-16", "key": "GAP-HEAT-16", "text": "Includes daily temperature/heat-index log sheets and pre-shift water/shade verification checklists for field foremen.", "topic": "heat_illness", "priority": "Low", "rec": "Add a daily foreman temperature/shade/water verification log to demonstrate active field implementation during Cal/OSHA inspections." }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "GAP-HAZ",
+      "name": "CA & Fed Hazard Communication Gap Analysis (8 CCR §5194 + GHS Rev 7)",
+      "industry": "Manufacturing",
+      "shield_code": "FACTORY",
+      "category": "policy_gap",
+      "scale": "policy_gap",
+      "description": "Audits Written HazCom Programs against Cal/OSHA 8 CCR §5194, 2024 Fed OSHA 29 CFR 1910.1200 GHS Rev 7 updates, 8 CCR §3321 Piping Identification, 8 CCR §3204 30-Year Exposure Archive, and CA Prop 65.",
+      "sections": [
+        {
+          "section_no": 1,
+          "name": "1. Written HazCom Program & Administrator (§5194(e))",
+          "max_points": null,
+          "questions": [
+            { "id": "HZ-01", "key": "GAP-HAZ-01", "text": "Written Hazard Communication Program is maintained on site, identifies the Program Coordinator by title/name, and describes how labeling, SDSs, and training are met.", "topic": "hazcom", "priority": "High", "rec": "Update the written Hazard Communication Program to designate the HazCom Coordinator and detail site-specific procedures for container labeling, SDS management, and employee training per 8 CCR §5194(e)." }
+          ]
+        },
+        {
+          "section_no": 2,
+          "name": "2. Master Chemical Inventory List (§5194(e)(1)(A))",
+          "max_points": null,
+          "questions": [
+            { "id": "HZ-02", "key": "GAP-HAZ-02", "text": "Includes a current hazardous chemical inventory list using the exact product identifier appearing on both the container label and Safety Data Sheet for each work area.", "topic": "hazcom", "priority": "High", "rec": "Compile and attach a complete, up-to-date Hazardous Chemical Inventory cross-referenced by exact GHS product identifier to the SDS binder/system per 8 CCR §5194(e)(1)(A)." },
+            { "id": "HZ-03", "key": "GAP-HAZ-03", "text": "Includes purchasing/procurement gatekeeping so no new chemical enters the workplace without prior SDS review and inventory addition.", "topic": "hazcom", "priority": "Med", "rec": "Establish a chemical pre-approval procedure requiring SDS submission and approval prior to bringing new chemicals onto any site." }
+          ]
+        },
+        {
+          "section_no": 3,
+          "name": "3. Primary & Workplace Secondary Container Labeling (§5194(f) + GHS Rev 7)",
+          "max_points": null,
+          "questions": [
+            { "id": "HZ-04", "key": "GAP-HAZ-04", "text": "Verifies shipped/primary containers bear intact GHS labels (product identifier, signal word, hazard statements, pictograms, precautionary statements, supplier info) and prohibits defacing labels.", "topic": "hazcom", "priority": "High", "rec": "Require receiving/warehouse inspection of incoming chemical labels and prohibit removing or defacing manufacturer GHS labels per 8 CCR §5194(f)." },
+            { "id": "HZ-05", "key": "GAP-HAZ-05", "text": "Specifies workplace secondary/transfer container labeling rules (GHS elements OR product identifier + general physical/health hazard words/pictures) and enforces the single-shift immediate-use portable container rule.", "topic": "hazcom", "priority": "High", "rec": "Standardize workplace secondary spray-bottle/jug labels showing product identifier and physical/health hazards, and prohibit unlabeled transfer containers left unattended across shifts per 8 CCR §5194(f)(6)-(8)." },
+            { "id": "HZ-06", "key": "GAP-HAZ-06", "text": "Addresses 2024 Fed OSHA GHS Revision 7 updates (small-container <=100 mL / <=3 mL labeling rules, aerosols, desensitized explosives, chemicals under pressure).", "topic": "hazcom", "priority": "Low", "rec": "Update the labeling section of the HazCom Program to align with OSHA's May 2024 GHS Revision 7 Hazard Communication final rule updates." }
+          ]
+        },
+        {
+          "section_no": 4,
+          "name": "4. Above-Ground Piping & Process Vessel Identification (8 CCR §3321)",
+          "max_points": null,
+          "questions": [
+            { "id": "HZ-07", "key": "GAP-HAZ-07", "text": "Covers identification of hazardous substances, ammonia, steam, compressed gases, or chemicals in above-ground piping systems and stationary process tanks (8 CCR §3321).", "topic": "hazcom", "priority": "Med", "rec": "Add piping and stationary tank identification procedures (ANSI/ASME A13.1 pipe markers, flow arrows, and tank placards) per 8 CCR §3321 and §5194(f)(7)." }
+          ]
+        },
+        {
+          "section_no": 5,
+          "name": "5. Safety Data Sheets (SDS) & Electronic Backup (§5194(g))",
+          "max_points": null,
+          "questions": [
+            { "id": "HZ-08", "key": "GAP-HAZ-08", "text": "Ensures 16-section GHS Safety Data Sheets are readily accessible during every work shift without supervisor permission or locked passwords.", "topic": "hazcom", "priority": "High", "rec": "Provide immediate, barrier-free employee access to 16-section GHS Safety Data Sheets in every work area during all shifts per 8 CCR §5194(g)(8)." },
+            { "id": "HZ-09", "key": "GAP-HAZ-09", "text": "If using electronic/QR SDS access, specifies power-outage/offline backup procedures, employee training on search terminals, and rapid printouts for emergency medical responders.", "topic": "hazcom", "priority": "High", "rec": "Document offline/power-failure SDS backup access and emergency medical responder SDS delivery in the written HazCom Program per 8 CCR §5194(g)(9)." }
+          ]
+        },
+        {
+          "section_no": 6,
+          "name": "6. 30-Year Exposure Record & Archived SDS Retention (8 CCR §3204)",
+          "max_points": null,
+          "questions": [
+            { "id": "HZ-10", "key": "GAP-HAZ-10", "text": "Preserves discontinued/superseded SDSs (or chemical identity, where-used, and dates-used archive) for at least 30 years and provides employee access within 15 working days per 8 CCR §3204.", "topic": "hazcom", "priority": "Med", "rec": "Include a 30-year discontinued SDS / chemical exposure record retention rule and 15-working-day employee access procedure per 8 CCR §3204." }
+          ]
+        },
+        {
+          "section_no": 7,
+          "name": "7. Non-Routine Tasks & Multi-Employer Worksite Coordination (§5194(e)(1)-(2))",
+          "max_points": null,
+          "questions": [
+            { "id": "HZ-11", "key": "GAP-HAZ-11", "text": "Describes methods used to inform employees of the hazards of non-routine tasks (e.g., tank cleaning, spill response, line breaking, seasonal fumigation).", "topic": "hazcom", "priority": "High", "rec": "Document pre-task hazard briefing/JHA procedures for non-routine chemical tasks per 8 CCR §5194(e)(1)(B)." },
+            { "id": "HZ-12", "key": "GAP-HAZ-12", "text": "Includes multi-employer worksite procedures for exchanging SDSs, precautionary measures, and labeling explanations with on-site contractors/subcontractors.", "topic": "hazcom", "priority": "High", "rec": "Add multi-employer contractor SDS access, precautionary protection, and labeling exchange procedures per 8 CCR §5194(e)(2)." }
+          ]
+        },
+        {
+          "section_no": 8,
+          "name": "8. Employee Information, Training & SB 513 Logs (§5194(h))",
+          "max_points": null,
+          "questions": [
+            { "id": "HZ-13", "key": "GAP-HAZ-13", "text": "Requires comprehensible HazCom training at initial assignment and whenever a new chemical hazard is introduced (detection methods, physical/health/simple asphyxiant/combustible dust hazards, PPE, SDS/label reading).", "topic": "hazcom", "priority": "High", "rec": "Conduct and document HazCom training covering all 8 CCR §5194(h) elements in languages understood by employees, retaining SB 513 compliant training records." }
+          ]
+        },
+        {
+          "section_no": 9,
+          "name": "9. California Proposition 65 Integration (§5194(b)(6))",
+          "max_points": null,
+          "questions": [
+            { "id": "HZ-14", "key": "GAP-HAZ-14", "text": "Addresses California Safe Drinking Water and Toxic Enforcement Act (Proposition 65) occupational warnings for listed carcinogens and reproductive toxicants.", "topic": "hazcom", "priority": "Low", "rec": "Include California Proposition 65 workplace warning verification for chemicals on the OEHHA list per 8 CCR §5194(b)(6)." }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "LCE-100",
+      "name": "Member Loss Control Evaluation Summary (100-Point Scorecard)",
+      "industry": "Agriculture",
+      "shield_code": "AGRI",
+      "category": "lce_100",
+      "scale": "lce_100",
+      "description": "ARU / Captive 100-Point Member Loss Control Evaluation Summary across Operations (20 pts), Exposures & Controls (25 pts), Loss Analysis (0 pts), Loss Management (5 pts), and Safety/OSHA/Training Programs (50 pts).",
+      "sections": [
+        {
+          "section_no": 1,
+          "name": "Operations, Fleet & Subcontractors (20 Points Max)",
+          "max_points": 20,
+          "questions": [
+            { "id": "LC-01", "key": "LCE-OPS-01", "text": "Operations & Life Safety (5 pts max): Facilities adequate for operations (sprinklers, extinguishers, clear aisles, storage, housekeeping), management/operational changes controlled, and formal safety program active.", "topic": "general", "priority": "Med", "threshold": 5, "rec": "Address facility life-safety, aisle clearance, and operational change-management controls identified during the survey." },
+            { "id": "LC-02", "key": "LCE-OPS-02", "text": "Fleet / Company Vehicle Operations (10 pts max): MVRs reviewed regularly, written Fleet Management policy in place, scheduled vehicle PM documented, dash-camera/GPS active, and non-owned auto policy/limits verified.", "topic": "fleet_dot", "priority": "High", "threshold": 10, "rec": "Implement an annual MVR review schedule, documented preventive vehicle maintenance logs, dash-cam/telematics monitoring, and annual non-owned auto insurance verification." },
+            { "id": "LC-03", "key": "LCE-OPS-03", "text": "Subcontractors (5 pts max): Certificates of Insurance (COIs) meet/exceed captive limits, written contracts contain favorable Hold Harmless clauses, and Additional Insured endorsements are obtained.", "topic": "general", "priority": "High", "threshold": 5, "rec": "Require executed written subcontracts with Hold Harmless clauses, Additional Insured endorsements, and verified Certificates of Insurance prior to subcontractor work." }
+          ]
+        },
+        {
+          "section_no": 2,
+          "name": "Exposures & Controls — Physical, Health, GL & Products (25 Points Max)",
+          "max_points": 25,
+          "questions": [
+            { "id": "LC-04", "key": "LCE-EXP-01", "text": "Physical Exposures (10 pts max): Machine guarding, material handling, ergonomic/CTD controls, housekeeping, slip/trip/fall prevention, confined spaces, and >6 ft work-at-height controls.", "topic": "machine_guarding", "priority": "High", "threshold": 10, "rec": "Strengthen physical hazard controls across machine point-of-operation guarding, material handling ergonomics, slip/trip/fall housekeeping, and >6 ft fall protection." },
+            { "id": "LC-05", "key": "LCE-EXP-02", "text": "Occupational Health Hazards (5 pts max): Noise, dust/silica, vapors/fumes/mists, radiation, biological agents, and carcinogenic agent exposures evaluated and controlled.", "topic": "respiratory", "priority": "Med", "threshold": 5, "rec": "Evaluate and control industrial hygiene exposures including occupational noise, airborne dusts, and chemical vapors/mists." },
+            { "id": "LC-06", "key": "LCE-EXP-03", "text": "General Liability Exposures (5 pts max): Emergency plans (fire, weather, earthquake, chemical spill, business continuity), vital record off-site backup, perimeter/visitor security, equipment PM, and company-event liquor policy.", "topic": "egress", "priority": "Med", "threshold": 5, "rec": "Establish documented emergency response/continuity plans, visitor/premises security controls, and a formal policy prohibiting alcohol at company-sponsored events." },
+            { "id": "LC-07", "key": "LCE-EXP-04", "text": "Products Liability Exposures (5 pts max): Written total quality control program, batch/lot traceability coding, written product recall & consumer notification plan, and legal record retention.", "topic": "recordkeeping", "priority": "Med", "threshold": 5, "rec": "Maintain a written Quality Control & Product Recall Plan with lot/batch coding traceability and legal statute-of-limitations record retention." }
+          ]
+        },
+        {
+          "section_no": 3,
+          "name": "Loss Analysis & Multi-Year Claims Trend Review (0 Points — Narrative & Loss Table)",
+          "max_points": 0,
+          "questions": [
+            { "id": "LC-08", "key": "LCE-LOSS-01", "text": "Injury Summary & Multi-Year Loss Trend Review (0 pts): Policy periods reviewed for Total Paid, Total Incurred, Total Claims, and Indemnity/Lost-Time Claims; root-cause trends identified.", "topic": "recordkeeping", "priority": "Med", "threshold": 0, "rec": "Target monthly safety meetings and supervisory inspections directly at the primary claim frequency and severity drivers identified in the multi-year loss run review." }
+          ]
+        },
+        {
+          "section_no": 4,
+          "name": "Loss Management — Employees & Hiring Practices (5 Points Max)",
+          "max_points": 5,
+          "questions": [
+            { "id": "LC-09", "key": "LCE-HIRE-01", "text": "Employees & Hiring Practices (5 pts max): Pre-employment physicals/drug testing as applicable, turnover management, temporary/seasonal labor COI verification, and multi-language workforce communication.", "topic": "iipp", "priority": "Med", "threshold": 5, "rec": "Formalize post-offer screening, obtain Certificates of Insurance for all staffing/FLC agencies, and provide bilingual supervision/materials for non-English-speaking crews." }
+          ]
+        },
+        {
+          "section_no": 5,
+          "name": "Safety Programs (20 pts) & 12 Mandatory OSHA Programs (20 pts) — 40 Points Max",
+          "max_points": 40,
+          "questions": [
+            { "id": "LC-10", "key": "LCE-PRG-01", "text": "Safety Management Programs (20 pts max): Written Accident Investigation Policy, Self-Inspection Program, Early Return-to-Work (RTW) Policy, active Safety Committee, and Safety Recognition Program.", "topic": "iipp", "priority": "High", "threshold": 20, "rec": "Implement and document formal Accident Investigation, periodic Self-Inspection, Early Return-to-Work (modified duty), and quarterly Safety Committee programs." },
+            { "id": "LC-11", "key": "LCE-PRG-02", "text": "OSHA Compliance Programs (20 pts max): OSHA 300 Log Recordkeeping, HazCom/SDS, Lockout/Tagout, Hearing Conservation, Bloodborne Pathogens, Confined Space, PPE, Respiratory, Forklift, Emergency Evacuation, Crane/Hoist, and Heat/Infectious Disease plans.", "topic": "loto", "priority": "High", "threshold": 20, "rec": "Audit and update all applicable written OSHA compliance programs (OSHA 300 Logs, HazCom, LOTO, Hearing, BBP, Confined Space, PPE, Respiratory, PIT/Forklift, EAP, Crane/Hoist, and Heat Illness)." }
+          ]
+        },
+        {
+          "section_no": 6,
+          "name": "Training Programs & Account Willingness (10 Points Max)",
+          "max_points": 10,
+          "questions": [
+            { "id": "LC-12", "key": "LCE-TRN-01", "text": "Training Programs & Loss Control Willingness (10 pts max): Effective new-hire orientation, department/task-specific training, regular Tool Box Talks, documented training rosters, and management willingness to partner with Loss Control.", "topic": "iipp", "priority": "High", "threshold": 10, "rec": "Document new-hire safety orientations, department task-specific training, and weekly toolbox talks with signed employee rosters." }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "AUTO-SUP",
+      "name": "Heavy Auto / Trucking Supplemental Loss Control Survey",
+      "industry": "Warehouse",
+      "shield_code": "LOGISTICS",
+      "category": "auto_sup_1_5",
+      "scale": "auto_sup_1_5",
+      "description": "9-Area Fleet Risk Assessment scored 1 (Excellent) to 5 (Poor) per area. Aggregate Fleet Risk Score: 9–15 Excellent, 16–22 Very Good, 23–29 Good, 30–36 Fair, 37–45 Poor, with Service Area Mileage Profile and Action Plan.",
+      "sections": [
+        {
+          "section_no": 1,
+          "name": "Fleet Risk Assessment Profile (9 Primary Areas · Score 1=Excellent to 5=Poor)",
+          "max_points": 45,
+          "questions": [
+            { "id": "AU-01", "key": "AUTO-SUP-01", "text": "1. Overall (Basic) Fleet Safety Program — Driver Policy Manual, recruiting, qualification prerequisites, orientation, road/knowledge testing, incentives, accountability/discipline, ongoing awareness, and accident recordkeeping.", "topic": "fleet_dot", "priority": "High", "rec": "Establish and enforce a comprehensive written Fleet Safety Policy Manual covering driver qualification, road testing, progressive accountability, and ongoing defensive driving training." },
+            { "id": "AU-02", "key": "AUTO-SUP-02", "text": "2. Driver Screening / Pre-Hire Qualifications Profile — Written hiring minimums (age, commercial experience, max MVR points, max preventable accidents), structured interview/application, road test, pre-employment D&A, PSP/prior employer checks, and DOT medical exam.", "topic": "fleet_dot", "priority": "High", "rec": "Adopt written driver hiring eligibility criteria (minimum commercial experience, MVR point/preventable accident caps, documented road tests, and prior-employer safety history checks)." },
+            { "id": "AU-03", "key": "AUTO-SUP-03", "text": "3. Driver Supervision & Controls Profile — Call-in policy, Reasonable Suspicion supervision, periodic/annual MVR & driver reviews, ELD/HOS daily log audits, ECM/Dash-Cam observation audits, and FMCSA BASIC/CAB score monitoring.", "topic": "fleet_dot", "priority": "High", "rec": "Conduct annual MVR reviews, audit ELD Hours-of-Service logs and CAB/SMS scores monthly, and coach drivers weekly using inward/outward dash-cam telematics data." },
+            { "id": "AU-04", "key": "AUTO-SUP-04", "text": "4. Drug and Alcohol Program & Controls — Current Substance Abuse Policy, consortium enrollment, FMCSA Clearinghouse queries, trained Reasonable Suspicion supervisors, secure recordkeeping, pre-employment/random/post-accident/return-to-work testing, and EAP.", "topic": "fleet_dot", "priority": "High", "rec": "Maintain active DOT Drug & Alcohol Consortium & FMCSA Clearinghouse compliance and ensure at least two supervisors complete 120-minute Reasonable Suspicion training." },
+            { "id": "AU-05", "key": "AUTO-SUP-05", "text": "5. Safety Equipment Profile — Spill kits, load securement devices (straps, chains, binders, edge protectors), PPE, material handling equipment (pallet jacks, liftgates, forklifts), hand/hoisting tools, and operator certifications.", "topic": "fleet_dot", "priority": "Med", "rec": "Inspect load securement straps/chains, emergency triangles/spill kits, PPE, and vehicle-mounted material handling equipment prior to dispatch." },
+            { "id": "AU-06", "key": "AUTO-SUP-06", "text": "6. In-Vehicle Communications Profile — Strict distracted-driving / mobile phone policy, hands-free/receipt-only rules, two-way/satellite dispatch policies, and forward/in-cab AI event cameras.", "topic": "fleet_dot", "priority": "High", "rec": "Enforce a written zero-tolerance handheld mobile phone/texting policy while operating company vehicles and deploy AI dash cameras with distracted-driving alerts." },
+            { "id": "AU-07", "key": "AUTO-SUP-07", "text": "7. Equipment Maintenance Profile — Documented Tractor & Trailer Preventive Maintenance (PM) schedules (daily DVIRs, monthly/quarterly/annual DOT inspections), defect repair sign-off, and owner-operator/subhauler PM verification.", "topic": "fleet_dot", "priority": "High", "rec": "Maintain documented preventive maintenance schedules, daily pre-/post-trip DVIR defect sign-offs, annual 49 CFR 396.17 inspections, and subhauler maintenance verification." },
+            { "id": "AU-08", "key": "AUTO-SUP-08", "text": "8. Incident / Accident Review & Investigation Procedures Profile — Accident Review Committee, immediate reporting procedures, accident response kits in cabs, root-cause & preventability determinations, and structured post-accident coaching/discipline.", "topic": "fleet_dot", "priority": "Med", "rec": "Place accident response kits in every cab and convene a formal Accident Review Committee to determine preventability, root cause, and targeted driver retraining." },
+            { "id": "AU-09", "key": "AUTO-SUP-09", "text": "9. Driver Work Environment — Compensation structure (hourly/guaranteed vs. mile/load fatigue risk), overtime/return-home schedules, company driver vs. subhauler oversight, and non-commercial/family-use prohibition policy.", "topic": "fleet_dot", "priority": "Med", "rec": "Audit route scheduling and compensation structures to prevent driver fatigue and prohibit unauthorized personal/family use of company fleet vehicles." }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "RCA-JOB",
+      "name": "Part II Work Site Safety Survey (Construction Job Site RCA — 77 Items)",
+      "industry": "Construction",
+      "shield_code": "CONST",
+      "category": "rca_percent",
+      "scale": "rca_percent",
+      "description": "ARU Construction Captive 77-Item Percentage-Scored Job Site Risk Control Assessment. Requires >=2 member employees on site and >=30 applicable items (Acceptable + Needs Improvement). Score = Acceptable / (Acceptable + Needs Improvement) × 100.",
+      "sections": [
+        {
+          "section_no": 1,
+          "name": "1. Safety Programs & Site Administration (19 Items)",
+          "max_points": 19,
+          "questions": [
+            { "id": "RJ-01", "key": "RCA-JOB-01", "text": "Safety Manual on site / accessible to crew", "topic": "iipp", "priority": "Med", "rec": "Ensure the company Safety Manual / IIPP is available at the job site in printed or immediate mobile format." },
+            { "id": "RJ-02", "key": "RCA-JOB-02", "text": "Training Records current & verifiable", "topic": "recordkeeping", "priority": "Med", "rec": "Maintain verifiable employee safety and equipment training records accessible for job site verification." },
+            { "id": "RJ-03", "key": "RCA-JOB-03", "text": "Inspection Records maintained", "topic": "iipp", "priority": "Med", "rec": "Maintain documented job site safety inspection records with corrective action sign-offs." },
+            { "id": "RJ-04", "key": "RCA-JOB-04", "text": "Weekly Inspections conducted", "topic": "iipp", "priority": "Med", "rec": "Conduct and document weekly comprehensive job site safety inspections." },
+            { "id": "RJ-05", "key": "RCA-JOB-05", "text": "Daily Inspections conducted", "topic": "iipp", "priority": "Med", "rec": "Require foremen/competent persons to perform daily pre-shift job site hazard inspections." },
+            { "id": "RJ-06", "key": "RCA-JOB-06", "text": "OSHA Posters posted at job site", "topic": "recordkeeping", "priority": "Low", "rec": "Post required Federal/State OSHA workplace safety and emergency medical notices conspicuously at the job site." },
+            { "id": "RJ-07", "key": "RCA-JOB-07", "text": "Safety Boards maintained", "topic": "iipp", "priority": "Low", "rec": "Maintain an up-to-date job site safety board with emergency numbers, hospital route map, and current permits." },
+            { "id": "RJ-08", "key": "RCA-JOB-08", "text": "Hazard Com / SDS available on site", "topic": "hazcom", "priority": "High", "rec": "Maintain a site chemical inventory and accessible Safety Data Sheets (SDS) for all products used on the job site." },
+            { "id": "RJ-09", "key": "RCA-JOB-09", "text": "First Aid Kits stocked & accessible", "topic": "first_aid", "priority": "High", "rec": "Inspect and restock ANSI-compliant job site First Aid kits and verify current CPR/First-Aid trained personnel." },
+            { "id": "RJ-10", "key": "RCA-JOB-10", "text": "Stretch & Flex pre-shift warm-up", "topic": "ergonomics", "priority": "Low", "rec": "Conduct daily pre-shift crew Stretch & Flex warm-up huddles to reduce sprain/strain injuries." },
+            { "id": "RJ-11", "key": "RCA-JOB-11", "text": "Job Site Permits (Trenching, Framing >36 ft, Hot Work, etc.)", "topic": "trenching", "priority": "High", "rec": "Obtain and post all required Cal/OSHA / municipal construction, trenching (>=5 ft), and hot-work permits prior to commencing work." },
+            { "id": "RJ-12", "key": "RCA-JOB-12", "text": "Fire Extinguishers charged, tagged & accessible", "topic": "fire", "priority": "High", "rec": "Provide charged, annually tagged 2A:10B:C fire extinguishers within required travel distances and at all hot-work/fuel areas." },
+            { "id": "RJ-13", "key": "RCA-JOB-13", "text": "Flammable Storage (UL/FM safety cans & cabinets)", "topic": "flammables", "priority": "High", "rec": "Store flammable liquids only in approved self-closing safety cans and labeled flammable storage cabinets away from ignition sources." },
+            { "id": "RJ-14", "key": "RCA-JOB-14", "text": "Flammable Handling / bonding & refueling controls", "topic": "flammables", "priority": "High", "rec": "Enforce engine shut-off, bonding/grounding, and no-smoking controls during fuel/flammable liquid dispensing." },
+            { "id": "RJ-15", "key": "RCA-JOB-15", "text": "Eye Wash Stations unobstructed & inspected", "topic": "first_aid", "priority": "High", "rec": "Provide unobstructed ANSI Z358.1 emergency eyewash capability where corrosive materials, concrete, or battery acids are handled." },
+            { "id": "RJ-16", "key": "RCA-JOB-16", "text": "Bloodborne Pathogens controls", "topic": "bloodborne", "priority": "Low", "rec": "Maintain biohazard response kits and bloodborne pathogen precautions for designated first-aid responders." },
+            { "id": "RJ-17", "key": "RCA-JOB-17", "text": "Emergency Plans & site address/hospital directions", "topic": "egress", "priority": "High", "rec": "Brief crews on the site Emergency Action Plan, muster point, and exact street/GPS address for 911 dispatch." },
+            { "id": "RJ-18", "key": "RCA-JOB-18", "text": "Fall Protection Plan & rescue provisions", "topic": "fall", "priority": "High", "rec": "Implement site-specific fall protection and prompt post-fall rescue procedures for all elevated work." },
+            { "id": "RJ-19", "key": "RCA-JOB-19", "text": "Confined Space Rescue Plan & equipment", "topic": "confined_space", "priority": "High", "rec": "Verify atmospheric monitoring, entry permits, and non-entry tripod/rescue readiness prior to any confined space entry." }
+          ]
+        },
+        {
+          "section_no": 2,
+          "name": "2. Personal PPE (10 Items)",
+          "max_points": 10,
+          "questions": [
+            { "id": "RJ-20", "key": "RCA-JOB-20", "text": "Face & Eye Protection (ANSI Z87.1+ safety glasses / face shields)", "topic": "ppe", "priority": "High", "rec": "Require ANSI Z87.1+ impact-rated eye protection at all times and full face shields during grinding, cutting, or chipping." },
+            { "id": "RJ-21", "key": "RCA-JOB-21", "text": "Hard Hat / Head Protection (ANSI Z89.1)", "topic": "ppe", "priority": "High", "rec": "Enforce ANSI Z89.1 hard hat / safety helmet wear across active construction zones and inspect shells/suspensions regularly." },
+            { "id": "RJ-22", "key": "RCA-JOB-22", "text": "Foot Protection (intact work boots with anti-slip/protective toe)", "topic": "ppe", "priority": "High", "rec": "Require intact protective work boots with anti-slip soles and replace worn or separating footwear immediately." },
+            { "id": "RJ-23", "key": "RCA-JOB-23", "text": "Hand Protection (cut/impact/chemical task-appropriate gloves)", "topic": "ppe", "priority": "Med", "rec": "Provide and enforce cut-resistant or task-appropriate work gloves for material handling and tool operation." },
+            { "id": "RJ-24", "key": "RCA-JOB-24", "text": "Hearing Protection provided & worn in high-noise tasks", "topic": "hearing", "priority": "Med", "rec": "Require hearing protection during concrete cutting, pneumatic nailing, heavy equipment, and high-noise operations." },
+            { "id": "RJ-25", "key": "RCA-JOB-25", "text": "Body Harness, lanyards/SRLs & anchorages inspected & worn properly", "topic": "fall", "priority": "High", "rec": "Inspect full-body harnesses, SRLs, and shock-absorbing lanyards before each shift and ensure proper D-ring adjustment and rated anchorage tie-off." },
+            { "id": "RJ-26", "key": "RCA-JOB-26", "text": "Reflective High-Visibility Clothing (Class 2/3)", "topic": "ppe", "priority": "High", "rec": "Require ANSI Class 2/3 high-visibility vests/garments near mobile heavy equipment, cranes, and vehicular traffic." },
+            { "id": "RJ-27", "key": "RCA-JOB-27", "text": "Protective Clothing (welding leathers, FR, Tyvek, chaps)", "topic": "ppe", "priority": "Med", "rec": "Provide task-specific protective clothing (welding leathers, arc-rated FR, chainsaw chaps, chemical aprons) where required." },
+            { "id": "RJ-28", "key": "RCA-JOB-28", "text": "Respirators (fit-tested, clean & proper cartridges for silica/fumes)", "topic": "respiratory", "priority": "High", "rec": "Ensure employees wearing tight-fitting respirators have current medical clearance, annual fit tests, clean-shaven seals, and proper cartridges." },
+            { "id": "RJ-29", "key": "RCA-JOB-29", "text": "NEC / Voltage-Rated Insulated Electrical Gloves", "topic": "electrical", "priority": "High", "rec": "Ensure voltage-rated insulated gloves with leather protectors are current on 6-month dielectric testing for authorized electrical work." }
+          ]
+        },
+        {
+          "section_no": 3,
+          "name": "3. Walking / Working Surfaces & Heavy Operations (19 Items)",
+          "max_points": 19,
+          "questions": [
+            { "id": "RJ-30", "key": "RCA-JOB-30", "text": "Slip Hazards controlled (water, mud, oil, slick decking)", "topic": "walking_surfaces", "priority": "High", "rec": "Eliminate standing water, mud, oil, and slick debris from walkways and work decks immediately." },
+            { "id": "RJ-31", "key": "RCA-JOB-31", "text": "Fall Hazards guarded (leading edges, floor holes covered & labeled, guardrails)", "topic": "fall", "priority": "High", "rec": "Install compliant top/mid-rails and toeboards on open edges and secure/label all floor and roof hole covers ('HOLE — DO NOT REMOVE')." },
+            { "id": "RJ-32", "key": "RCA-JOB-32", "text": "Trip Hazards controlled (cords, hoses, scrap lumber, protruding rebar capped)", "topic": "walking_surfaces", "priority": "High", "rec": "Route cords/hoses overhead or protected out of walkways, clear scrap materials, and cap all protruding rebar against impalement." },
+            { "id": "RJ-33", "key": "RCA-JOB-33", "text": "Stairways (handrails, stairrails, pan treads filled, well lit)", "topic": "walking_surfaces", "priority": "High", "rec": "Maintain compliant stairrails/handrails on stairways with >=4 risers and ensure pan stairs are filled before use." },
+            { "id": "RJ-34", "key": "RCA-JOB-34", "text": "Ladders (labels intact, 36-in extension, secured, proper A-frame/extension use)", "topic": "ladders", "priority": "High", "rec": "Inspect ladders daily, tag out defective units, secure extension ladders extending >=36 inches above landings, and prohibit standing on top two steps or walking A-frame ladders." },
+            { "id": "RJ-35", "key": "RCA-JOB-35", "text": "Scaffolding (competent person tag, full planking, guardrails, mudsills, safe access)", "topic": "scaffolding", "priority": "High", "rec": "Ensure scaffolds are inspected daily by a Competent Person before shift use, fully planked on sound mudsills/baseplates, and fitted with complete guardrails and ladder access." },
+            { "id": "RJ-36", "key": "RCA-JOB-36", "text": "Powered Equipment (trained operators, pre-shift check, seatbelts, backup alarms)", "topic": "forklift", "priority": "High", "rec": "Verify operator authorization, functioning backup alarms, and seatbelt use on all telehandlers, skid steers, and powered equipment." },
+            { "id": "RJ-37", "key": "RCA-JOB-37", "text": "Aerial Lifts / Boom Lifts (100% harness & SRL tied off to basket anchor)", "topic": "fall", "priority": "High", "rec": "Enforce 100% full-body harness and short SRL attachment to designated boom-lift basket anchors with gates closed." },
+            { "id": "RJ-38", "key": "RCA-JOB-38", "text": "Scissor Lifts (guardrail chain/gate closed, feet on platform deck, level surface)", "topic": "scaffolding", "priority": "High", "rec": "Keep scissor lift entry gates/chains latched, prohibit climbing or standing on mid/top rails, and verify firm level operating surfaces." },
+            { "id": "RJ-39", "key": "RCA-JOB-39", "text": "Trenching & Excavation (competent person, >=5 ft shoring/sloping, >=4 ft ladder within 25 ft, spoils >=2 ft)", "topic": "trenching", "priority": "High", "rec": "Maintain daily Competent Person soil/trench logs, protective shoring/boxes at >=5 ft, spoils >=2 ft from edges, and ladder egress within 25 ft." },
+            { "id": "RJ-40", "key": "RCA-JOB-40", "text": "Confined Spaces (identified, barricaded, atmospheric testing, attendant)", "topic": "confined_space", "priority": "High", "rec": "Identify and barricade vaults, manholes, and confined spaces; enforce continuous 4-gas monitoring and permit procedures." },
+            { "id": "RJ-41", "key": "RCA-JOB-41", "text": "Work Area Protection (traffic cones, flaggers, drop-zone barricades)", "topic": "walking_surfaces", "priority": "High", "rec": "Establish high-visibility drop-zone barricades below overhead work and compliant MUTCD traffic work-zone protection." },
+            { "id": "RJ-42", "key": "RCA-JOB-42", "text": "Perimeter Fencing & site access security", "topic": "egress", "priority": "Med", "rec": "Maintain secure perimeter fencing, locked gates after hours, and authorized visitor/PPE entry signage." },
+            { "id": "RJ-43", "key": "RCA-JOB-43", "text": "Staging Area Housekeeping", "topic": "walking_surfaces", "priority": "Med", "rec": "Keep laydown and material staging yards organized with clear equipment turning lanes and pedestrian pathways." },
+            { "id": "RJ-44", "key": "RCA-JOB-44", "text": "Material Storage (stacked stable, chocked pipe, >=6 ft from floor edges)", "topic": "material_handling", "priority": "Med", "rec": "Stack palletized/bundled materials stable on dunnage, chock round stock, and keep stored materials >=6 ft back from hoistways and open edges." },
+            { "id": "RJ-45", "key": "RCA-JOB-45", "text": "General Job Site Housekeeping & debris disposal", "topic": "walking_surfaces", "priority": "High", "rec": "Enforce continuous 'clean-as-you-go' housekeeping across all trades to remove scrap, nails, and packaging debris." },
+            { "id": "RJ-46", "key": "RCA-JOB-46", "text": "Heavy Equipment (spotters, swing-radius barricades, ROPS, ground clearances)", "topic": "crane_hoist", "priority": "High", "rec": "Use trained high-visibility spotters in congested areas, barricade excavator swing radii, and maintain overhead power-line clearances." },
+            { "id": "RJ-47", "key": "RCA-JOB-47", "text": "Barrier Guarding (shaftways, excavations, buck hoists, mechanical pits)", "topic": "fall", "priority": "High", "rec": "Maintain rigid physical barrier guarding and locked gates around elevator shafts, buck hoists, and open pits." },
+            { "id": "RJ-48", "key": "RCA-JOB-48", "text": "Material Handling (team lifts, mechanical aids, rigging carts)", "topic": "material_handling", "priority": "Med", "rec": "Utilize carts, pallet jacks, hoists, and two-person team lifts for heavy drywall, pipe, HVAC, and masonry materials." }
+          ]
+        },
+        {
+          "section_no": 4,
+          "name": "4. Electrical / Energy & Chemical Hazards (8 Items)",
+          "max_points": 8,
+          "questions": [
+            { "id": "RJ-49", "key": "RCA-JOB-49", "text": "GFCI Protection & Grounding on all temporary 120V construction circuits", "topic": "electrical", "priority": "High", "rec": "Ensure 100% GFCI protection on all temporary 120V receptacles/spiders and verify intact grounding pins on all extension cords." },
+            { "id": "RJ-50", "key": "RCA-JOB-50", "text": "Temporary Wiring (panel dead-fronts installed, strain relief, weatherproof covers)", "topic": "electrical", "priority": "High", "rec": "Keep dead-front covers closed on all temporary power panels, replace missing knockouts, and maintain strain relief on flexible cords." },
+            { "id": "RJ-51", "key": "RCA-JOB-51", "text": "Power Cord Placement & Condition (no taped jackets, elevated/bridged across aisles)", "topic": "electrical", "priority": "Med", "rec": "Remove damaged/spliced extension cords from service and elevate or bridge cords across doorways, pinch points, and vehicle paths." },
+            { "id": "RJ-52", "key": "RCA-JOB-52", "text": "Compressed Gas Cylinders (upright, chained, caps on, oxygen/fuel separated >=20 ft)", "topic": "flammables", "priority": "High", "rec": "Secure compressed gas cylinders upright with chains, install valve caps when regulators are removed, and separate oxygen from fuel gas by >=20 ft or a 5-ft 30-min fire barrier." },
+            { "id": "RJ-53", "key": "RCA-JOB-53", "text": "Chemical Storage (segregated, secondary containment, ventilated)", "topic": "hazcom", "priority": "Med", "rec": "Store adhesives, solvents, coatings, and curing compounds in ventilated, compatible secondary-containment areas." },
+            { "id": "RJ-54", "key": "RCA-JOB-54", "text": "Chemical Handling (secondary container labels, chemical PPE, ventilation)", "topic": "hazcom", "priority": "Med", "rec": "Label all secondary chemical containers and enforce SDS-specified gloves, goggles, and ventilation during application." },
+            { "id": "RJ-55", "key": "RCA-JOB-55", "text": "Chemical & Oily Rag Disposal (self-closing oily waste cans, regulated disposal)", "topic": "flammables", "priority": "Med", "rec": "Dispose of solvent/stain-soaked rags in UL-listed self-closing oily waste cans and prevent storm-drain washout." },
+            { "id": "RJ-56", "key": "RCA-JOB-56", "text": "Lock-Out / Tag-Out (breakers/valves locked & tagged before MEP servicing)", "topic": "loto", "priority": "High", "rec": "Enforce individual Lockout/Tagout locks, tags, and zero-energy verification prior to working on electrical circuits or mechanical systems." }
+          ]
+        },
+        {
+          "section_no": 5,
+          "name": "5. Tools & Equipment (7 Items)",
+          "max_points": 7,
+          "questions": [
+            { "id": "RJ-57", "key": "RCA-JOB-57", "text": "Hand Tool Use & Storage (no mushroomed heads, cracked handles, or makeshift tools)", "topic": "machine_guarding", "priority": "Low", "rec": "Inspect hand tools regularly and remove chisels with mushroomed heads, split handles, or damaged insulation." },
+            { "id": "RJ-58", "key": "RCA-JOB-58", "text": "Power Tool Use (guards never pinned, dead-man switches, silica wet/shroud controls)", "topic": "silica", "priority": "High", "rec": "Prohibit pinning/removing saw or grinder guards and enforce Table 1 wet-cutting or HEPA vacuum shrouds on concrete/masonry tools." },
+            { "id": "RJ-59", "key": "RCA-JOB-59", "text": "Battery Power Tools & Charging Stations (ventilated, dry, undamaged Li-ion packs)", "topic": "electrical", "priority": "Low", "rec": "Locate battery charging stations in dry, ventilated areas away from combustibles and discard swollen/damaged lithium-ion packs." },
+            { "id": "RJ-60", "key": "RCA-JOB-60", "text": "Crane Safety & Permits (NCCCO operator, annual inspection, qualified rigger/signalperson)", "topic": "crane_hoist", "priority": "High", "rec": "Verify current annual crane inspection, NCCCO operator certification, qualified rigger/signalperson credentials, and outrigger pad cribbing." },
+            { "id": "RJ-61", "key": "RCA-JOB-61", "text": "Hoist & Lift Safety (rated slings/shackles, safety latches intact, no frayed wire rope)", "topic": "crane_hoist", "priority": "High", "rec": "Inspect synthetic slings, chains, shackles, and hook safety latches prior to every lift and destroy damaged rigging immediately." },
+            { "id": "RJ-62", "key": "RCA-JOB-62", "text": "Machine Guarding (table saws, miter saws, pipe threaders, compressors)", "topic": "machine_guarding", "priority": "High", "rec": "Ensure blade guards, riving knives, foot-switch shrouds, and belt/pulley guards are installed on all stationary/portable shop machines." },
+            { "id": "RJ-63", "key": "RCA-JOB-63", "text": "Motorized Vehicles (company trucks, trailers, wheel chocks, load securement)", "topic": "fleet_dot", "priority": "Med", "rec": "Secure ladder racks and trailer loads properly, verify trailer breakaway chains/lights, and use spotters when backing on job sites." }
+          ]
+        },
+        {
+          "section_no": 6,
+          "name": "6. Site Safety Culture & Multi-Trade Controls (14 Items)",
+          "max_points": 14,
+          "questions": [
+            { "id": "RJ-64", "key": "RCA-JOB-64", "text": "Onboarding for Subcontractors (pre-mobilization safety & COI check)", "topic": "iipp", "priority": "Med", "rec": "Verify subcontractor safety submittals, competent person designations, and COIs prior to site mobilization." },
+            { "id": "RJ-65", "key": "RCA-JOB-65", "text": "Site-Specific Safety Orientation completed for all workers", "topic": "iipp", "priority": "High", "rec": "Require every employee and subcontractor worker to complete site-specific safety orientation (with hard-hat sticker/log) on day one." },
+            { "id": "RJ-66", "key": "RCA-JOB-66", "text": "Daily Safety Huddles / Pre-Task Briefings", "topic": "iipp", "priority": "Med", "rec": "Conduct daily morning crew safety huddles reviewing active trades, high-hazard tasks, and weather conditions." },
+            { "id": "RJ-67", "key": "RCA-JOB-67", "text": "Daily Walk Through by Superintendent / Foreman", "topic": "iipp", "priority": "Med", "rec": "Perform daily supervisory walk-throughs across all work elevations to correct multi-trade housekeeping and railing issues promptly." },
+            { "id": "RJ-68", "key": "RCA-JOB-68", "text": "JHAs / JSAs / Pre-Task Hazard Analyses completed & signed by crew", "topic": "iipp", "priority": "High", "rec": "Complete task-specific Job Hazard Analyses (JHAs) reviewed and signed by all crew members prior to starting non-routine or high-risk tasks." },
+            { "id": "RJ-69", "key": "RCA-JOB-69", "text": "High-Risk Safety Plans (steel erection, demolition, energization, deep excavation)", "topic": "fall", "priority": "High", "rec": "Develop and review written High-Risk Work Plans prior to critical lifts, live tie-ins, structural demolition, or deep excavations." },
+            { "id": "RJ-70", "key": "RCA-JOB-70", "text": "Crane Pick Plans & critical lift calculations", "topic": "crane_hoist", "priority": "High", "rec": "Require written Crane Pick Plans verifying load weight, radius, boom configuration, wind limits, and ground bearing capacity." },
+            { "id": "RJ-71", "key": "RCA-JOB-71", "text": "Weekly Subcontractor / All-Hands Safety Meetings", "topic": "iipp", "priority": "Med", "rec": "Hold and document weekly toolbox / multi-trade safety coordination meetings with bilingual translation." },
+            { "id": "RJ-72", "key": "RCA-JOB-72", "text": "Safety Stand-Downs conducted after near-misses or seasonal emphasis", "topic": "iipp", "priority": "Low", "rec": "Conduct focused crew safety stand-downs following near-misses, ladder/fall observations, or seasonal heat spikes." },
+            { "id": "RJ-73", "key": "RCA-JOB-73", "text": "Entry Safety Posters & mandatory PPE signage at gates", "topic": "ppe", "priority": "Low", "rec": "Post clear bilingual entry signage specifying mandatory PPE, speed limits, and superintendent check-in instructions." },
+            { "id": "RJ-74", "key": "RCA-JOB-74", "text": "Heat Illness Prevention Posters displayed", "topic": "heat_illness", "priority": "Med", "rec": "Display bilingual Heat Illness Prevention symptom and first-aid posters at crew break and water stations." },
+            { "id": "RJ-75", "key": "RCA-JOB-75", "text": "Infectious Disease / Hygiene Postings & handwashing stations", "topic": "ag_field_sanitation", "priority": "Low", "rec": "Maintain clean job site sanitation units, stocked handwashing stations, and health/hygiene postings." },
+            { "id": "RJ-76", "key": "RCA-JOB-76", "text": "Heat Illness Plan, Cool Water & Shade Canopies staged on site", "topic": "heat_illness", "priority": "High", "rec": "Stage cool potable drinking water (>=1 qt/hr), erect shade structures above 80°F, and keep the written HIPP on site." },
+            { "id": "RJ-77", "key": "RCA-JOB-77", "text": "Tethering Tools Plan / Dropped-Object Prevention at elevation", "topic": "fall", "priority": "High", "rec": "Implement tool lanyards, toeboards, debris netting, and below-deck exclusion zones when working on multi-story edges or lifts." }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

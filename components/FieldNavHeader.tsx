@@ -36,14 +36,20 @@ export default function FieldNavHeader({
     >
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <img
-            src={logoUrl || '/brand/logo.png'}
-            alt={tenantName}
-            style={logoUrl && logoUrl !== '/brand/logo.png' ? { height: 28 } : { height: 28, filter: 'brightness(0) invert(1)' }}
-          />
-          <div>
+          {logoUrl && (logoUrl !== '/brand/logo.png' || tenantName === 'The Safety Alchemist') ? (
+            <img
+              src={logoUrl}
+              alt={tenantName}
+              style={logoUrl !== '/brand/logo.png' ? { height: 30 } : { height: 30, filter: 'brightness(0) invert(1)' }}
+            />
+          ) : (
             <div style={{ font: '700 17px var(--fh)', letterSpacing: '.05em', textTransform: 'uppercase' }}>
-              {tenantName} · Field Loss Control PWA
+              {tenantName}
+            </div>
+          )}
+          <div>
+            <div className="kicker" style={{ color: 'var(--sand)' }}>
+              Field Loss Control PWA
             </div>
             <div className="kicker" style={{ color: 'rgba(255,255,255,.55)' }}>
               Consultant: {userName} ({role})

@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   AI_PROVIDER_CATALOG,
   AI_NEEDS_METADATA,
@@ -9,7 +10,7 @@ import {
   AIProviderId,
   ELEVENLABS_VOICES,
   getModelsForProviderAndModality,
-} from '@/lib/ai';
+} from '@/lib/ai-catalog';
 import { Frame, Pill } from '@/components/ui';
 
 const PROVIDER_SHORT_LABELS: Record<AIProviderId, string> = {
@@ -26,9 +27,12 @@ export default function AISettingsManager({
   initialConfig,
   canEdit = true,
 }: {
-  initialConfig: AIConfig;
+  initialConfig: AIConfig & { maskedSecrets?: Record<string, string> };
   canEdit?: boolean;
 }) {
+  const router = useRouter();
+  const masked = initialConfig.maskedSecrets || {};
+
   const [routes, setRoutes] = useState<Record<AINeedKey, AINeedRoute>>(
     initialConfig.routes || {
       email: { provider: initialConfig.provider || 'aws_bedrock', model: initialConfig.textModel || 'qwen.qwen2.5-32b-instruct-v1:0' },
@@ -49,21 +53,22 @@ export default function AISettingsManager({
     tts: false,
   });
 
-  // Cloud Endpoint & Credentials State
+  // Cloud Endpoint & Credentials State (raw secrets are NEVER hydrated to browser; inputs start empty!)
   const [credTab, setCredTab] = useState<'aws_bedrock' | 'elevenlabs' | 'azure_ai' | 'openai_compat'>('aws_bedrock');
   const [awsRegion, setAwsRegion] = useState(initialConfig.awsRegion || 'us-west-2');
   const [awsBedrockEndpoint, setAwsBedrockEndpoint] = useState(initialConfig.awsBedrockEndpoint || '');
-  const [awsBedrockApiKey, setAwsBedrockApiKey] = useState(initialConfig.awsBedrockApiKey || '');
+  const [awsBedrockApiKey, setAwsBedrockApiKey] = useState('');
 
-  const [elevenlabsApiKey, setElevenlabsApiKey] = useState(initialConfig.elevenlabsApiKey || '');
+  const [elevenlabsApiKey, setElevenlabsApiKey] = useState('');
   const [elevenlabsVoiceId, setElevenlabsVoiceId] = useState(initialConfig.elevenlabsVoiceId || 'JBFqnCBsd6RMkjVDRZzb');
 
   const [azureEndpoint, setAzureEndpoint] = useState(initialConfig.azureEndpoint || '');
-  const [azureApiKey, setAzureApiKey] = useState(initialConfig.azureApiKey || '');
+  const [azureApiKey, setAzureApiKey] = useState('');
   const [azureApiVersion, setAzureApiVersion] = useState(initialConfig.azureApiVersion || '2024-05-01-preview');
 
   const [openaiBaseUrl, setOpenaiBaseUrl] = useState(initialConfig.openaiBaseUrl || '');
-  const [openaiApiKey, setOpenaiApiKey] = useState(initialConfig.openaiApiKey || '');
+  const [openaiApiKey, setOpenaiApiKey] = useState('');
+  const [clearSecrets, setClearSecrets] = useState<string[]>([]);
 
   const [fallbackToDeterministic, setFallbackToDeterministic] = useState(
     initialConfig.fallbackToDeterministic !== false
@@ -75,6 +80,16 @@ export default function AISettingsManager({
   // Live Test Bench State
   const [testingNeed, setTestingNeed] = useState<string | null>(null);
   const [testOutput, setTestOutput] = useState<any>(null);
+
+  function secretPlaceholder(key: string, defaultText: string) {
+    if (clearSecrets.includes(key)) return 'Will clear saved key on Save…';
+    if (masked[key]) return `Saved encrypted (${masked[key]}) — leave blank to keep`;
+    return defaultText;
+  }
+
+  function toggleClearSecret(key: string) {
+    setClearSecrets(prev => (prev.includes(key) ? prev.filter(x => x !== key) : [...prev, key]));
+  }
 
   function handleProviderChange(
     needKey: AINeedKey,
@@ -176,6 +191,7 @@ export default function AISettingsManager({
         azureModel: routes.email.model,
         openaiBaseUrl,
         openaiApiKey,
+        clearSecrets,
         textModel: routes.email.model,
         visionModel: routes.vision.model,
         audioModel: routes.stt.model,
@@ -185,7 +201,13 @@ export default function AISettingsManager({
     const data = await res.json();
     setSaving(false);
     if (data.ok) {
-      setStatusMsg('Per-Need AI Provider & Model Routing saved for this tenant.');
+      setAwsBedrockApiKey('');
+      setElevenlabsApiKey('');
+      setAzureApiKey('');
+      setOpenaiApiKey('');
+      setClearSecrets([]);
+      setStatusMsg('Encrypted AI Credentials & Per-Need Model Routing saved.');
+      router.refresh();
     } else {
       setStatusMsg(data.error || 'Error saving AI routing.');
     }
@@ -204,7 +226,7 @@ export default function AISettingsManager({
     });
     const data = await res.json();
     setTestingNeed(null);
-    setTestOutput({ type: 'Email Intake ("Read it")', payload: data.parsed });
+    setTestOutput({ type: 'Email Intake ("Read it")', payload: data.parsed || data });
   }
 
   async function handleTestVoiceSTT() {
@@ -264,7 +286,6 @@ export default function AISettingsManager({
 
   return (
     <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-      {/* Top 5-Card Status Strip Showing Active Provider + Model Per Need */}
       <div className="stats" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(195px, 1fr))' }}>
         <Frame className="stat">
           <div className="k">1 · Email Intake (&ldquo;Read it&rdquo;)</div>
@@ -317,33 +338,30 @@ export default function AISettingsManager({
         </Frame>
       </div>
 
-      {/* Main Two-Column Layout */}
       <div className="cols" style={{ gridTemplateColumns: '1.35fr 1fr', alignItems: 'start' }}>
-        {/* LEFT COLUMN: Per-Need AI Routing Matrix */}
         <Frame className="strong">
           <div className="panel-head">
             <div>
               <h2>Per-Need AI Provider &amp; Model Routing</h2>
-              <div className="sub">
-                Assign the ideal AI provider and model independently for each workflow task
+              <div className="sub">Assign the ideal AI provider and model independently for each workflow task</div>
+            </div>
+            {canEdit && (
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  className="btn btn-sm btn-primary"
+                  onClick={() => applyPreset('aws_elevenlabs')}
+                >
+                  ★ Preset: AWS Qwen + ElevenLabs
+                </button>
+                <button type="button" className="btn btn-sm" onClick={() => applyPreset('all_aws')}>
+                  All AWS
+                </button>
+                <button type="button" className="btn btn-sm" onClick={() => applyPreset('azure_elevenlabs')}>
+                  Azure + ElevenLabs
+                </button>
               </div>
-            </div>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-              <button
-                type="button"
-                className="btn btn-sm btn-primary"
-                onClick={() => applyPreset('aws_elevenlabs')}
-                title="Set Text/Vision/OCR to AWS Bedrock Qwen 2.5 and Voice STT/TTS to ElevenLabs"
-              >
-                ★ Preset: AWS Qwen + ElevenLabs
-              </button>
-              <button type="button" className="btn btn-sm" onClick={() => applyPreset('all_aws')}>
-                All AWS
-              </button>
-              <button type="button" className="btn btn-sm" onClick={() => applyPreset('azure_elevenlabs')}>
-                Azure + ElevenLabs
-              </button>
-            </div>
+            )}
           </div>
 
           <div className="panel-body">
@@ -397,18 +415,20 @@ export default function AISettingsManager({
                       <div className="sub" style={{ marginTop: 4 }}>{need.description}</div>
                     </div>
 
-                    <button
-                      type="button"
-                      className="btn btn-sm"
-                      onClick={() =>
-                        setCustomModelMode(prev => ({
-                          ...prev,
-                          [need.key]: !prev[need.key],
-                        }))
-                      }
-                    >
-                      {isCustom ? 'Use Preset Catalog' : 'Custom Model ID'}
-                    </button>
+                    {canEdit && (
+                      <button
+                        type="button"
+                        className="btn btn-sm"
+                        onClick={() =>
+                          setCustomModelMode(prev => ({
+                            ...prev,
+                            [need.key]: !prev[need.key],
+                          }))
+                        }
+                      >
+                        {isCustom ? 'Use Preset Catalog' : 'Custom Model ID'}
+                      </button>
+                    )}
                   </div>
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.45fr', gap: 12 }}>
@@ -466,7 +486,6 @@ export default function AISettingsManager({
               );
             })}
 
-            {/* Save & Fallback Footer */}
             <div
               style={{
                 paddingTop: 14,
@@ -493,24 +512,23 @@ export default function AISettingsManager({
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 {statusMsg && <Pill kind="ok">{statusMsg}</Pill>}
                 <button type="submit" className="btn btn-primary" disabled={saving || !canEdit}>
-                  {saving ? 'Saving Routing...' : 'Save Per-Need AI Routing'}
+                  {saving ? 'Encrypting & Saving...' : 'Save Per-Need AI Routing'}
                 </button>
               </div>
             </div>
           </div>
         </Frame>
 
-        {/* RIGHT COLUMN: Cloud Provider Credentials + Live Multi-Need Test Bench */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           <Frame>
             <div className="panel-head">
               <div>
-                <h2>Cloud Provider Credentials</h2>
+                <h2>Encrypted Cloud Credentials Vault</h2>
                 <div className="sub">
-                  Configure endpoints and API keys for the providers selected in your routing table
+                  Secrets are encrypted at rest with AES-256-GCM and never serialized back to the browser
                 </div>
               </div>
-              <Pill kind="neutral">{activeCatalogMeta?.badge || 'Cloud Config'}</Pill>
+              <Pill kind="verified">AES-256-GCM</Pill>
             </div>
 
             <div className="panel-body">
@@ -537,23 +555,14 @@ export default function AISettingsManager({
 
               {credTab === 'aws_bedrock' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  <div
-                    style={{
-                      padding: '10px 12px',
-                      background: 'var(--bg-soft)',
-                      border: '1px solid var(--div2)',
-                      fontSize: 12,
-                      lineHeight: 1.45,
-                      color: 'var(--n7)',
-                    }}
-                  >
-                    Runs open-weight <strong>Qwen 2.5 32B/72B</strong>, <strong>Qwen 2.5-VL Vision</strong>, and{' '}
-                    <strong>Amazon Nova</strong> at ~80% lower cost than frontier proprietary models.
+                  <div className="note">
+                    {activeCatalogMeta?.description} Custom endpoints are validated against SSRF private-IP &amp; cloud
+                    metadata ranges.
                   </div>
 
                   <label className="field">
                     <span>AWS Region</span>
-                    <select className="select" value={awsRegion} onChange={e => setAwsRegion(e.target.value)}>
+                    <select className="select" value={awsRegion} disabled={!canEdit} onChange={e => setAwsRegion(e.target.value)}>
                       <option value="us-west-2">us-west-2 (Oregon · Full Qwen &amp; Nova Catalog)</option>
                       <option value="us-east-1">us-east-1 (N. Virginia · Nova &amp; Llama 3.3)</option>
                       <option value="us-east-2">us-east-2 (Ohio · Cross-Region Inference)</option>
@@ -562,24 +571,33 @@ export default function AISettingsManager({
                   </label>
 
                   <label className="field">
-                    <span>Bedrock OpenAI-Compatible / Mantle Endpoint</span>
+                    <span>Bedrock OpenAI-Compatible / Mantle Endpoint (HTTPS)</span>
                     <input
                       type="text"
                       className="input mono"
                       value={awsBedrockEndpoint}
+                      disabled={!canEdit}
                       onChange={e => setAwsBedrockEndpoint(e.target.value)}
                       placeholder={`https://bedrock-runtime.${awsRegion}.amazonaws.com/openai/v1`}
                     />
                   </label>
 
                   <label className="field">
-                    <span>Bedrock Bearer Token (or set AWS_BEDROCK_API_KEY in .env)</span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span>Bedrock Bearer Token</span>
+                      {masked.awsBedrockApiKey && canEdit && (
+                        <button type="button" className="btn btn-sm" onClick={() => toggleClearSecret('awsBedrockApiKey')}>
+                          {clearSecrets.includes('awsBedrockApiKey') ? 'Keep Saved Key' : 'Clear Saved Key'}
+                        </button>
+                      )}
+                    </span>
                     <input
                       type="password"
                       className="input mono"
                       value={awsBedrockApiKey}
+                      disabled={!canEdit}
                       onChange={e => setAwsBedrockApiKey(e.target.value)}
-                      placeholder="Uses .env AWS_BEDROCK_API_KEY by default"
+                      placeholder={secretPlaceholder('awsBedrockApiKey', 'Enter new Bedrock token (or uses .env default)')}
                     />
                   </label>
                 </div>
@@ -587,27 +605,22 @@ export default function AISettingsManager({
 
               {credTab === 'elevenlabs' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  <div
-                    style={{
-                      padding: '10px 12px',
-                      background: 'var(--bg-soft)',
-                      border: '1px solid var(--div2)',
-                      fontSize: 12,
-                      lineHeight: 1.45,
-                      color: 'var(--n7)',
-                    }}
-                  >
-                    Powers <strong>Need 05 (Voice Memo Transcription)</strong> via <code>scribe_v1</code> with speaker diarization and <strong>Need 06 (&ldquo;In the Truck&rdquo; Audio Readback)</strong> via <code>eleven_flash_v2_5</code>.
-                  </div>
-
                   <label className="field">
-                    <span>ElevenLabs API Key (xi-api-key or set ELEVENLABS_API_KEY in .env)</span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span>ElevenLabs API Key (xi-api-key)</span>
+                      {masked.elevenlabsApiKey && canEdit && (
+                        <button type="button" className="btn btn-sm" onClick={() => toggleClearSecret('elevenlabsApiKey')}>
+                          {clearSecrets.includes('elevenlabsApiKey') ? 'Keep Saved Key' : 'Clear Saved Key'}
+                        </button>
+                      )}
+                    </span>
                     <input
                       type="password"
                       className="input mono"
                       value={elevenlabsApiKey}
+                      disabled={!canEdit}
                       onChange={e => setElevenlabsApiKey(e.target.value)}
-                      placeholder="xi-... (Uses .env ELEVENLABS_API_KEY if blank)"
+                      placeholder={secretPlaceholder('elevenlabsApiKey', 'xi-... (Uses .env ELEVENLABS_API_KEY if blank)')}
                     />
                   </label>
 
@@ -616,6 +629,7 @@ export default function AISettingsManager({
                     <select
                       className="select"
                       value={elevenlabsVoiceId}
+                      disabled={!canEdit}
                       onChange={e => setElevenlabsVoiceId(e.target.value)}
                     >
                       {ELEVENLABS_VOICES.map(v => (
@@ -625,41 +639,18 @@ export default function AISettingsManager({
                       ))}
                     </select>
                   </label>
-
-                  <label className="field">
-                    <span>Custom ElevenLabs Voice ID Override</span>
-                    <input
-                      type="text"
-                      className="input mono"
-                      value={elevenlabsVoiceId}
-                      onChange={e => setElevenlabsVoiceId(e.target.value)}
-                      placeholder="JBFqnCBsd6RMkjVDRZzb"
-                    />
-                  </label>
                 </div>
               )}
 
               {credTab === 'azure_ai' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  <div
-                    style={{
-                      padding: '10px 12px',
-                      background: 'var(--bg-soft)',
-                      border: '1px solid var(--div2)',
-                      fontSize: 12,
-                      lineHeight: 1.45,
-                      color: 'var(--n7)',
-                    }}
-                  >
-                    Connects to Azure AI Foundry Serverless or Azure OpenAI deployments for Qwen 2.5, Phi-4 Multimodal, or GPT-4o-mini.
-                  </div>
-
                   <label className="field">
-                    <span>Azure AI Inference Endpoint</span>
+                    <span>Azure AI Inference Endpoint (HTTPS)</span>
                     <input
                       type="text"
                       className="input mono"
                       value={azureEndpoint}
+                      disabled={!canEdit}
                       onChange={e => setAzureEndpoint(e.target.value)}
                       placeholder="https://<resource>.services.ai.azure.com/models"
                     />
@@ -667,13 +658,21 @@ export default function AISettingsManager({
 
                   <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 12 }}>
                     <label className="field">
-                      <span>Azure API Key</span>
+                      <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span>Azure API Key</span>
+                        {masked.azureApiKey && canEdit && (
+                          <button type="button" className="btn btn-sm" onClick={() => toggleClearSecret('azureApiKey')}>
+                            {clearSecrets.includes('azureApiKey') ? 'Keep' : 'Clear'}
+                          </button>
+                        )}
+                      </span>
                       <input
                         type="password"
                         className="input mono"
                         value={azureApiKey}
+                        disabled={!canEdit}
                         onChange={e => setAzureApiKey(e.target.value)}
-                        placeholder="Uses .env AZURE_AI_API_KEY"
+                        placeholder={secretPlaceholder('azureApiKey', 'Uses .env AZURE_AI_API_KEY')}
                       />
                     </label>
                     <label className="field">
@@ -682,6 +681,7 @@ export default function AISettingsManager({
                         type="text"
                         className="input mono"
                         value={azureApiVersion}
+                        disabled={!canEdit}
                         onChange={e => setAzureApiVersion(e.target.value)}
                       />
                     </label>
@@ -691,38 +691,34 @@ export default function AISettingsManager({
 
               {credTab === 'openai_compat' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  <div
-                    style={{
-                      padding: '10px 12px',
-                      background: 'var(--bg-soft)',
-                      border: '1px solid var(--div2)',
-                      fontSize: 12,
-                      lineHeight: 1.45,
-                      color: 'var(--n7)',
-                    }}
-                  >
-                    Connects to any OpenAI-compatible <code>/v1/chat/completions</code> server (vLLM, Ollama, Together, Fireworks, or OpenAI).
-                  </div>
-
                   <label className="field">
                     <span>Base URL</span>
                     <input
                       type="text"
                       className="input mono"
                       value={openaiBaseUrl}
+                      disabled={!canEdit}
                       onChange={e => setOpenaiBaseUrl(e.target.value)}
                       placeholder="https://api.openai.com/v1"
                     />
                   </label>
 
                   <label className="field">
-                    <span>Bearer API Key</span>
+                    <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span>Bearer API Key</span>
+                      {masked.openaiApiKey && canEdit && (
+                        <button type="button" className="btn btn-sm" onClick={() => toggleClearSecret('openaiApiKey')}>
+                          {clearSecrets.includes('openaiApiKey') ? 'Keep Saved Key' : 'Clear Saved Key'}
+                        </button>
+                      )}
+                    </span>
                     <input
                       type="password"
                       className="input mono"
                       value={openaiApiKey}
+                      disabled={!canEdit}
                       onChange={e => setOpenaiApiKey(e.target.value)}
-                      placeholder="sk-..."
+                      placeholder={secretPlaceholder('openaiApiKey', 'sk-...')}
                     />
                   </label>
                 </div>
@@ -730,14 +726,11 @@ export default function AISettingsManager({
             </div>
           </Frame>
 
-          {/* Live Multi-Need Diagnostics & Test Bench */}
           <Frame>
             <div className="panel-head">
               <div>
                 <h2>Live Per-Need Test Bench</h2>
-                <div className="sub">
-                  Verify your active provider routing for Email Intake, ElevenLabs Scribe STT, and TTS Readback
-                </div>
+                <div className="sub">Verify your active provider routing</div>
               </div>
               <Pill kind="amber">Diagnostics</Pill>
             </div>

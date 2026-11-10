@@ -38,18 +38,19 @@ export default async function ConfirmVisitPage({ params }: { params: Promise<{ t
     <div style={{ minHeight: '100vh', background: 'var(--bg)', ['--acc' as string]: accent }}>
       <header style={{ background: 'var(--ink)', color: '#fff', padding: '16px 24px', marginBottom: 32 }}>
         <div style={{ maxWidth: 640, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 12 }}>
-          <img
-            src={visit.logo_key || '/brand/logo.png'}
-            alt={visit.tenant_name}
-            style={{ height: 28, filter: 'brightness(0) invert(1)' }}
-          />
-          <div>
+          {visit.logo_key || visit.tenant_id === 't1' || visit.tenant_name === 'The Safety Alchemist' ? (
+            <img
+              src={visit.logo_key || '/brand/logo.png'}
+              alt={visit.tenant_name}
+              style={visit.logo_key ? { height: 30 } : { height: 30, filter: 'brightness(0) invert(1)' }}
+            />
+          ) : (
             <div style={{ font: '700 16px var(--fh)', letterSpacing: '.05em', textTransform: 'uppercase' }}>
               {visit.tenant_name}
             </div>
-            <div className="kicker" style={{ color: 'rgba(255,255,255,.55)' }}>
-              Site Visit Confirmation Service
-            </div>
+          )}
+          <div className="kicker" style={{ color: 'rgba(255,255,255,.55)' }}>
+            Site Visit Confirmation Service
           </div>
         </div>
       </header>

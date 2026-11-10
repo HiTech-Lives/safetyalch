@@ -6,7 +6,10 @@ import { Frame, Pill } from '@/components/ui';
 import { contrastOnWhite, guardAccent } from '@/lib/color';
 
 const ACCENTS = ['#4b2454', '#1f4f6e', '#7a3b1d', '#3d3d6b', '#1f4a3a'];
-const JURISDICTIONS = ['CA', 'WA', 'OR', 'NV', 'FED', 'AZ', 'TX', 'UT'];
+const JURISDICTIONS = [
+  'CA', 'WA', 'OR', 'NV', 'MI', 'AZ', 'UT', 'HI', 'AK', 'NM', 'NC', 'SC', 'VA', 'MD', 'MN', 'IA', 'IN', 'KY', 'TN', 'VT', 'WY', 'PR',
+  'FED', 'TX', 'FL', 'NY', 'IL', 'PA', 'OH', 'GA', 'CO', 'MA', 'NJ', 'CT', 'DC',
+];
 
 export default function SignupPage() {
   const router = useRouter();
@@ -20,16 +23,17 @@ export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Step 2: White-Label Brand & Seats
+  // Step 2: White-Label Brand, Portfolio Preset & Seats
   const [customDomain, setCustomDomain] = useState('');
   const [emailSender, setEmailSender] = useState('');
   const [accent, setAccent] = useState('#1f4f6e');
   const [plan, setPlan] = useState('professional');
+  const [groupPreset, setGroupPreset] = useState('standard_consultancy');
   const [seats, setSeats] = useState(3);
 
   // Step 3: Optional First Member & Site
   const [firstMemberName, setFirstMemberName] = useState('');
-  const [firstMemberIndustry, setFirstMemberIndustry] = useState('Warehouse');
+  const [firstMemberIndustry, setFirstMemberIndustry] = useState('Agriculture');
   const [firstMemberCity, setFirstMemberCity] = useState('');
   const [firstSiteName, setFirstSiteName] = useState('Primary Facility');
   const [firstSiteJur, setFirstSiteJur] = useState('CA');
@@ -56,6 +60,7 @@ export default function SignupPage() {
         emailSender,
         accent,
         plan,
+        groupPreset,
         seats,
         firstMemberName,
         firstMemberIndustry,
@@ -79,9 +84,8 @@ export default function SignupPage() {
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg)', display: 'flex', flexDirection: 'column', ['--acc' as string]: guarded }}>
       <header style={{ background: 'var(--ink)', color: '#fff', padding: '14px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#fff' }}>
-          <img src="/brand/logo.png" alt="The Safety Alchemist" style={{ height: 28, filter: 'brightness(0) invert(1)' }} />
-          <span style={{ font: '700 17px var(--fh)', letterSpacing: '.05em', textTransform: 'uppercase' }}>The Safety Alchemist</span>
+        <Link href="/" aria-label="The Safety Alchemist Home" style={{ display: 'flex', alignItems: 'center', color: '#fff' }}>
+          <img src="/brand/logo.png" alt="The Safety Alchemist" style={{ height: 30, filter: 'brightness(0) invert(1)' }} />
         </Link>
         <Link href="/login" style={{ color: '#fff', fontSize: 12.5 }}>Already have an account? Sign in →</Link>
       </header>
@@ -92,10 +96,10 @@ export default function SignupPage() {
             <div>
               <div className="kicker">Multi-Tenant Provisioning · Step {step} of 3</div>
               <h1 style={{ margin: '4px 0 0', font: '700 26px/1.1 var(--fh)', textTransform: 'uppercase' }}>
-                {step === 1 ? '1 · Consultancy & Owner Account' : step === 2 ? '2 · White-Label Identity & Seats' : '3 · First Member & Site (Optional)'}
+                {step === 1 ? '1 · Consultancy & Owner Account' : step === 2 ? '2 · White-Label Identity, Groups & Seats' : '3 · First Member & Site (Optional)'}
               </h1>
             </div>
-            <Pill kind="acc">15 Forms Included</Pill>
+            <Pill kind="acc">21 Master Templates · 56 Jurisdictions</Pill>
           </div>
 
           {err && <div className="banner warn" style={{ marginBottom: 14 }}>{err}</div>}
@@ -104,7 +108,7 @@ export default function SignupPage() {
             {step === 1 && (
               <>
                 <label className="field">
-                  <span>Consultancy / Organization Name</span>
+                  <span>Consultancy / Captive Name</span>
                   <input className="input" value={orgName} onChange={e => setOrgName(e.target.value)} required placeholder="Cascade Loss Control & EHS" />
                 </label>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
@@ -118,17 +122,17 @@ export default function SignupPage() {
                   </label>
                 </div>
                 <label className="field">
-                  <span>Password (minimum 6 characters)</span>
-                  <input className="input" type="password" minLength={6} value={password} onChange={e => setPassword(e.target.value)} required />
+                  <span>Password (minimum 10 characters)</span>
+                  <input className="input" type="password" minLength={10} value={password} onChange={e => setPassword(e.target.value)} required />
                 </label>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
                   <button
                     type="button"
                     className="btn btn-primary"
-                    disabled={!orgName.trim() || !ownerName.trim() || !email.trim() || password.length < 6}
+                    disabled={!orgName.trim() || !ownerName.trim() || !email.trim() || password.length < 10}
                     onClick={() => setStep(2)}
                   >
-                    Next: Brand &amp; Seats →
+                    Next: Brand &amp; Portfolio Preset →
                   </button>
                 </div>
               </>
@@ -149,7 +153,7 @@ export default function SignupPage() {
 
                 <div className="field">
                   <span>White-Label Brand Accent (WCAG AA Guarded)</span>
-                  <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
                     {ACCENTS.map(h => (
                       <button
                         key={h}
@@ -171,6 +175,15 @@ export default function SignupPage() {
                   </div>
                 </div>
 
+                <label className="field">
+                  <span>Starter Portfolio Group / Hierarchy Structure (100% Customizable Later)</span>
+                  <select className="select" value={groupPreset} onChange={e => setGroupPreset(e.target.value)}>
+                    <option value="standard_consultancy">Standard Consultancy (Captive, Carrier Dispatch &amp; Direct Commercial Portfolios)</option>
+                    <option value="breckpoint_sig_rsa">SIG Captive &quot;Gems&quot; + Retail RSA (CAN, CAP, CCN, CFM, CLP, CRMBC + RSA)</option>
+                    <option value="blank">Blank — Define Custom Portfolio Groups Later</option>
+                  </select>
+                </label>
+
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 160px', gap: 12 }}>
                   <label className="field">
                     <span>Subscription Tier</span>
@@ -186,7 +199,7 @@ export default function SignupPage() {
                   </label>
                 </div>
                 <div className="banner dashed" style={{ fontSize: 12 }}>
-                  Back-office Admin seats and Member Client Portals are always $0 and do not consume paid inspector seats.
+                  Team Admin seats, Read-Only Viewers, and Member Client Portals are $0 and do not consume paid inspector seats.
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8 }}>
@@ -252,4 +265,3 @@ export default function SignupPage() {
     </div>
   );
 }
-

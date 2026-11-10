@@ -191,3 +191,50 @@ textarea.input { height: auto; padding: 8px 11px; line-height: 1.45; }
 .table-wrap th { text-align: left; font: 600 9.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--n6); padding: 11px 16px; border-bottom: 1px solid var(--ink); background: var(--bg-soft); white-space: nowrap; }
 .table-wrap td { padding: 12px 16px; border-top: 1px solid var(--div2); vertical-align: middle; }
 .table-wrap tbody tr:hover td { background: var(--a1); }
+
+/* v0.0.3 Accessibility Font Scale Switcher (Small / Medium / Large) */
+html[data-font-scale="sm"] body { font-size: 12.5px; }
+html[data-font-scale="sm"] table.tbl,
+html[data-font-scale="sm"] .table-wrap table,
+html[data-font-scale="sm"] .input,
+html[data-font-scale="sm"] .select,
+html[data-font-scale="sm"] .nav-item { font-size: 12px; }
+
+html[data-font-scale="lg"] body { font-size: 15.5px; }
+html[data-font-scale="lg"] table.tbl,
+html[data-font-scale="lg"] .table-wrap table,
+html[data-font-scale="lg"] .input,
+html[data-font-scale="lg"] .select,
+html[data-font-scale="lg"] .nav-item,
+html[data-font-scale="lg"] .note,
+html[data-font-scale="lg"] .banner { font-size: 15px; }
+html[data-font-scale="lg"] .sub { font-size: 13px; }
+html[data-font-scale="lg"] .topbar h1 { font-size: 24px; }
+
+/* Support Impersonation Banner */
+.imp-banner {
+  background: #7c3b31;
+  color: #fff;
+  padding: 9px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  font-size: 12.5px;
+  border-bottom: 2px solid var(--ink);
+}
+
+/* Watch Tier Dots & Badges */
+.watch-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; border: 1px solid rgba(0,0,0,.25); }
+.watch-red { background: #c1121f; }
+.watch-orange { background: #e85d04; }
+.watch-yellow { background: #f4a261; }
+.watch-green { background: #2d6a4f; }
+.watch-none { background: var(--n3); }
+
+@media print {
+  .no-print, .side, .mbar, .imp-banner, .toast { display: none !important; }
+  body { background: #fff !important; }
+  .report-sheet { box-shadow: none !important; border: none !important; margin: 0 !important; max-width: 100% !important; padding: 0 !important; }
+}
